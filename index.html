@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Call of the Nature - Wildlife Adventures</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+
+    <!-- GOOGLE FONT -->
+    <!-- <link href='http://fonts.googleapis.com/css?family=Hind:400,300,500,600%7cMontserrat:400,700' rel='stylesheet' type='text/css'> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-green: #2d5016;
+            --accent-green: #4a7c59;
+            --light-green: #7fb069;
+            --earth-brown: #8b4513;
+            --warm-beige: #f5f1e8;
+            --text-dark: #1a1a1a;
+            --text-light: #666;
+            --gold-accent: #d4af37;
+        }
+
+        .caveat-font {
+          font-family: "Caveat", cursive;
+          font-optical-sizing: auto;
+          font-weight: 400;
+          font-style: normal;
+        }
+
+
+        body {
+            font-family: 'Inter', sans-serif;
+            /*font-family: "Caveat", cursive;*/
+            /*font-optical-sizing: auto;*/
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: rgba(45, 80, 22, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(45, 80, 22, 0.98);
+            padding: 0.5rem 2rem;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .logo-img {
+                height: 32px;
+            }
+            
+            .logo-text {
+                font-size: 1.4rem;
+            }
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--gold-accent);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--gold-accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            /*background: linear-gradient(rgba(45, 80, 22, 0.4), rgba(45, 80, 22, 0.4)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%232d5016" width="1200" height="800"/><path fill="%234a7c59" d="M0 600c200-100 400-50 600-75s400 25 600-25v300H0z"/><circle fill="%237fb069" cx="200" cy="150" r="50" opacity="0.7"/><circle fill="%237fb069" cx="800" cy="200" r="30" opacity="0.5"/><circle fill="%237fb069" cx="1000" cy="100" r="40" opacity="0.6"/></svg>');*/
+            background: linear-gradient(rgba(45, 80, 22, 0.4), rgba(45, 80, 22, 0.4)),
+                        url('images/img_hero.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            color: white;
+            z-index: 2;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--gold-accent), #b8941f);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            animation: bounce 2s infinite;
+        }
+
+        /* About Section */
+        .about {
+            padding: 6rem 2rem;
+            background: var(--warm-beige);
+            position: relative;
+            z-index: 2;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary-green);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-light);
+        }
+
+        .about-text h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        /*.about-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><rect fill="%234a7c59" width="400" height="400"/><path fill="%237fb069" d="M0 200c50-25 100-12.5 150-18.75s100 6.25 150-6.25v225H0z"/><circle fill="%23d4af37" cx="50" cy="50" r="15" opacity="0.6"/><circle fill="%23d4af37" cx="300" cy="80" r="10" opacity="0.4"/><circle fill="%23d4af37" cx="350" cy="30" r="12" opacity="0.5"/></svg>');
+            background-size: cover;
+            z-index: 1;
+        }*/
+
+        /* Destination Section */
+        .destinations {
+            padding: 6rem 2rem;
+            background: white;
+        }
+
+        .destination-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .destination-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .destination-image {
+            height: 300px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /*.destination-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, var(--primary-green), var(--accent-green)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect fill="%232d5016" width="400" height="300"/><path fill="%234a7c59" d="M0 200c80-20 160-10 240-15s160 5 160-5v120H0z"/><circle fill="%237fb069" cx="60" cy="60" r="20" opacity="0.7"/><circle fill="%237fb069" cx="300" cy="80" r="15" opacity="0.5"/><circle fill="%237fb069" cx="200" cy="40" r="12" opacity="0.6"/><path fill="%23d4af37" d="M100 250c20-5 40-2.5 60-3.75s40 1.25 60-1.25v55H100z" opacity="0.3"/></svg>');
+            background-size: cover;
+            z-index: 1;
+        }*/
+
+        .destination-content {
+            padding: 2rem;
+        }
+
+        .destination-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .destination-location {
+            color: var(--gold-accent);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .destination-description {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .destination-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-tag {
+            background: rgba(127, 176, 105, 0.1);
+            color: var(--accent-green);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .destination-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        .book-now-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-green));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .book-now-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(45, 80, 22, 0.3);
+        }
+
+        /* Parallax Section */
+        .parallax-section {
+            height: 60vh;
+            /*background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%231a1a1a" width="1200" height="600"/><path fill="%232d5016" d="M0 400c240-50 480-25 720-37.5s480 12.5 480-12.5v250H0z"/><circle fill="%234a7c59" cx="150" cy="100" r="30" opacity="0.6"/><circle fill="%234a7c59" cx="600" cy="150" r="40" opacity="0.4"/><circle fill="%234a7c59" cx="1000" cy="80" r="25" opacity="0.7"/><path fill="%23d4af37" d="M300 500c60-10 120-5 180-7.5s120 2.5 180-2.5v110H300z" opacity="0.2"/></svg>');*/
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                        url('images/img_3.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .parallax-content {
+            color: white;
+            max-width: 600px;
+        }
+
+        .parallax-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .parallax-content p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-green);
+            color: white;
+            padding: 3rem 2rem 2rem;
+            position: relative;
+            z-index: 3;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--gold-accent);
+        }
+
+        .footer-section p, .footer-section a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            line-height: 1.8;
+        }
+
+        .footer-section a:hover {
+            color: var(--gold-accent);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            /*.mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+            }*/
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed !important;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: rgba(45, 80, 22, 0.98);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                padding-top: 2rem;
+                transition: left 0.3s ease;
+                backdrop-filter: blur(10px);
+                z-index: 999;
+            }
+
+            .nav-menu.active {
+                left: 0 !important;
+                display: flex !important;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .navbar {
+                padding: 1rem;
+            }
+
+            .hero {
+                /*background-attachment: scroll;*/
+                background-attachment: fixed;
+            }
+
+            .parallax-section {
+                /*background-attachment: scroll;*/
+                background-attachment: fixed;
+                height: 50vh;
+            }
+
+            .parallax-content h2 {
+                font-size: 2rem;
+            }
+
+            .parallax-content p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .destination-content {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Loading animation */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loading-text {
+            color: white;
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .chat-btn {
+          position: fixed;
+          right: 15px;
+          bottom: 105px;
+          z-index: 9999999;
+        }
+
+        .call-btn {
+          position: fixed;
+          right: 15px;
+          bottom: 40px;
+          z-index: 9999999;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="loading-text"><img src="images/cotn_logo.jpg" alt="Call of the Nature Logo" class="logo-img">&nbsp; Call of the Nature</div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <img src="images/cotn_logo.jpg" alt="Call of the Nature Logo" class="logo-img">
+                <span class="logo-text">Call of the Nature</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#destinations" class="nav-link">Destinations</a></li>
+                <li><a href="/gallery.html" class="nav-link">Gallery</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Discover Wildlife Wonders</h1>
+            <p>Embark on extraordinary adventures through pristine wilderness and encounter nature's most magnificent creatures in their natural habitat.</p>
+            <a href="#destinations" class="cta-button">Explore Adventures</a>
+        </div>
+        <div class="scroll-indicator">
+            <div style="font-size: 2rem;">↓</div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title fade-in">About Our Journey</h2>
+            <div class="about-grid">
+                <div class="about-text fade-in">
+                    <h3>Connecting with Nature</h3>
+                    <p>At Call of the Nature, we believe in the transformative power of wildlife encounters. Our carefully curated expeditions take you deep into the heart of pristine ecosystems, where every moment reveals the intricate beauty of our natural world.</p>
+                    <p>From the mysterious mangroves of the Sundarbans to future destinations across the globe, we offer immersive experiences that not only create lifelong memories but also foster a deeper connection with wildlife and conservation efforts.</p>
+                </div>
+                <div class="about-image fade-in">
+                    <img src="images/img_9.jpg" alt="Wildlife in natural habitat" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Destinations Section -->
+    <section class="destinations" id="destinations">
+        <div class="container">
+            <h2 class="section-title fade-in">Featured Destination</h2>
+            <div class="destination-card fade-in">
+                <div class="destination-image">
+                    <img src="images/img_4.jpg" alt="Sundarbans Mangrove Forest" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="destination-content">
+                    <h3 class="destination-title">Sundarbans Mangrove Adventure</h3>
+                    <p class="destination-location">📍 West Bengal, India</p>
+                    <p class="destination-description">
+                        Journey through the world's largest mangrove forest, home to the magnificent Royal Bengal Tiger. Navigate through intricate waterways, witness incredible biodiversity, and experience the raw beauty of this UNESCO World Heritage site.
+                    </p>
+                    <div class="destination-features">
+                        <span class="feature-tag">Tiger Safari</span>
+                        <span class="feature-tag">Boat Expedition</span>
+                        <span class="feature-tag">Bird Watching</span>
+                        <span class="feature-tag">Photography</span>
+                        <span class="feature-tag">Local Culture</span>
+                        <span class="feature-tag">Delicious Food</span>
+                    </div>
+                    <!-- <div class="destination-price">Starting from ₹</div> -->
+                    <button class="book-now-btn">More Details</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Parallax Section -->
+    <section class="parallax-section">
+        <div class="parallax-content">
+            <h2>Every Journey Tells a Story</h2>
+            <p>Let the call of the wild guide you to experiences that will forever change how you see our planet.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Call of the Nature</h3>
+                    <p>Discover the world's most incredible wildlife destinations with expert guides and sustainable tourism.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="#">Home</a></p>
+                    <p><a href="#about">About Us</a></p>
+                    <p><a href="#destinations">Destinations</a></p>
+                    <p><a href="#contact">Contact</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p>📧 <a href="mailto:callofthenature01@gmail.com">callofthenature01@gmail.com</a></p>
+                    <p>📞 <a href="tel:+918240443268">+91 82404 43268</a></p>
+                    <p>📍 Kolkata, West Bengal</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Our Journey</h3>
+                    <p><a href="https://www.instagram.com/call_of_thenature/profilecard/?igsh=MXZ4d2dxMDd6bjJxbg==">Instagram</a></p>
+                    <p><a href="https://www.facebook.com/share/1AuiDmBZ2L/">Facebook</a></p>
+                    <p><a href="https://youtube.com/@callofdnature">YouTube</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Call of the Nature. All rights reserved. | Designed for Wildlifers by Wildlifers</p>
+            </div>
+        </div>
+
+        <div class="chat-btn">
+          <a href="https://api.whatsapp.com/send?phone=918240443268" target="_blank"><img src="images/icons8-whatsapp-50.png" alt="whatsapp icon and button that can be clicked to start a chat with Call of the Nature business Whatsapp number"/></a>
+        </div>
+
+        <div class="call-btn">
+          <a href="tel:+918240443268" target="_blank"><img src="images/icons8-telephone-64.png" alt="telephone icon and button that can be clicked to make a call to the Call of the Nature business number"/></a>
+        </div>
+    </footer>
+
+    <script>
+        // Loading screen
+        window.addEventListener('load', function() {
+            const loading = document.getElementById('loading');
+            setTimeout(() => {
+                loading.classList.add('hidden');
+            }, 1500);
+        });
+
+        // Initialize gallery
+        document.addEventListener('DOMContentLoaded', function() {
+            setupMobileMenu();
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Parallax effect for hero and parallax sections
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.hero');
+            const parallaxSection = document.querySelector('.parallax-section');
+            
+            if (parallax) {
+                const heroRect = parallax.getBoundingClientRect();
+                if (heroRect.bottom > 0) {
+                    // Calculate parallax offset relative to when the element comes into view
+                    const elementTop = parallax.offsetTop;
+                    const offset = (scrolled - elementTop) * 0.5;
+                    parallax.style.backgroundPosition = `center calc(50% + ${offset}px)`;
+                }
+            }
+            
+            if (parallaxSection) {
+                const rect = parallaxSection.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    const offset = (scrolled - parallaxSection.offsetTop) * 0.3;
+                    parallaxSection.style.backgroundPosition = `center calc(50% + ${offset}px)`;
+                }
+            }
+        });
+
+        // Book now button functionality
+        document.querySelector('.book-now-btn').addEventListener('click', function() {
+            window.location.href = "http://localhost:8000/sundarbans.html";
+        });
+
+        // // Mobile menu toggle (basic implementation)
+        // document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+        //     const navMenu = document.querySelector('.nav-menu');
+        //     if (navMenu.style.display === 'flex') {
+        //         navMenu.style.display = 'none';
+        //     } else {
+        //         navMenu.style.display = 'flex';
+        //         navMenu.style.flexDirection = 'column';
+        //         navMenu.style.position = 'absolute';
+        //         navMenu.style.top = '100%';
+        //         navMenu.style.left = '0';
+        //         navMenu.style.width = '100%';
+        //         navMenu.style.background = 'rgba(45, 80, 22, 0.95)';
+        //         navMenu.style.padding = '1rem';
+        //     }
+        // });
+
+
+        function setupMobileMenu() {
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const navMenu = document.querySelector('.nav-menu');
+
+            if (mobileMenuBtn && navMenu) {
+                mobileMenuBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    navMenu.classList.toggle('active');
+                    
+                    // Change hamburger icon
+                    if (navMenu.classList.contains('active')) {
+                        this.innerHTML = '✕';
+                    } else {
+                        this.innerHTML = '☰';
+                    }
+                });
+
+                // Close menu when clicking on nav links
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.addEventListener('click', function() {
+                        navMenu.classList.remove('active');
+                        if (mobileMenuBtn) {
+                            mobileMenuBtn.innerHTML = '☰';
+                        }
+                    });
+                });
+
+                // Close menu when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!navMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                        navMenu.classList.remove('active');
+                        mobileMenuBtn.innerHTML = '☰';
+                    }
+                });
+            }
+        }
+
+        // Add some interactive hover effects
+        document.querySelectorAll('.destination-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>

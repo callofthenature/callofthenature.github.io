@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wildlife Gallery - Call of the Nature</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-green: #2d5016;
+            --accent-green: #4a7c59;
+            --light-green: #7fb069;
+            --earth-brown: #8b4513;
+            --warm-beige: #f5f1e8;
+            --text-dark: #1a1a1a;
+            --text-light: #666;
+            --gold-accent: #d4af37;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: rgba(45, 80, 22, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(45, 80, 22, 0.98);
+            padding: 0.5rem 2rem;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .logo-img {
+                height: 32px;
+            }
+            
+            .logo-text {
+                font-size: 1.4rem;
+            }
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--gold-accent);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--gold-accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: rgba(45, 80, 22, 0.98);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                padding-top: 2rem;
+                transition: left 0.3s ease;
+                backdrop-filter: blur(10px);
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 60vh;
+            background: linear-gradient(rgba(45, 80, 22, 0.7), rgba(45, 80, 22, 0.7)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%232d5016" width="1200" height="600"/><path fill="%234a7c59" d="M0 400c200-50 400-25 600-37.5s400 12.5 600-25v225H0z"/><circle fill="%237fb069" cx="150" cy="100" r="30" opacity="0.6"/><circle fill="%237fb069" cx="600" cy="150" r="40" opacity="0.4"/><circle fill="%237fb069" cx="1000" cy="80" r="25" opacity="0.7"/><path fill="%23d4af37" d="M300 400c60-10 120-5 180-7.5s120 2.5 180-2.5v210H300z" opacity="0.2"/></svg>');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            color: white;
+            max-width: 800px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            margin-bottom: 2rem;
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            padding: 4rem 2rem;
+            background: var(--warm-beige);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .gallery-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        .gallery-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Filter Buttons */
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.8rem 1.5rem;
+            background: white;
+            border: 2px solid var(--accent-green);
+            color: var(--accent-green);
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--accent-green);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 124, 89, 0.3);
+        }
+
+        /* Masonry Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-gap: 20px;
+        }
+
+        .gallery-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(50px) scale(0.9);
+            position: relative;
+            /* Add these lines: */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .gallery-item.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%; /* Change from height: 100% */
+            object-fit: cover;
+            transition: transform 0.4s ease;
+            flex-shrink: 0; /* Add this */
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: flex-end;
+            padding: 1.5rem;
+        }
+
+        .gallery-item:hover .overlay {
+            opacity: 1;
+        }
+
+        .overlay-content {
+            color: white;
+        }
+
+        .overlay-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .overlay-description {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 10000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            animation: zoomIn 0.3s ease;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .lightbox-nav:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .lightbox-prev {
+            left: 2rem;
+        }
+
+        .lightbox-next {
+            right: 2rem;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .lightbox-close:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.1);
+        }
+
+        .lightbox-info {
+            position: absolute;
+            bottom: 2rem;
+            left: 2rem;
+            right: 2rem;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        .lightbox-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .lightbox-description {
+            opacity: 0.9;
+        }
+
+        .lightbox-counter {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Loading animation */
+        .loading-spinner {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            z-index: 10001;
+            display: none;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            /*.mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+            }*/
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed !important;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: rgba(45, 80, 22, 0.98);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                padding-top: 2rem;
+                transition: left 0.3s ease;
+                backdrop-filter: blur(10px);
+                z-index: 999;
+            }
+
+            .nav-menu.active {
+                left: 0 !important;
+                display: flex !important;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .gallery-title {
+                font-size: 2.2rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                grid-gap: 15px;
+            }
+
+            .filter-buttons {
+                gap: 0.5rem;
+            }
+
+            .filter-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .lightbox-nav {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+
+            .lightbox-prev {
+                left: 1rem;
+            }
+
+            .lightbox-next {
+                right: 1rem;
+            }
+
+            .lightbox-close {
+                top: 1rem;
+                right: 1rem;
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            .lightbox-info {
+                bottom: 1rem;
+                left: 1rem;
+                right: 1rem;
+                padding: 1rem;
+            }
+
+            .lightbox-counter {
+                top: 1rem;
+                left: 1rem;
+            }
+
+            .hero {
+                background-attachment: scroll;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .gallery-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-green);
+            color: white;
+            padding: 3rem 2rem 2rem;
+            position: relative;
+            z-index: 3;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--gold-accent);
+        }
+
+        .footer-section p, .footer-section a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            line-height: 1.8;
+        }
+
+        .footer-section a:hover {
+            color: var(--gold-accent);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.6);
+        }
+        
+        .chat-btn {
+          position: fixed;
+          right: 15px;
+          bottom: 105px;
+          z-index: 9999999;
+        }
+
+        .call-btn {
+          position: fixed;
+          right: 15px;
+          bottom: 40px;
+          z-index: 9999999;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <img src="images/cotn_logo.jpg" alt="Call of the Nature Logo" class="logo-img">
+                <span class="logo-text">Call of the Nature</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="index.html#destinations" class="nav-link">Destinations</a></li>
+                <li><a href="/gallery.html" class="nav-link">Gallery</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Wilderness Gallery</h1>
+            <p>Witness the raw beauty of nature through our lens - every photograph tells a story of wilderness, wonder, and wildlife conservation.</p>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div class="container">
+            <div class="gallery-header">
+                <!-- <h2 class="gallery-title">Our Captured Moments</h2> -->
+                <p class="gallery-subtitle">Each image represents a unique encounter with nature's most magnificent creatures and breathtaking landscapes from our wildlife expeditions.</p>
+            </div>
+
+            <!-- Filter Buttons -->
+            <!-- <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All Photos</button>
+                <button class="filter-btn" data-filter="tigers">Tigers</button>
+                <button class="filter-btn" data-filter="birds">Birds</button>
+                <button class="filter-btn" data-filter="landscapes">Landscapes</button>
+                <button class="filter-btn" data-filter="wildlife">Wildlife</button>
+            </div> -->
+
+            <!-- Gallery Grid -->
+            <div class="gallery-grid" id="gallery-grid">
+                <!-- Gallery items will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <img class="lightbox-image" id="lightbox-image" src="" alt="">
+            <button class="lightbox-nav lightbox-prev" id="lightbox-prev">‹</button>
+            <button class="lightbox-nav lightbox-next" id="lightbox-next">›</button>
+            <button class="lightbox-close" id="lightbox-close">×</button>
+            <div class="lightbox-counter" id="lightbox-counter"></div>
+            <!-- <div class="lightbox-info" id="lightbox-info">
+                <div class="lightbox-title" id="lightbox-title"></div>
+                <div class="lightbox-description" id="lightbox-description"></div>
+            </div> -->
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div class="loading-spinner" id="loading-spinner"></div>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Call of the Nature</h3>
+                    <p>Discover the world's most incredible wildlife destinations with expert guides and sustainable tourism.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="index.html">Home</a></p>
+                    <p><a href="index.html#about">About Us</a></p>
+                    <p><a href="index.html#destinations">Destinations</a></p>
+                    <p><a href="index.html#contact">Contact</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p>📧 <a href="mailto:callofthenature01@gmail.com">callofthenature01@gmail.com</a></p>
+                    <p>📞 <a href="tel:+918240443268">+91 82404 43268</a></p>
+                    <p>📍 Kolkata, West Bengal</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Our Journey</h3>
+                    <p><a href="https://www.instagram.com/call_of_thenature/profilecard/?igsh=MXZ4d2dxMDd6bjJxbg==">Instagram</a></p>
+                    <p><a href="https://www.facebook.com/share/1AuiDmBZ2L/">Facebook</a></p>
+                    <p><a href="https://youtube.com/@callofdnature">YouTube</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Call of the Nature. All rights reserved. | Designed for Wildlifers by Wildlifers</p>
+            </div>
+        </div>
+        <div class="chat-btn">
+          <a href="https://api.whatsapp.com/send?phone=918240443268" target="_blank"><img src="images/icons8-whatsapp-50.png" alt="whatsapp icon and button that can be clicked to start a chat with Call of the Nature business Whatsapp number"/></a>
+        </div>
+
+        <div class="call-btn">
+          <a href="tel:+918240443268" target="_blank"><img src="images/icons8-telephone-64.png" alt="telephone icon and button that can be clicked to make a call to the Call of the Nature business number"/></a>
+        </div>
+    </footer>
+
+    <script>
+        // Sample gallery data - replace with your actual images
+        const galleryData = [
+            {
+                id: 1,
+                src: 'images/img_1.jpg',
+                title: 'Mangrove Sunrise',
+                description: 'Golden hour painting the Sundarban waters in warm hues',
+                category: 'landscapes',
+            },
+            {
+                id: 2,
+                src: 'images/img_2.jpg',
+                title: 'Deer',
+                description: 'Vibrant deer in Sundarbans',
+                category: 'wildlife'
+            },
+            {
+                id: 3,
+                src: 'images/img_3.jpg',
+                title: 'Deer',
+                description: 'Vibrant kingfisher diving for fish in crystal clear waters',
+                category: 'wildlife'
+            },
+            {
+                id: 4,
+                src: 'images/img_4.jpg',
+                title: 'Wild Elephant',
+                description: 'Gentle giant roaming freely in its natural habitat',
+                category: 'wildlife',
+            },
+            {
+                id: 5,
+                src: 'images/img_5.jpg',
+                title: 'Tiger Cub',
+                description: 'Playful tiger cub learning to hunt in the wild',
+                category: 'tigers'
+            },
+            {
+                id: 6,
+                src: 'images/img_6.jpg',
+                title: 'Wetland Birds',
+                description: 'Migratory birds gathering at the water\'s edge',
+                category: 'birds'
+            },
+            {
+                id: 7,
+                src: 'images/img_7.jpg',
+                title: 'Forest Canopy',
+                description: 'Dense forest canopy filtering golden sunlight',
+                category: 'landscapes',
+                size: 'tall'
+            },
+            {
+                id: 8,
+                src: 'images/img_8.jpg',
+                title: 'One-horned Rhinoceros',
+                description: 'Rare one-horned rhino grazing peacefully',
+                category: 'wildlife'
+            },
+            {
+                id: 9,
+                src: 'images/img_9.jpg',
+                title: 'Tiger Portrait',
+                description: 'Intense gaze of a magnificent Bengal tiger',
+                category: 'tigers'
+            },
+            {
+                id: 10,
+                src: 'images/img_10.jpg',
+                title: 'Royal Bengal Tiger',
+                description: 'Majestic Bengal tiger prowling through the Sundarbans mangroves',
+                category: 'tigers'
+            },
+            {
+                id: 11,
+                src: 'images/img_11.jpg',
+                title: 'River Delta',
+                description: 'Aerial view of the intricate river delta system',
+                category: 'landscapes'
+            },
+            {
+                id: 12,
+                src: 'images/img_12.jpg',
+                title: 'Spotted Deer',
+                description: 'Graceful chital deer in dappled forest light',
+                category: 'wildlife'
+            },
+            {
+                id: 13,
+                src: 'images/img_13.jpg',
+                title: 'Spotted Deer',
+                description: 'Graceful chital deer in dappled forest light',
+                category: 'wildlife'
+            },
+            {
+                id: 14,
+                src: 'images/img_14.jpg',
+                title: 'Spotted Deer',
+                description: 'Graceful chital deer in dappled forest light',
+                category: 'wildlife'
+            },
+            {
+                id: 15,
+                src: 'images/img_15.jpg',
+                title: 'Spotted Deer',
+                description: 'Graceful chital deer in dappled forest light',
+                category: 'wildlife'
+            },
+            {
+                id: 16,
+                src: 'images/img_16.jpg',
+                title: 'Spotted Deer',
+                description: 'Graceful chital deer in dappled forest light',
+                category: 'wildlife'
+            },
+            {
+                id: 17,
+                src: 'images/img_17.jpg',
+                title: 'Spotted Deer',
+                description: 'Graceful chital deer in dappled forest light',
+                category: 'wildlife'
+            },
+            {
+                id: 18,
+                src: 'images/img_18.jpg',
+                title: 'Spotted Deer',
+                description: 'Graceful chital deer in dappled forest light',
+                category: 'wildlife'
+            },
+            {
+                id: 19,
+                src: 'images/img_19.jpg',
+                title: 'Spotted Deer',
+                description: 'Graceful chital deer in dappled forest light',
+                category: 'wildlife'
+            },
+            {
+                id: 20,
+                src: 'images/img_20.jpg',
+                title: 'Spotted Deer',
+                description: 'Graceful chital deer in dappled forest light',
+                category: 'wildlife'
+            },
+            {
+                id: 21,
+                src: 'images/img_21.jpg',
+                title: 'Spotted Deer',
+                description: 'Graceful chital deer in dappled forest light',
+                category: 'wildlife'
+            },
+            {
+                id: 22,
+                src: 'images/img_22.jpg',
+                title: 'Tiger',
+                description: 'Graceful chital deer in dappled forest light',
+                category: 'tiger'
+            },
+            {
+                id: 23,
+                src: 'images/img_23.jpg',
+                title: 'Tiger',
+                description: 'Graceful chital deer in dappled forest light',
+                category: 'tiger'
+            },
+            {
+                id: 24,
+                src: 'images/img_24.jpg',
+                title: 'Leopard',
+                description: 'Graceful chital deer in dappled forest light',
+                category: 'tiger'
+            }
+        ];
+
+        // Gallery functionality
+        let currentImages = [];
+        let currentImageIndex = 0;
+        let isLightboxOpen = false;
+
+        // Initialize gallery
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeGallery();
+            setupEventListeners();
+            setupScrollAnimations();
+            setupLightbox();
+            setupMobileMenu();
+        });
+
+        function initializeGallery() {
+            currentImages = galleryData;
+            renderGallery(currentImages);
+        }
+
+        function renderGallery(images) {
+            const galleryGrid = document.getElementById('gallery-grid');
+            galleryGrid.innerHTML = '';
+
+            images.forEach((image, index) => {
+                const galleryItem = document.createElement('div');
+                galleryItem.className = 'gallery-item'; // Remove ${image.size}
+                galleryItem.setAttribute('data-category', image.category);
+                galleryItem.setAttribute('data-index', index);
+                
+                // galleryItem.innerHTML = `
+                //     <img src="${image.src}" alt="${image.title}" loading="lazy">
+                //     <div class="overlay">
+                //         <div class="overlay-content">
+                //             <div class="overlay-title">${image.title}</div>
+                //             <div class="overlay-description">${image.description}</div>
+                //         </div>
+                //     </div>
+                // `;
+
+                galleryItem.innerHTML = `
+                    <img src="${image.src}" alt="${image.title}" loading="lazy">
+                `;
+
+                galleryGrid.appendChild(galleryItem);
+            });
+
+            setTimeout(() => {
+                animateGalleryItems();
+            }, 100);
+        }
+
+        function animateGalleryItems() {
+            const items = document.querySelectorAll('.gallery-item');
+            items.forEach((item, index) => {
+                setTimeout(() => {
+                    item.classList.add('visible');
+                }, index * 100);
+            });
+        }
+
+        function setupEventListeners() {
+            // Filter buttons
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const filter = this.getAttribute('data-filter');
+                    
+                    // Update active button
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Filter images
+                    filterGallery(filter);
+                });
+            });
+
+            // Gallery item clicks
+            document.addEventListener('click', function(e) {
+                const galleryItem = e.target.closest('.gallery-item');
+                if (galleryItem) {
+                    const index = parseInt(galleryItem.getAttribute('data-index'));
+                    openLightbox(index);
+                }
+            });
+
+            // Navbar scroll effect
+            window.addEventListener('scroll', handleNavbarScroll);
+
+            // Touch events for mobile swiping
+            setupTouchEvents();
+        }
+
+        function filterGallery(filter) {
+            if (filter === 'all') {
+                currentImages = galleryData;
+            } else {
+                currentImages = galleryData.filter(image => image.category === filter);
+            }
+            
+            // Hide current items
+            const items = document.querySelectorAll('.gallery-item');
+            items.forEach(item => {
+                item.classList.remove('visible');
+                item.style.transform = 'translateY(50px) scale(0.9)';
+                item.style.opacity = '0';
+            });
+
+            // Re-render after animation
+            setTimeout(() => {
+                renderGallery(currentImages);
+            }, 300);
+        }
+
+        function setupScrollAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '50px'
+            });
+
+            // Observe gallery items as they're created
+            const galleryGrid = document.getElementById('gallery-grid');
+            const mutationObserver = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    mutation.addedNodes.forEach((node) => {
+                        if (node.classList && node.classList.contains('gallery-item')) {
+                            observer.observe(node);
+                        }
+                    });
+                });
+            });
+
+            mutationObserver.observe(galleryGrid, { childList: true });
+        }
+
+        function setupLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            const lightboxTitle = document.getElementById('lightbox-title');
+            const lightboxDescription = document.getElementById('lightbox-description');
+            const lightboxCounter = document.getElementById('lightbox-counter');
+            const lightboxClose = document.getElementById('lightbox-close');
+            const lightboxPrev = document.getElementById('lightbox-prev');
+            const lightboxNext = document.getElementById('lightbox-next');
+            const loadingSpinner = document.getElementById('loading-spinner');
+
+            // Close lightbox
+            lightboxClose.addEventListener('click', closeLightbox);
+            lightbox.addEventListener('click', function(e) {
+                if (e.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+
+            // Navigation
+            lightboxPrev.addEventListener('click', () => navigateLightbox(-1));
+            lightboxNext.addEventListener('click', () => navigateLightbox(1));
+
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (!isLightboxOpen) return;
+                
+                switch(e.key) {
+                    case 'Escape':
+                        closeLightbox();
+                        break;
+                    case 'ArrowLeft':
+                        navigateLightbox(-1);
+                        break;
+                    case 'ArrowRight':
+                        navigateLightbox(1);
+                        break;
+                }
+            });
+        }
+
+        function openLightbox(index) {
+            currentImageIndex = index;
+            isLightboxOpen = true;
+            
+            const lightbox = document.getElementById('lightbox');
+            const loadingSpinner = document.getElementById('loading-spinner');
+            
+            lightbox.classList.add('active');
+            loadingSpinner.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            
+            updateLightboxContent();
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            const loadingSpinner = document.getElementById('loading-spinner');
+            
+            isLightboxOpen = false;
+            lightbox.classList.remove('active');
+            loadingSpinner.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function navigateLightbox(direction) {
+            currentImageIndex += direction;
+            
+            if (currentImageIndex < 0) {
+                currentImageIndex = currentImages.length - 1;
+            } else if (currentImageIndex >= currentImages.length) {
+                currentImageIndex = 0;
+            }
+            
+            updateLightboxContent();
+        }
+
+        function updateLightboxContent() {
+            const image = currentImages[currentImageIndex];
+            const lightboxImage = document.getElementById('lightbox-image');
+            const lightboxTitle = document.getElementById('lightbox-title');
+            const lightboxDescription = document.getElementById('lightbox-description');
+            const lightboxCounter = document.getElementById('lightbox-counter');
+            const loadingSpinner = document.getElementById('loading-spinner');
+
+            // Show loading spinner
+            loadingSpinner.style.display = 'block';
+            
+            // Update image
+            lightboxImage.onload = function() {
+                loadingSpinner.style.display = 'none';
+            };
+            
+            lightboxImage.src = image.src;
+            lightboxImage.alt = image.title;
+            
+            // Update info
+            // lightboxTitle.textContent = image.title;
+            // lightboxDescription.textContent = image.description;
+            lightboxCounter.textContent = `${currentImageIndex + 1} / ${currentImages.length}`;
+        }
+
+        function setupTouchEvents() {
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            const lightbox = document.getElementById('lightbox');
+            
+            lightbox.addEventListener('touchstart', function(e) {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+            
+            lightbox.addEventListener('touchend', function(e) {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
+            
+            function handleSwipe() {
+                if (!isLightboxOpen) return;
+                
+                const swipeThreshold = 50;
+                const swipeDistance = touchEndX - touchStartX;
+                
+                if (Math.abs(swipeDistance) > swipeThreshold) {
+                    if (swipeDistance > 0) {
+                        navigateLightbox(-1); // Swipe right - previous
+                    } else {
+                        navigateLightbox(1); // Swipe left - next
+                    }
+                }
+            }
+        }
+
+        function handleNavbarScroll() {
+            const navbar = document.getElementById('navbar');
+            const scrolled = window.pageYOffset > 100;
+            
+            if (scrolled) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        }
+
+        // Smooth scrolling for navigation links
+        // document.querySelectorAll('.nav-link').forEach(link => {
+        //     link.addEventListener('click', function(e) {
+        //         e.preventDefault();
+        //         // Add smooth scrolling logic here if needed
+        //     });
+        // });
+
+        // Mobile menu toggle (if you want to add mobile menu functionality)
+        // const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        // const navMenu = document.querySelector('.nav-menu');
+
+        // // Mobile menu toggle
+        // const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        // const navMenu = document.querySelector('.nav-menu');
+
+        // if (mobileMenuBtn && navMenu) {
+        //     mobileMenuBtn.addEventListener('click', function() {
+        //         navMenu.classList.toggle('active');
+                
+        //         // Optional: Change hamburger icon when menu is open
+        //         if (navMenu.classList.contains('active')) {
+        //             this.innerHTML = '✕';
+        //         } else {
+        //             this.innerHTML = '☰';
+        //         }
+        //     });
+
+        //     // Close menu when clicking on nav links
+        //     document.querySelectorAll('.nav-link').forEach(link => {
+        //         link.addEventListener('click', function() {
+        //             navMenu.classList.remove('active');
+        //             mobileMenuBtn.innerHTML = '☰';
+        //         });
+        //     });
+        // }
+
+
+        function setupMobileMenu() {
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const navMenu = document.querySelector('.nav-menu');
+
+            if (mobileMenuBtn && navMenu) {
+                mobileMenuBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    navMenu.classList.toggle('active');
+                    
+                    // Change hamburger icon
+                    if (navMenu.classList.contains('active')) {
+                        this.innerHTML = '✕';
+                    } else {
+                        this.innerHTML = '☰';
+                    }
+                });
+
+                // Close menu when clicking on nav links
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.addEventListener('click', function() {
+                        navMenu.classList.remove('active');
+                        if (mobileMenuBtn) {
+                            mobileMenuBtn.innerHTML = '☰';
+                        }
+                    });
+                });
+
+                // Close menu when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!navMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                        navMenu.classList.remove('active');
+                        mobileMenuBtn.innerHTML = '☰';
+                    }
+                });
+            }
+        }
+        
+        // mobileMenuBtn.addEventListener('click', function() {
+        //     navMenu.classList.toggle('active');
+        // });
+
+        // Lazy loading optimization
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src || img.src;
+                        img.classList.remove('lazy');
+                        observer.unobserve(img);
+                    }
+                });
+            });
+
+            document.querySelectorAll('img[data-src]').forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
+
+        // Performance optimization: Debounce scroll events
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Apply debounce to scroll handler
+        window.addEventListener('scroll', debounce(handleNavbarScroll, 10));
+    </script>
+</body>
+</html>

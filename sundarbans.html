@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sundarbans Mangrove Adventure - Call of the Nature</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-green: #2d5016;
+            --accent-green: #4a7c59;
+            --light-green: #7fb069;
+            --earth-brown: #8b4513;
+            --warm-beige: #f5f1e8;
+            --text-dark: #1a1a1a;
+            --text-light: #666;
+            --gold-accent: #d4af37;
+            --whatsapp-green: #25D366;
+            --whatsapp-green-dark: #128C7E;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: rgba(45, 80, 22, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .logo-img {
+                height: 32px;
+            }
+            
+            .logo-text {
+                font-size: 1.4rem;
+            }
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--gold-accent);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 70vh;
+            /*background: linear-gradient(rgba(45, 80, 22, 0.6), rgba(45, 80, 22, 0.6)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%232d5016" width="1200" height="600"/><path fill="%234a7c59" d="M0 400c240-50 480-25 720-37.5s480 12.5 480-12.5v250H0z"/><circle fill="%237fb069" cx="150" cy="100" r="30" opacity="0.6"/><circle fill="%237fb069" cx="600" cy="150" r="40" opacity="0.4"/><circle fill="%237fb069" cx="1000" cy="80" r="25" opacity="0.7"/></svg>');*/
+            background: linear-gradient(rgba(45, 80, 22, 0.6), rgba(45, 80, 22, 0.6)),
+                        url('images/img_10.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            color: white;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero .location {
+            font-size: 1.2rem;
+            color: var(--gold-accent);
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+
+        /* Content Section */
+        .content {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary-green);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .overview-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .overview-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-light);
+        }
+
+        .overview-text h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--primary-green);
+            margin: 2rem 0 1rem 0;
+        }
+
+        .quick-info {
+            background: var(--warm-beige);
+            padding: 2rem;
+            border-radius: 15px;
+            height: fit-content;
+        }
+
+        .quick-info h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-green);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(45, 80, 22, 0.1);
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .info-value {
+            color: var(--text-light);
+            text-align: right;
+        }
+
+        .price-highlight {
+            background: var(--primary-green);
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .price-highlight .price {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        /*.book-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--gold-accent), #b8941f);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .book-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }*/
+
+        .book-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--whatsapp-green), var(--whatsapp-green-dark));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .book-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+            background: linear-gradient(135deg, #128C7E, #075E54);
+        }
+
+        .whatsapp-icon {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+
+        /* Itinerary Section */
+        .itinerary {
+            background: var(--warm-beige);
+            padding: 4rem 2rem;
+            margin: 4rem 0;
+        }
+
+        .itinerary-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .day-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .day-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .day-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .day-number {
+            background: var(--primary-green);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-right: 1rem;
+        }
+
+        .day-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--primary-green);
+        }
+
+        .day-activities {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        /* Highlights Grid */
+        .highlights {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .highlight-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .highlight-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .highlight-card h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        .highlight-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Gallery Preview */
+        .gallery-preview {
+            background: var(--warm-beige);
+            padding: 4rem 2rem;
+        }
+
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        /* What to Expect */
+        .expectations {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .expectations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .expectation-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .expectation-icon {
+            background: var(--light-green);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+        }
+
+        .expectation-content h4 {
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .expectation-content p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-green);
+            color: white;
+            padding: 3rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--gold-accent);
+        }
+
+        .footer-section p, .footer-section a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            line-height: 1.8;
+        }
+
+        .footer-section a:hover {
+            color: var(--gold-accent);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            /*.mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+            }*/
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed !important;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: rgba(45, 80, 22, 0.98);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                padding-top: 2rem;
+                transition: left 0.3s ease;
+                backdrop-filter: blur(10px);
+                z-index: 999;
+            }
+
+            .nav-menu.active {
+                left: 0 !important;
+                display: flex !important;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .overview-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .highlights-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .expectations-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .navbar {
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .chat-btn {
+          position: fixed;
+          right: 15px;
+          bottom: 105px;
+          z-index: 9999999;
+        }
+
+        .call-btn {
+          position: fixed;
+          right: 15px;
+          bottom: 40px;
+          z-index: 9999999;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <img src="images/cotn_logo.jpg" alt="Call of the Nature Logo" class="logo-img">
+                <span class="logo-text">Call of the Nature</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="#" class="nav-link">About</a></li>
+                <li><a href="#" class="nav-link">Destinations</a></li>
+                <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+                <li><a href="index/html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Sundarbans Mangrove Adventure</h1>
+            <p class="location">📍 West Bengal, India</p>
+            <p>Experience full-day safaris with real-time wildlife tracking, early jungle entry, and expert positioning for the ultimate tiger photography adventure</p>
+        </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section class="content">
+        <div class="overview-grid">
+            <div class="overview-text fade-in">
+                <h2 class="section-title" style="text-align: left; margin-bottom: 1rem;">Experience the Wild</h2>
+                <p>The Sundarbans, a UNESCO World Heritage site, is home to the world's largest mangrove forest and the legendary Royal Bengal Tiger. This extraordinary ecosystem spans across India and Bangladesh, offering an unparalleled wildlife experience.</p>
+                
+                <h3>Why Choose This Adventure?</h3>
+                <p>Our carefully crafted expedition takes you deep into the heart of the Sundarbans, where dense mangrove forests meet the Bay of Bengal. Navigate through intricate waterways, spot diverse wildlife, and immerse yourself in the raw beauty of this pristine wilderness.</p>
+                
+                <h3>What Makes It Special</h3>
+                <p>The Sundarbans is the only mangrove forest in the world where tigers have adapted to an aquatic lifestyle. Beyond tigers, you'll encounter saltwater crocodiles, spotted deer, wild boars, and hundreds of bird species in their natural habitat.</p>
+
+                <h3>Full-Day Safari Experience</h3>
+                <p>Unlike typical short excursions, our full-day safaris are designed exclusively for wildlife enthusiasts and photographers. We focus on dedicated tiger tracking and provide strategic early jungle entry from dawn hours when animal activity peaks.</p>
+            </div>
+            
+            <div class="quick-info fade-in">
+                <h3>Quick Information</h3>
+                <div class="info-item">
+                    <span class="info-label">Duration</span>
+                    <span class="info-value">3 Days / 2 Nights</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Group Size</span>
+                    <span class="info-value">8-10 People</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Best Time</span>
+                    <span class="info-value">All year long</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Difficulty</span>
+                    <span class="info-value">Easy to Moderate</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Transportation</span>
+                    <span class="info-value">Boat Safari</span>
+                </div>
+                
+                <!-- <div class="price-highlight">
+                    <div class="price">₹12,999</div>
+                    <p style="margin: 0;">Per Person</p>
+                </div> -->
+
+                    <a href="https://wa.me/918240443268?text=Hi! I'm interested in booking a Sundarbans adventure." class="book-btn" target="_blank">
+                <svg class="whatsapp-icon" viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                </svg>
+                Chat on WhatsApp
+            </a>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Itinerary Section -->
+    <section class="itinerary">
+        <div class="itinerary-container">
+            <h2 class="section-title">Detailed Itinerary</h2>
+            
+            <div class="day-card fade-in">
+                <div class="day-header">
+                    <div class="day-number">1</div>
+                    <div class="day-title">Arrival & River Journey</div>
+                </div>
+                <div class="day-activities">
+                    <strong>Morning:</strong> Pickup from Kolkata and drive to Godkhali (3 hours). Board your comfortable boat and begin the journey into the Sundarbans.<br>
+                    <strong>Afternoon:</strong> Lunch on board while cruising through mangrove channels. First wildlife spotting opportunities - look out for spotted deer and various bird species.<br>
+                    <strong>Evening:</strong> Arrive at accommodation. Dinner and briefing about tomorrow's activities.
+                </div>
+            </div>
+            
+            <div class="day-card fade-in">
+                <div class="day-header">
+                    <div class="day-number">2</div>
+                    <div class="day-title">Deep Forest Exploration</div>
+                </div>
+                <div class="day-activities">
+                    <strong>Early Morning:</strong> Dawn entry for tiger tracking expedition with real-time updates from forest towers. Routes adjusted based on recent tiger movements and territorial activity. <br>
+                    <strong>Morning:</strong> Nature walk on designated trails, bird watching, and photography sessions.<br>
+                    <strong>Afternoon:</strong> Visit local fishing villages and learn about traditional mangrove fishing techniques.<br>
+                    <strong>Evening:</strong> Sunset cruise with cultural program by local artists.
+                </div>
+            </div>
+            
+            <div class="day-card fade-in">
+                <div class="day-header">
+                    <div class="day-number">3</div>
+                    <div class="day-title">Final Safari & Departure</div>
+                </div>
+                <div class="day-activities">
+                    <strong>Morning:</strong> Final tiger safari and wildlife photography session. Visit to crocodile breeding center.<br>
+                    <strong>Late Morning:</strong> Return journey to Godkhali with packed lunch.<br>
+                    <strong>Afternoon:</strong> Drive back to Kolkata with beautiful memories and arrival by evening.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Highlights Section -->
+    <section class="highlights">
+        <h2 class="section-title">Adventure Highlights</h2>
+        <div class="highlights-grid">
+            <div class="highlight-card fade-in">
+                <div class="highlight-icon">🐅</div>
+                <h3>Royal Bengal Tiger</h3>
+                <p>Spot the magnificent Royal Bengal Tiger in its natural aquatic habitat - a truly unique experience found nowhere else in the world.</p>
+            </div>
+            
+            <div class="highlight-card fade-in">
+                <div class="highlight-icon">🚤</div>
+                <h3>Expert Boat Positioning</h3>
+                <p>Our experienced boatmen understand sunlight angles and scene composition, ensuring every guest gets the perfect view for wildlife photography.</p>
+            </div>
+
+            <div class="highlight-card fade-in">
+                <div class="highlight-icon">📡</div>
+                <h3>Real-time Wildlife Tracking</h3>
+                <p>Connected guides receive live updates from forest watchtowers and boatmen, with safari routes adjusted based on recent tiger movements and activity signs.</p>
+            </div>
+
+            <div class="highlight-card fade-in">
+                <div class="highlight-icon">🌅</div>
+                <h3>Early Jungle Entry</h3>
+                <p>Strategic accommodation near forest entry points allows dawn access to undisturbed zones, capturing peak animal activity when wildlife is most active.</p>
+            </div>
+            
+            <div class="highlight-card fade-in">
+                <div class="highlight-icon">🦅</div>
+                <h3>Bird Watching</h3>
+                <p>Observe over 200 bird species including kingfishers, herons, eagles, and the rare masked finfoot.</p>
+            </div>
+            
+            <div class="highlight-card fade-in">
+                <div class="highlight-icon">🐊</div>
+                <h3>Crocodile Encounters</h3>
+                <p>Witness saltwater crocodiles basking in the sun along muddy banks and visit the crocodile breeding center.</p>
+            </div>
+            
+            <div class="highlight-card fade-in">
+                <div class="highlight-icon">🌿</div>
+                <h3>Mangrove Ecosystem</h3>
+                <p>Learn about the unique mangrove ecosystem and its crucial role in coastal protection and biodiversity.</p>
+            </div>
+
+            <div class="highlight-card fade-in">
+                <div class="highlight-icon">📅</div>
+                <h3>Strategic Safari Dates</h3>
+                <p>Our safaris are scheduled based on tidal cycles, selecting low tide dates to maximize wildlife tracking opportunities.</p>
+            </div>
+
+            <div class="highlight-card fade-in">
+                <div class="highlight-icon">🍽️</div>
+                <h3>Food & Hospitality</h3>
+                <p>Freshly prepared, healthy meals served hygienically onboard — comforting and nourishing.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Preview -->
+    <section class="gallery-preview">
+        <div class="gallery-container">
+            <h2 class="section-title">Photo Gallery</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="images/img_10.jpg" alt="Royal Bengal Tiger in Sundarbans" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/img_9.jpg" alt="Mangrove waterway" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/img_8.jpg" alt="Boat safari in Sundarbans" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/img_11.jpg" alt="Bird watching in Sundarbans" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="gallery.html" class="cta-button" style="display: inline-block; padding: 1rem 2rem; background: linear-gradient(135deg, var(--gold-accent), #b8941f); color: white; text-decoration: none; border-radius: 50px; font-weight: 600;">View Full Gallery</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- What to Expect -->
+    <section class="expectations">
+        <h2 class="section-title">What to Expect</h2>
+        <div class="expectations-grid">
+            <div class="expectation-item fade-in">
+                <div class="expectation-icon">✓</div>
+                <div class="expectation-content">
+                    <h4>Expert Guides</h4>
+                    <p>Expert guides with deep local knowledge of tiger territories, migratory patterns, and secret waterways. Real-time wildlife tracking through forest tower updates.</p>
+                </div>
+            </div>
+            
+            <div class="expectation-item fade-in">
+                <div class="expectation-icon">✓</div>
+                <div class="expectation-content">
+                    <h4>Strategic Accommodation</h4>
+                    <p>Clean, AC rooms strategically located near forest entry points, ensuring restful sleep and early morning energy for dawn safaris.</p>
+                </div>
+            </div>
+            
+            <div class="expectation-item fade-in">
+                <div class="expectation-icon">✓</div>
+                <div class="expectation-content">
+                    <h4>All Meals Included</h4>
+                    <p>Enjoy fresh, local cuisine including traditional Bengali dishes and fresh seafood prepared by local chefs.</p>
+                </div>
+            </div>
+            
+            <div class="expectation-item fade-in">
+                <div class="expectation-icon">✓</div>
+                <div class="expectation-content">
+                    <h4>Photography Mentorship</h4>
+                    <p>Dedicated mentored photo tours with senior photographers. Learn gear settings, lighting, and composition in real-time during safaris.</p>
+                </div>
+            </div>
+            
+            <div class="expectation-item fade-in">
+                <div class="expectation-icon">✓</div>
+                <div class="expectation-content">
+                    <h4>Small Groups</h4>
+                    <p>Maximum 8-10 participants to ensure personalized attention and minimal environmental impact.</p>
+                </div>
+            </div>
+
+            <div class="expectation-item fade-in">
+                <div class="expectation-icon">✓</div>
+                <div class="expectation-content">
+                    <h4>Deep Forest Knowledge</h4>
+                    <p>Our boatmen and guides possess intimate knowledge of famous tiger territories, migratory bird patterns, secret creeks, and seasonal movement behaviors.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Call of the Nature</h3>
+                    <p>Discover the world's most incredible wildlife destinations with expert guides and sustainable tourism.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="index.html#home">Home</a></p>
+                    <p><a href="index.html#about">About Us</a></p>
+                    <p><a href="index.html#destinations">Destinations</a></p>
+                    <p><a href="index.html#contact">Contact</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p>📧 <a href="mailto:callofthenature01@gmail.com">callofthenature01@gmail.com</a></p>
+                    <p>📞 <a href="tel:+918240443268">+91 82404 43268</a></p>
+                    <p>📍 Kolkata, West Bengal</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Our Journey</h3>
+                    <p><a href="https://www.instagram.com/call_of_thenature/profilecard/?igsh=MXZ4d2dxMDd6bjJxbg==">Instagram</a></p>
+                    <p><a href="https://www.facebook.com/share/1AuiDmBZ2L/">Facebook</a></p>
+                    <p><a href="https://youtube.com/@callofdnature">YouTube</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Call of the Nature. All rights reserved. | Designed for Wildlifers by Wildlifers</p>
+            </div>
+        </div>
+        <div class="chat-btn">
+          <a href="https://api.whatsapp.com/send?phone=918240443268" target="_blank"><img src="images/icons8-whatsapp-50.png" alt="whatsapp icon and button that can be clicked to start a chat with Call of the Nature business Whatsapp number"/></a>
+        </div>
+
+        <div class="call-btn">
+          <a href="tel:+918240443268" target="_blank"><img src="images/icons8-telephone-64.png" alt="telephone icon and button that can be clicked to make a call to the Call of the Nature business number"/></a>
+        </div>
+    </footer>
+
+    <script>
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Book button functionality
+        // document.querySelector('.book-btn').addEventListener('click', function() {
+        //     alert('Booking system coming soon! Please contact us directly for reservations.');
+        // });
+
+        // Gallery items click
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', function() {
+                window.location.href = 'gallery.html';
+            });
+        });
+
+        // Mobile menu toggle
+        // document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+        //     const navMenu = document.querySelector('.nav-menu');
+        //     if (navMenu.style.display === 'flex') {
+        //         navMenu.style.display = 'none';
+        //     } else {
+        //         navMenu.style.display = 'flex';
+        //         navMenu.style.flexDirection = 'column';
+        //         navMenu.style.position = 'absolute';
+        //         navMenu.style.top = '100%';
+        //         navMenu.style.left = '0';
+        //         navMenu.style.width = '100%';
+        //         navMenu.style.background = 'rgba(45, 80, 22, 0.95)';
+        //         navMenu.style.padding = '1rem';
+        //     }
+        // });
+
+        // Initialize gallery
+        document.addEventListener('DOMContentLoaded', function() {
+            setupMobileMenu();
+        });
+
+        function setupMobileMenu() {
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const navMenu = document.querySelector('.nav-menu');
+
+            if (mobileMenuBtn && navMenu) {
+                mobileMenuBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    navMenu.classList.toggle('active');
+                    
+                    // Change hamburger icon
+                    if (navMenu.classList.contains('active')) {
+                        this.innerHTML = '✕';
+                    } else {
+                        this.innerHTML = '☰';
+                    }
+                });
+
+                // Close menu when clicking on nav links
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.addEventListener('click', function() {
+                        navMenu.classList.remove('active');
+                        if (mobileMenuBtn) {
+                            mobileMenuBtn.innerHTML = '☰';
+                        }
+                    });
+                });
+
+                // Close menu when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!navMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                        navMenu.classList.remove('active');
+                        mobileMenuBtn.innerHTML = '☰';
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>
