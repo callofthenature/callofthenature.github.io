@@ -809,6 +809,7 @@
             background: white;
             color: var(--primary-dark);
         }
+
     </style>
 </head>
 
@@ -874,7 +875,7 @@
             <h2 class="section-title">Welcome to Jhargram River View Stay!</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <p>Nestled along the golden banks of the mighty Subarnarekha River, Nodir Bari Homestay is a tranquil sanctuary for those seeking to escape the urban chaos and reconnect with nature's pristine beauty. Located in the heart of Kutighat Gopiballavpur, this riverside retreat offers an authentic glimpse into rural West Bengal's serene landscape and rich cultural heritage.</p>
+                    <p>Nestled along the golden banks of the mighty Subarnarekha River, Jhargram River View Stay is a tranquil sanctuary for those seeking to escape the urban chaos and reconnect with nature's pristine beauty. Located in the heart of Kutighat Gopiballavpur, this riverside retreat offers an authentic glimpse into rural West Bengal's serene landscape and rich cultural heritage.</p>
                     
                     <p>Surrounded by lush forests, meandering river channels, and verdant countryside, our homestay provides the perfect setting for a peaceful getaway. The gentle murmur of the Subarnarekha's flowing waters creates a soothing backdrop, while our warm Bengali hospitality ensures that every guest feels truly at home. Here, where legends speak of gold-streaked waters and ancient temples, travelers can unwind in complete solitude and discover the untouched beauty of this enchanting riverside region.</p>
                     
@@ -983,11 +984,11 @@
                 
                 <div class="attraction-card">
                     <div class="attraction-img">
-                        <img src="images/kodopal_eco_nest.jpeg" alt="Kodopal Eco-Nest">
+                        <img src="images/jhargram_village.jpg" alt="Traditional Village Tours">
                     </div>
                     <div class="attraction-content">
-                        <h3 class="attraction-title">Kodopal Eco-Nest</h3>
-                        <p class="attraction-description">Experience authentic rural life at this 200-acre eco-tourism site where you can participate in farming activities, enjoy bullock cart rides, and savor traditional Bengali cuisine.</p>
+                        <h3 class="attraction-title">Traditional Village Tours</h3>
+                        <p class="attraction-description">Explore nearby Bengali villages with their terracotta temples, traditional handicrafts, and experience the warm hospitality of local tribal communities.</p>
                     </div>
                 </div>
                 
@@ -1011,7 +1012,7 @@
             <div class="location-content">
                 <div class="location-info">
                     <h3>Situated on the Banks of the Historic Subarnarekha River</h3>
-                    <p>Nodir Bari Homestay enjoys a prime riverside location in Kutighat Gopiballavpur, offering guests direct access to the sacred Subarnarekha River and the rich natural heritage of Jhargram district. Our strategic position provides an ideal base for exploring the region's dense forests, ancient temples, and traditional Bengali villages.</p>
+                    <p>Jhargram River View Stay enjoys a prime riverside location in Kutighat Gopiballavpur, offering guests direct access to the sacred Subarnarekha River and the rich natural heritage of Jhargram district. Our strategic position provides an ideal base for exploring the region's dense forests, ancient temples, and traditional Bengali villages.</p>
                     <p>Our location offers:</p>
                     <ul style="color: rgba(255, 255, 255, 0.9); margin-left: 1rem; font-size: 0.9rem;">
                         <li>Direct riverfront access to the golden Subarnarekha</li>
@@ -1295,6 +1296,15 @@
 
             marker.on('click', onMarkerClick);
         });
+
+
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                console.log('Page hidden - possible screenshot');
+                // Could be screenshot, but also tab switching, etc.
+            }
+        });
     </script>
+
 </body>
 </html>
