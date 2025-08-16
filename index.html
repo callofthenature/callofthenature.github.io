@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Call of the Nature - Wildlife Adventures</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>Call of the Nature - Offbeat Stays & Wildlife Safaris</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <!-- Add to <head> after existing font links -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Montserrat:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 
-    <!-- GOOGLE FONT -->
-    <!-- <link href='http://fonts.googleapis.com/css?family=Hind:400,300,500,600%7cMontserrat:400,700' rel='stylesheet' type='text/css'> -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
 
     <style>
         * {
@@ -20,32 +20,43 @@
             box-sizing: border-box;
         }
 
-        :root {
-            --primary-green: #2d5016;
-            --accent-green: #4a7c59;
-            --light-green: #7fb069;
-            --earth-brown: #8b4513;
-            --warm-beige: #f5f1e8;
-            --text-dark: #1a1a1a;
-            --text-light: #666;
-            --gold-accent: #d4af37;
-        }
-
-        .caveat-font {
-          font-family: "Caveat", cursive;
-          font-optical-sizing: auto;
+        .gloria-hallelujah-regular {
+          font-family: "Gloria Hallelujah", cursive;
           font-weight: 400;
           font-style: normal;
         }
 
+        :root {
+            --primary-dark: #0f172a; /*#1a1a1a; */
+            --secondary-dark: #1e293b;
+            --font-black: #000000;
+            /*--accent-gold: #d4af37;
+            --warm-gold: #e8c547;*/
+            --text-dark: #0f172a;
+            --accent-gold: #2563eb; /* Change from #d4af37 to blue */
+            --warm-gold: #2E7D32;    /* #3b82f6; Change from #e8c547 to lighter blue */
+            --pure-white: #ffffff;
+            --soft-white: #fafafa;
+            --light-gray: #f5f5f5;
+            --medium-gray: #374151;
+            --border-gray: #e5e5e5;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --shadow-medium: rgba(0, 0, 0, 0.12);
+            --heading-font: 'Crimson Text', serif;
+            --brand-font: 'Merriweather', serif;
+            --body-font: 'Montserrat', sans-serif;
+            --deep-blue: #1d4ed8;
+            --light-blue: #60a5fa;
+
+        }
 
         body {
-            font-family: 'Inter', sans-serif;
-            /*font-family: "Caveat", cursive;*/
-            /*font-optical-sizing: auto;*/
+            font-family: var(--body-font);
             line-height: 1.6;
-            color: var(--text-dark);
+            /*color: var(--primary-dark);*/
+            color: var(--font-black);
             overflow-x: hidden;
+            background: var(--pure-white);
         }
 
         /* Navigation */
@@ -54,22 +65,24 @@
             top: 0;
             width: 100%;
             padding: 1rem 2rem;
-            background: rgba(45, 80, 22, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-gray);
             z-index: 1000;
             transition: all 0.3s ease;
         }
 
         .navbar.scrolled {
-            background: rgba(45, 80, 22, 0.98);
+            background: rgba(255, 255, 255, 0.98);
             padding: 0.5rem 2rem;
+            box-shadow: 0 2px 20px var(--shadow-light);
         }
 
         .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
@@ -77,51 +90,36 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            font-family: 'Playfair Display', serif;
+            font-family: var(--heading-font);
             font-size: 1.8rem;
-            font-weight: 700;
-            color: white;
+            font-weight: 600;
+            color: var(--primary-dark);
             text-decoration: none;
         }
 
         .logo-img {
             height: 40px;
             width: auto;
-        }
-
-        .logo-text {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: white;
-        }
-
-        @media (max-width: 768px) {
-            .logo-img {
-                height: 32px;
-            }
-            
-            .logo-text {
-                font-size: 1.4rem;
-            }
+            border-radius: 50%;
         }
 
         .nav-menu {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 2.5rem;
         }
 
         .nav-link {
-            color: white;
+            color: var(--primary-dark);
             text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
+            font-family: var(--body-font);
+            font-weight: 400;
+            transition: all 0.3s ease;
             position: relative;
         }
 
         .nav-link:hover {
-            color: var(--gold-accent);
+            color: var(--accent-gold);
         }
 
         .nav-link::after {
@@ -131,7 +129,7 @@
             height: 2px;
             bottom: -5px;
             left: 0;
-            background: var(--gold-accent);
+            background: var(--accent-gold);
             transition: width 0.3s ease;
         }
 
@@ -143,284 +141,434 @@
             display: none;
             background: none;
             border: none;
-            color: white;
+            color: var(--primary-dark);
             font-size: 1.5rem;
             cursor: pointer;
         }
 
-        /* Hero Section */
+        /* Hero Section with Image Slider */
         .hero {
             height: 100vh;
-            /*background: linear-gradient(rgba(45, 80, 22, 0.4), rgba(45, 80, 22, 0.4)),
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%232d5016" width="1200" height="800"/><path fill="%234a7c59" d="M0 600c200-100 400-50 600-75s400 25 600-25v300H0z"/><circle fill="%237fb069" cx="200" cy="150" r="50" opacity="0.7"/><circle fill="%237fb069" cx="800" cy="200" r="30" opacity="0.5"/><circle fill="%237fb069" cx="1000" cy="100" r="40" opacity="0.6"/></svg>');*/
-            background: linear-gradient(rgba(45, 80, 22, 0.4), rgba(45, 80, 22, 0.4)),
-                        url('images/img_hero.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+            position: relative;
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
+        }
+
+        .hero-slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            /*background: linear-gradient(135deg, rgba(26, 26, 26, 0.4), rgba(26, 26, 26, 0.2));*/
             z-index: 1;
         }
 
         .hero-content {
-            max-width: 800px;
-            color: white;
+            position: relative;
             z-index: 2;
-            animation: fadeInUp 1s ease-out;
+            text-align: center;
+            color: white;
+            max-width: 700px;
+            padding: 0 2rem;
+            animation: fadeInUp 1.2s ease-out;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 10vh;
         }
 
         .hero h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 4rem;
+            font-size: 4.5rem;
             font-weight: 700;
             margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 2px 4px 12px rgba(0,0,0,0.5);
+            line-height: 1.1;
         }
 
-        .hero p {
-            font-size: 1.3rem;
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-shadow: 1px 2px 8px rgba(0,0,0,0.4);
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-top: 12rem;
             margin-bottom: 2rem;
             opacity: 0.95;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            text-shadow: 1px 2px 8px rgba(0,0,0,0.4);
+            background: rgba(15, 23, 42, 0.4);
+            box-decoration-break: clone;
+            padding: 0.2em 0.4em; /* adds spacing around each line */
+            display: inline; /* makes the box wrap each line */
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 10px;
         }
 
         .cta-button {
             display: inline-block;
-            padding: 1rem 2.5rem;
-            background: linear-gradient(135deg, var(--gold-accent), #b8941f);
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, var(--accent-gold), var(--warm-gold));
             color: white;
             text-decoration: none;
             border-radius: 50px;
-            font-weight: 600;
-            font-size: 1.1rem;
+            font-weight: 500;
+            font-size: 0.9rem;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .cta-button.secondary {
+            background: rgba(255, 255, 255, 1);
+            border: 2px solid white;
+            backdrop-filter: blur(10px);
+            color: var(--primary-dark);
         }
 
         .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.4);
         }
 
-        .scroll-indicator {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            color: white;
-            animation: bounce 2s infinite;
+        .cta-button.secondary:hover {
+            background: white;
+            color: var(--primary-dark);
         }
 
-        /* About Section */
-        .about {
-            padding: 6rem 2rem;
-            background: var(--warm-beige);
-            position: relative;
-            z-index: 2;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
         }
 
         .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            text-align: center;
-            margin-bottom: 3rem;
-            color: var(--primary-green);
+            font-family: var(--heading-font);
+            font-size: 3.5rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 0rem;
         }
 
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .about-text {
+        .section-subtitle {
             font-size: 1.1rem;
-            line-height: 1.8;
-            color: var(--text-light);
-        }
-
-        .about-text h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            color: var(--primary-green);
-            margin-bottom: 1rem;
-        }
-
-        .about-image {
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        }
-
-        /*.about-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><rect fill="%234a7c59" width="400" height="400"/><path fill="%237fb069" d="M0 200c50-25 100-12.5 150-18.75s100 6.25 150-6.25v225H0z"/><circle fill="%23d4af37" cx="50" cy="50" r="15" opacity="0.6"/><circle fill="%23d4af37" cx="300" cy="80" r="10" opacity="0.4"/><circle fill="%23d4af37" cx="350" cy="30" r="12" opacity="0.5"/></svg>');
-            background-size: cover;
-            z-index: 1;
-        }*/
-
-        /* Destination Section */
-        .destinations {
-            padding: 6rem 2rem;
-            background: white;
-        }
-
-        .destination-card {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-            position: relative;
-        }
-
-        .destination-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .destination-image {
-            height: 300px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        /*.destination-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, var(--primary-green), var(--accent-green)),
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect fill="%232d5016" width="400" height="300"/><path fill="%234a7c59" d="M0 200c80-20 160-10 240-15s160 5 160-5v120H0z"/><circle fill="%237fb069" cx="60" cy="60" r="20" opacity="0.7"/><circle fill="%237fb069" cx="300" cy="80" r="15" opacity="0.5"/><circle fill="%237fb069" cx="200" cy="40" r="12" opacity="0.6"/><path fill="%23d4af37" d="M100 250c20-5 40-2.5 60-3.75s40 1.25 60-1.25v55H100z" opacity="0.3"/></svg>');
-            background-size: cover;
-            z-index: 1;
-        }*/
-
-        .destination-content {
-            padding: 2rem;
-        }
-
-        .destination-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            color: var(--primary-green);
-            margin-bottom: 0.5rem;
-        }
-
-        .destination-location {
-            color: var(--gold-accent);
-            font-weight: 500;
-            margin-bottom: 1rem;
-        }
-
-        .destination-description {
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
+            color: var(--font-black);
+            /*color: var(--medium-gray);*/
+            max-width: 600px;
+            margin: 0 auto;
             line-height: 1.7;
         }
 
-        .destination-features {
+        /* Offbeat Stays Section */
+        .offbeat-stays {
+            padding: 1rem 1rem;
+            background: linear-gradient(135deg, var(--soft-white) 0%, var(--light-gray) 100%);
+        }
+
+        .stays-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .stay-card {
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px var(--shadow-light);
+            transition: all 0.4s ease;
+            position: relative;
+            border: 1px solid var(--border-gray);
+        }
+
+        .stay-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 60px var(--shadow-medium);
+        }
+
+        .stay-image {
+            height: 280px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .stay-badge {
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem;
+            background: linear-gradient(135deg, var(--accent-gold), var(--warm-gold));
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .stay-content {
+            padding: 1.0rem;
+        }
+
+        .stay-title {
+            font-family: var(--heading-font);
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .stay-location {
+            color: var(--accent-gold);
+            font-weight: 500;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .stay-description {
+            color: var(--font-black);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            font-family: var(--body-font);
+            font-weight: 300;
+            font-size: 0.9rem;
+        }
+
+        .stay-features {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .feature-tag {
-            background: rgba(127, 176, 105, 0.1);
-            color: var(--accent-green);
-            padding: 0.3rem 0.8rem;
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--accent-gold);
+            padding: 0.4rem 1rem;
             border-radius: 20px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 500;
+            border: 1px solid rgba(212, 175, 55, 0.2);
         }
 
-        .destination-price {
+        .explore-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary-dark), var(--secondary-dark));
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .explore-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(26, 26, 26, 0.2);
+        }
+
+        /* Wildlife Safaris Section */
+        .wildlife-safaris {
+            padding: 1rem 1rem;
+            background: var(--pure-white);
+        }
+
+        .safaris-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .safari-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px var(--shadow-light);
+            transition: all 0.4s ease;
+            border: 1px solid var(--border-gray);
+        }
+
+        .safari-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px var(--shadow-medium);
+        }
+
+        .safari-image {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .safari-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(26, 26, 26, 0.8);
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+        }
+
+        .safari-content {
+            padding: 1.0rem;
+        }
+
+        .safari-title {
+            font-family: var(--heading-font);
             font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary-green);
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .safari-location {
+            color: var(--accent-gold);
+            font-weight: 500;
             margin-bottom: 1rem;
         }
 
-        .book-now-btn {
+        .safari-description {
+            color: var(--medium-gray);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            font-family: var(--body-font);
+            font-weight: 400;
+        }
+
+        .safari-highlights {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight-tag {
+            background: rgba(26, 26, 26, 0.05);
+            color: var(--secondary-dark);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .book-safari-btn {
             width: 100%;
             padding: 0.8rem;
-            background: linear-gradient(135deg, var(--primary-green), var(--accent-green));
+            background: linear-gradient(135deg, var(--accent-gold), var(--warm-gold));
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
-        .book-now-btn:hover {
+        .book-safari-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(45, 80, 22, 0.3);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
         }
 
-        /* Parallax Section */
-        .parallax-section {
-            height: 60vh;
-            /*background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%231a1a1a" width="1200" height="600"/><path fill="%232d5016" d="M0 400c240-50 480-25 720-37.5s480 12.5 480-12.5v250H0z"/><circle fill="%234a7c59" cx="150" cy="100" r="30" opacity="0.6"/><circle fill="%234a7c59" cx="600" cy="150" r="40" opacity="0.4"/><circle fill="%234a7c59" cx="1000" cy="80" r="25" opacity="0.7"/><path fill="%23d4af37" d="M300 500c60-10 120-5 180-7.5s120 2.5 180-2.5v110H300z" opacity="0.2"/></svg>');*/
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-                        url('images/img_3.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-        }
-
-        .parallax-content {
+        .safari-duration {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: linear-gradient(135deg, var(--accent-gold), var(--warm-gold));
             color: white;
-            max-width: 600px;
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(37, 99, 235, 0.3);
         }
 
-        .parallax-content h2 {
+        /* CTA Section */
+        .cta-section {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, var(--primary-dark), var(--secondary-dark));
+            text-align: center;
+            color: white;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-section h2 {
             font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+            font-size: 2rem;
+            font-weight: 600;
+            /*margin-bottom: 1rem;*/
         }
 
-        .parallax-content p {
-            font-size: 1.2rem;
+        .cta-section p {
+            font-size: 1.0rem;
+            margin-bottom: 2rem;
             opacity: 0.9;
         }
 
         /* Footer */
         .footer {
-            background: var(--primary-green);
-            color: white;
-            padding: 3rem 2rem 2rem;
-            position: relative;
-            z-index: 3;
+            background: var(--light-gray);
+            padding: 3rem 2rem 1.5rem;
+            border-top: 1px solid var(--border-gray);
         }
 
         .footer-content {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -430,33 +578,68 @@
         .footer-section h3 {
             font-family: 'Playfair Display', serif;
             font-size: 1.3rem;
-            margin-bottom: 1rem;
-            color: var(--gold-accent);
+            margin-bottom: 1.5rem;
+            color: var(--font-black);
         }
 
         .footer-section p, .footer-section a {
-            color: rgba(255,255,255,0.8);
+            color: var(--font-black);
+            font-size: 1.0rem;
             text-decoration: none;
             line-height: 1.8;
+            margin-bottom: 0.5rem;
         }
 
         .footer-section a:hover {
-            color: var(--gold-accent);
+            color: var(--accent-gold);
         }
 
         .footer-bottom {
             text-align: center;
             margin-top: 2rem;
             padding-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: rgba(255,255,255,0.6);
+            border-top: 1px solid var(--border-gray);
+            color: var(--medium-gray);
+        }
+
+        .contact-buttons {
+            position: fixed;
+            right: 2rem;
+            bottom: 2rem;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px var(--shadow-medium);
+            transition: all 0.3s ease;
+        }
+
+        .contact-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .whatsapp-btn {
+            background: #25D366;
+        }
+
+        .call-btn {
+            background: var(--accent-gold);
         }
 
         /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(40px);
             }
             to {
                 opacity: 1;
@@ -464,113 +647,10 @@
             }
         }
 
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0);
-            }
-            40% {
-                transform: translateY(-10px);
-            }
-            60% {
-                transform: translateY(-5px);
-            }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            /*.mobile-menu-btn {
-                display: block;
-            }
-
-            .nav-menu {
-                display: none;
-            }*/
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .nav-menu {
-                position: fixed !important;
-                top: 70px;
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - 70px);
-                background: rgba(45, 80, 22, 0.98);
-                flex-direction: column;
-                justify-content: flex-start;
-                align-items: center;
-                padding-top: 2rem;
-                transition: left 0.3s ease;
-                backdrop-filter: blur(10px);
-                z-index: 999;
-            }
-
-            .nav-menu.active {
-                left: 0 !important;
-                display: flex !important;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero p {
-                font-size: 1.1rem;
-            }
-
-            .section-title {
-                font-size: 2.2rem;
-            }
-
-            .about-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .navbar {
-                padding: 1rem;
-            }
-
-            .hero {
-                /*background-attachment: scroll;*/
-                background-attachment: fixed;
-            }
-
-            .parallax-section {
-                /*background-attachment: scroll;*/
-                background-attachment: fixed;
-                height: 50vh;
-            }
-
-            .parallax-content h2 {
-                font-size: 2rem;
-            }
-
-            .parallax-content p {
-                font-size: 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .section-title {
-                font-size: 1.8rem;
-            }
-
-            .destination-content {
-                padding: 1.5rem;
-            }
-        }
-
-        /* Scroll animations */
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
-            transition: all 0.6s ease;
+            transition: all 0.8s ease;
         }
 
         .fade-in.visible {
@@ -578,14 +658,14 @@
             transform: translateY(0);
         }
 
-        /* Loading animation */
+        /* Loading Screen */
         .loading {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--primary-green);
+            background: var(--pure-white);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -598,41 +678,634 @@
             pointer-events: none;
         }
 
+        .loading-content {
+            text-align: center;
+        }
+
         .loading-text {
-            color: white;
             font-family: 'Playfair Display', serif;
             font-size: 2rem;
+            color: var(--primary-dark);
+            margin-top: 0.1rem;
             animation: pulse 1.5s infinite;
         }
 
         @keyframes pulse {
-            0%, 100% {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: rgba(255, 255, 255, 0.98);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                padding-top: 2rem;
+                transition: left 0.3s ease;
+                backdrop-filter: blur(20px);
+                border-top: 1px solid var(--border-gray);
+            }
+
+            .nav-menu.active {
+                left: 0;
+                display: flex;
+            }
+
+            .hero h1 {
+                font-family: var(--brand-font);
+                font-weight: 700;
+            }
+
+            .hero-subtitle {
+                font-family: var(--heading-font);
+                font-style: italic;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            /*.hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }*/
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .stays-grid, .safaris-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stay-card, .safari-card {
+                margin: 0 1rem;
+            }
+
+            .contact-buttons {
+                right: 1rem;
+                bottom: 1rem;
+            }
+
+            .contact-btn {
+                width: 50px;
+                height: 50px;
+            }
+
+            .cta-section h2 {
+                font-size: 2rem;
+                margin-top: 2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: row; /* Changed from column to row */
+                align-items: center;
+                justify-content: center;
+                gap: 1rem; /* Reduced gap for mobile */
+                flex-wrap: wrap; /* Allow wrapping if needed on very small screens */
+            }
+            
+            .cta-button {
+                padding: 0.6rem 1.2rem; /* Slightly smaller padding on mobile */
+                font-size: 0.85rem; /* Slightly smaller font */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .stay-content, .safari-content {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .hero-buttons {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+        }
+
+
+        /* Add these new styles */
+        .nav-dropdown {
+            position: relative;
+        }
+
+        .dropdown-trigger {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .dropdown-arrow {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-dropdown:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px var(--shadow-medium);
+            border: 1px solid var(--border-gray);
+            min-width: 220px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1001;
+            list-style: none;
+            padding: 0.5rem 0;
+        }
+
+        .nav-dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-link {
+            display: block;
+            padding: 0.7rem 1.2rem;
+            color: var(--primary-dark);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 400;
+            transition: all 0.2s ease;
+            border-radius: 6px;
+            margin: 0 0.5rem;
+        }
+
+        .dropdown-link:hover {
+            background: var(--light-gray);
+            color: var(--accent-gold);
+            transform: translateX(4px);
+        }
+
+        /* Mobile dropdown styles */
+        @media (max-width: 768px) {
+
+            .dropdown-trigger {
+                margin-left: 3rem;
+            }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 0;
+                visibility: hidden;
+                max-height: 0;
+                overflow: hidden;
+                transform: none;
+                box-shadow: none;
+                border: none;
+                background: rgba(255, 255, 255, 0.1);
+                margin-left: 1rem;
+                margin-top: 0;
+                transition: all 0.3s ease;
+            }
+            
+            .dropdown-menu.mobile-active {
                 opacity: 1;
+                visibility: visible;
+                max-height: 200px;
+                margin-top: 0.5rem;
+            }
+            
+            .dropdown-link {
+                margin: 0;
+                padding: 0.5rem 0;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+                color: var(--primary-dark);
+            }
+            
+            .dropdown-link:hover {
+                background: rgba(0,0,0,0.05);
+                transform: translateX(4px);
+            }
+        }
+
+        .about-us {
+            padding: 6rem 2rem;
+            background: var(--pure-white);
+        }
+
+        .about-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            padding-right: 2rem;
+        }
+
+        .about-story {
+            margin: 2rem 0;
+        }
+
+        .about-story p {
+            margin-bottom: 1.0rem;
+            font-size: 0.9rem;
+            /*line-height: 1.8;*/
+            color: var(--medium-gray);
+        }
+
+        .about-mission {
+            background: linear-gradient(135deg, var(--soft-white), var(--light-gray));
+            font-size: 0.9rem;
+            padding: 2rem;
+            border-radius: 20px;
+            border-left: 4px solid var(--accent-gold);
+            margin-top: 2rem;
+        }
+
+        .about-mission h3 {
+            font-family: var(--heading-font);
+            font-size: 0.9rem;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+        }
+
+        .about-mission p {
+            font-size: 0.9rem;
+            /*line-height: 1.7;*/
+            color: var(--medium-gray);
+            font-style: italic;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 25px;
+            box-shadow: 0 20px 60px var(--shadow-medium);
+        }
+
+        .about-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 2rem;
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px var(--shadow-light);
+            border: 1px solid var(--border-gray);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat h4 {
+            font-family: var(--heading-font);
+            font-size: 2.5rem;
+            color: var(--accent-gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat p {
+            color: var(--medium-gray);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile styles for About Us */
+        @media (max-width: 768px) {
+            .about-us {
+                padding: 4rem 1rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .about-text {
+                padding-right: 0;
+            }
+            
+            .about-story p {
+                font-size: 1rem;
+            }
+            
+            .about-img {
+                height: 300px;
+            }
+            
+            .about-stats {
+                flex-direction: column;
+                gap: 1.5rem;
+                padding: 1.5rem;
+            }
+            
+            .stat h4 {
+                font-size: 2rem;
+            }
+        }
+
+        .coming-soon-badge {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+            animation: pulse-glow 2s infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
             }
             50% {
-                opacity: 0.5;
+                transform: scale(1.05);
+                box-shadow: 0 6px 20px rgba(255, 107, 107, 0.5);
             }
         }
 
-        .chat-btn {
-          position: fixed;
-          right: 15px;
-          bottom: 105px;
-          z-index: 9999999;
+        /* Also add a subtle overlay to the entire card to indicate it's coming soon */
+        .stay-card:has(.coming-soon-badge) {
+            position: relative;
         }
 
-        .call-btn {
-          position: fixed;
-          right: 15px;
-          bottom: 40px;
-          z-index: 9999999;
+        .stay-card:has(.coming-soon-badge)::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 25px;
+            pointer-events: none;
+        }
+
+        /* Disable the explore button for coming soon cards */
+        .stay-card:has(.coming-soon-badge) .explore-btn {
+            background: linear-gradient(135deg, #ccc, #aaa);
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .stay-card:has(.coming-soon-badge) .explore-btn:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, var(--soft-white) 0%, var(--light-gray) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonials-slider {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+
+        /*.testimonials-track {
+            display: flex;
+            transition: transform 0.6s ease;
+        }
+
+        .testimonial-card {
+            min-width: 100%;
+            background: white;
+            border-radius: 25px;
+            padding: 3rem;
+            text-align: center;
+            box-shadow: 0 15px 50px var(--shadow-light);
+            border: 1px solid var(--border-gray);
+            position: relative;
+        }*/
+
+        .testimonials-track {
+            display: flex;
+            transition: transform 0.6s ease;
+            align-items: stretch; /* make cards align naturally in height */
+        }
+
+        .testimonial-card {
+            flex: 0 0 100%; /* each card takes full width, but height adapts */
+            height: auto;   /* let content define the height */
+            background: white;
+            border-radius: 25px;
+            padding: 3rem;
+            text-align: center;
+            box-shadow: 0 15px 50px var(--shadow-light);
+            border: 1px solid var(--border-gray);
+            position: relative;
+            display: flex;
+            flex-direction: column; /* stack content */
+            justify-content: flex-start; /* allow natural content flow */
+        }
+
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 1rem;
+            left: 2rem;
+            font-size: 4rem;
+            color: var(--accent-gold);
+            font-family: 'Playfair Display', serif;
+            opacity: 0.3;
+        }
+
+        .testimonial-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 2rem;
+            object-fit: cover;
+            border: 4px solid var(--accent-gold);
+            box-shadow: 0 8px 25px var(--shadow-medium);
+        }
+
+        .testimonial-content {
+            font-size: 0.9rem;
+            line-height: 1.8;
+            color: var(--medium-gray);
+            margin-bottom: 2rem;
+            font-style: italic;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .testimonial-author {
+            font-family: var(--heading-font);
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .testimonial-location {
+            color: var(--accent-gold);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .testimonial-rating {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            color: #ffd700;
+        }
+
+        .slider-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .slider-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            background: var(--accent-gold);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        .slider-btn:hover {
+            background: var(--warm-gold);
+            transform: scale(1.1);
+        }
+
+        .slider-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: scale(1);
+        }
+
+        .slider-dots {
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: none;
+            background: #ddd;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: var(--accent-gold);
+            transform: scale(1.2);
+        }
+
+        /* Mobile styles for testimonials */
+        @media (max-width: 768px) {
+            .testimonials {
+                padding: 4rem 1rem;
+            }
+            
+            .testimonials-slider {
+                touch-action: pan-y pinch-zoom; /* Allow vertical scrolling but capture horizontal swipes */
+                cursor: grab;
+            }
+            
+            .testimonials-slider:active {
+                cursor: grabbing;
+            }
+            
+            .testimonial-card {
+                padding: 2rem;
+                user-select: none; /* Prevent text selection during swipe */
+            }
+            
+            .testimonial-card::before {
+                font-size: 3rem;
+                top: 0.5rem;
+                left: 1rem;
+            }
+            
+            .testimonial-avatar {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .testimonial-content {
+                font-size: 1rem;
+            }
+            
+            .testimonial-author {
+                font-size: 1.1rem;
+            }
+            
+            .slider-nav {
+                gap: 1rem;
+            }
+            
+            .slider-btn {
+                width: 40px;
+                height: 40px;
+            }
+            
         }
     </style>
 </head>
 <body>
     <!-- Loading Screen -->
     <div class="loading" id="loading">
-        <div class="loading-text"><img src="images/cotn_logo.jpg" alt="Call of the Nature Logo" class="logo-img">&nbsp; Call of the Nature</div>
+        <div class="loading-content">
+            <img src="images/cotn_logo.jpg" alt="Call of the Nature Logo" style="height: 200px; border-radius: 50%;">
+            <div class="loading-text">Call of the Nature</div>
+        </div>
     </div>
 
     <!-- Navigation -->
@@ -640,82 +1313,334 @@
         <div class="nav-container">
             <a href="#" class="logo">
                 <img src="images/cotn_logo.jpg" alt="Call of the Nature Logo" class="logo-img">
-                <span class="logo-text">Call of the Nature</span>
+                <span>Call of the Nature</span>
             </a>
-            <ul class="nav-menu">
+            <ul class="nav-menu" id="nav-menu">
                 <li><a href="#home" class="nav-link">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#destinations" class="nav-link">Destinations</a></li>
+                
+                <li class="nav-dropdown">
+                    <a href="#stays" class="nav-link dropdown-trigger">
+                        Offbeat Stays <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="shangarh.html" class="dropdown-link">Shangarh Mountain Retreat</a></li>
+                        <li><a href="jhargram.html" class="dropdown-link">Jhargram River View Stay</a></li>
+                        <!-- <li><a href="chilapata.html" class="dropdown-link">Chilapata Jungle Lodge</a></li> -->
+                    </ul>
+                </li>
+                
+                <li class="nav-dropdown">
+                    <a href="#safaris" class="nav-link dropdown-trigger">
+                        Wildlife Safaris <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="sundarbans.html" class="dropdown-link">Sundarbans Tiger Safari</a></li>
+                        <li><a href="jhalana_jawai.html" class="dropdown-link">Jhalana & Jawai Safari</a></li>
+                        <li><a href="jawai.html" class="dropdown-link">Jawai Leopard Safari</a></li>
+                        <li><a href="kanha.html" class="dropdown-link">Kanha Tiger Safari</a></li>
+                    </ul>
+                </li>
+                
                 <li><a href="/gallery.html" class="nav-link">Gallery</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
-            <button class="mobile-menu-btn">☰</button>
+            <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
-        <div class="hero-content">
-            <h1>Discover Wildlife Wonders</h1>
-            <p>Embark on extraordinary adventures through pristine wilderness and encounter nature's most magnificent creatures in their natural habitat.</p>
-            <a href="#destinations" class="cta-button">Explore Adventures</a>
+        <div class="hero-slider" id="hero-slider">
+            <div class="slide" style="background-image: url('images/cover_photo_3.jpg')"></div>
+            <div class="slide active" style="background-image: url('images/suhaana_ghar_iconic.jpg')"></div>
+            <div class="slide" style="background-image: url('images/cover_photo_2.jpg')"></div>
+            <div class="slide" style="background-image: url('images/img_9.jpg')"></div>
+            <div class="slide" style="background-image: url('images/img_23.jpg')"></div>
+            <div class="slide" style="background-image: url('images/gallery_5.jpg')"></div>
         </div>
-        <div class="scroll-indicator">
-            <div style="font-size: 2rem;">↓</div>
+        <div class="hero-content">
+            <h1>Offbeat Stays & Wildlife Wonders</h1>
+            <!-- <h1>Offbeat Experiences</h1> -->
+            <!-- <p class="hero-subtitle" style="font-style: gloria-hallelujah-regular;">Where Every Journey Leads to Wonder</p> -->
+            <p class="hero-subtitle"><i>Where Every Journey Leads to Wonder</i></p>
+            <!-- <p class="hero-description">Discover pristine locations and wild experiences across India.</p> -->
+            <div class="hero-buttons">
+                <a href="#stays" class="cta-button">Offbeat Stays</a>
+                <a href="#safaris" class="cta-button secondary">Wildlife Safaris</a>
+            </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section class="about" id="about">
+    <!-- About Us Section -->
+    <section class="about-us" id="about">
         <div class="container">
-            <h2 class="section-title fade-in">About Our Journey</h2>
-            <div class="about-grid">
+            <div class="about-content">
                 <div class="about-text fade-in">
-                    <h3>Connecting with Nature</h3>
-                    <p>At Call of the Nature, we believe in the transformative power of wildlife encounters. Our carefully curated expeditions take you deep into the heart of pristine ecosystems, where every moment reveals the intricate beauty of our natural world.</p>
-                    <p>From the mysterious mangroves of the Sundarbans to future destinations across the globe, we offer immersive experiences that not only create lifelong memories but also foster a deeper connection with wildlife and conservation efforts.</p>
+                    <div class="section-header">
+                        <h2 class="section-title">Our Story</h2>
+                        <p class="section-subtitle">Crafting Extraordinary Experiences in Nature's Embrace</p>
+                    </div>
+                    <div class="about-story">
+                        <p>Born from a deep passion for nature and adventure, Call of the Nature was founded with a simple yet profound mission: to connect travelers with the untamed beauty of our natural world through carefully curated experiences that go beyond the ordinary.</p>
+                        
+                        <p>We believe that true adventure lies not in crowded tourist destinations, but in the hidden gems where nature reveals its most authentic self. Our handpicked collection of offbeat stays and wildlife safaris offers you the chance to disconnect from the chaos of modern life and reconnect with the rhythms of the wild.</p>
+                        
+                        <p>Every experience we craft tells a story - of conservation, of local communities, and of the incredible biodiversity that makes India one of the world's most remarkable wildlife destinations. We are committed to responsible tourism that not only creates unforgettable memories for our guests but also contributes to the preservation of these pristine environments for future generations.</p>
+                    </div>
+                    <div class="about-mission">
+                        <h3>Our Mission</h3>
+                        <p>To provide transformative travel experiences that foster a deeper connection with nature while supporting conservation efforts and local communities across India's most spectacular landscapes.</p>
+                    </div>
                 </div>
                 <div class="about-image fade-in">
-                    <img src="images/img_9.jpg" alt="Wildlife in natural habitat" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Destinations Section -->
-    <section class="destinations" id="destinations">
-        <div class="container">
-            <h2 class="section-title fade-in">Featured Destination</h2>
-            <div class="destination-card fade-in">
-                <div class="destination-image">
-                    <img src="images/img_4.jpg" alt="Sundarbans Mangrove Forest" style="width: 100%; height: 100%; object-fit: cover;">
-                </div>
-                <div class="destination-content">
-                    <h3 class="destination-title">Sundarbans Mangrove Adventure</h3>
-                    <p class="destination-location">📍 West Bengal, India</p>
-                    <p class="destination-description">
-                        Journey through the world's largest mangrove forest, home to the magnificent Royal Bengal Tiger. Navigate through intricate waterways, witness incredible biodiversity, and experience the raw beauty of this UNESCO World Heritage site.
-                    </p>
-                    <div class="destination-features">
-                        <span class="feature-tag">Tiger Safari</span>
-                        <span class="feature-tag">Boat Expedition</span>
-                        <span class="feature-tag">Bird Watching</span>
-                        <span class="feature-tag">Photography</span>
-                        <span class="feature-tag">Local Culture</span>
-                        <span class="feature-tag">Delicious Food</span>
+                    <img src="images/homepage_about_photo.jpg" alt="Call of the Nature - Our Story" class="about-img">
+                    <div class="about-stats">
+                        <div class="stat">
+                            <h4>50+</h4>
+                            <p>Unique Experiences</p>
+                        </div>
+                        <div class="stat">
+                            <h4>1000+</h4>
+                            <p>Happy Travelers</p>
+                        </div>
+                        <div class="stat">
+                            <h4>15+</h4>
+                            <p>Destinations</p>
+                        </div>
                     </div>
-                    <!-- <div class="destination-price">Starting from ₹</div> -->
-                    <button class="book-now-btn">More Details</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Parallax Section -->
-    <section class="parallax-section">
-        <div class="parallax-content">
-            <h2>Every Journey Tells a Story</h2>
-            <p>Let the call of the wild guide you to experiences that will forever change how you see our planet.</p>
+    <!-- Offbeat Stays Section -->
+    <section class="offbeat-stays" id="stays">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">Offbeat Stays</h2>
+                <p class="section-subtitle">Escape the ordinary with our handpicked collection of unique accommodations nestled in nature's most beautiful settings</p>
+            </div>
+            
+            <div class="stays-grid">
+                <div class="stay-card fade-in">
+                    <div class="stay-image" style="background-image: url('images/cover_photo_1.jpg')">
+                        <div class="stay-badge">Mountain Retreat</div>
+                    </div>
+                    <div class="stay-content">
+                        <h3 class="stay-title">Shangarh Mountain Retreat</h3>
+                        <p class="stay-location">📍 Shangarh, Himachal Pradesh</p>
+                        <p class="stay-description">Perched high in the Himalayas, experience serenity like never before. Wake up to panoramic mountain views, crisp mountain air, and the melody of nature at this exclusive retreat.</p>
+                        <div class="stay-features">
+                            <span class="feature-tag">Mountain Views</span>
+                            <span class="feature-tag">Hiking Trails</span>
+                            <span class="feature-tag">Cozy Interiors</span>
+                            <span class="feature-tag">Local Cuisine</span>
+                        </div>
+                        <button class="explore-btn">Explore Retreat</button>
+                    </div>
+                </div>
+
+                <div class="stay-card fade-in">
+                    <div class="stay-image" style="background-image: url('images/FB_IMG_1754987980110.jpg')">
+                        <div class="stay-badge">Riverside Stay</div>
+                    </div>
+                    <div class="stay-content">
+                        <h3 class="stay-title">Jhargram River View Retreat</h3>
+                        <p class="stay-location">📍 Jhargram, West Bengal</p>
+                        <p class="stay-description">Unwind by the gentle flowing river surrounded by lush greenery. This peaceful retreat offers the perfect blend of comfort and nature's tranquility.</p>
+                        <div class="stay-features">
+                            <span class="feature-tag">Riverside</span>
+                            <span class="feature-tag">Bird Watching</span>
+                            <span class="feature-tag">Fishing</span>
+                            <span class="feature-tag">Nature Walks</span>
+                        </div>
+                        <button class="explore-btn">Explore Retreat</button>
+                    </div>
+                </div>
+
+                <div class="stay-card fade-in">
+                    <div class="stay-image" style="background-image: url('images/chilapata_coming_soon.jpg')">
+                        <div class="stay-badge">Jungle Lodge</div>
+                        <div class="coming-soon-badge">Coming Soon</div>
+                    </div>
+                    <div class="stay-content">
+                        <h3 class="stay-title">Chilapata Jungle Lodge</h3>
+                        <p class="stay-location">📍 Chilapata, West Bengal</p>
+                        <p class="stay-description">Immerse yourself in the heart of the jungle where elephants roam freely. Experience wildlife encounters right from your doorstep in this unique forest lodge.</p>
+                        <div class="stay-features">
+                            <span class="feature-tag">Wildlife Views</span>
+                            <span class="feature-tag">Jungle Walks</span>
+                            <span class="feature-tag">Elephant Corridors</span>
+                        </div>
+                        <!-- <button class="explore-btn">Explore Lodge</button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wildlife Safaris Section -->
+    <section class="wildlife-safaris" id="safaris">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">Wildlife Safaris</h2>
+                <p class="section-subtitle">Embark on extraordinary wildlife adventures and witness nature's most magnificent creatures in their natural habitat</p>
+            </div>
+            
+            <div class="safaris-grid">
+                <div class="safari-card fade-in">
+                    <div class="safari-image" style="background-image: url('images/sundarban_tiger_latest.jpg')">
+                        <div class="safari-duration">3 Days/ 2 Nights</div>
+                        <div class="safari-badge">Tiger Territory</div>
+                    </div>
+                    <div class="safari-content">
+                        <h3 class="safari-title">Sundarbans Tiger Safari</h3>
+                        <p class="safari-location">📍 West Bengal</p>
+                        <p class="safari-description">Navigate through the world's largest mangrove forest and witness the majestic Royal Bengal Tiger in its natural habitat.</p>
+                        <div class="safari-highlights">
+                            <span class="highlight-tag">Royal Bengal Tiger</span>
+                            <span class="highlight-tag">Mangrove Forest</span>
+                            <span class="highlight-tag">Boat Safari</span>
+                            <span class="highlight-tag">Bird Watching</span>
+                        </div>
+                        <button class="book-safari-btn" onclick="window.location.href='sundarbans.html'">Book Safari</button>
+                    </div>
+                </div>
+
+                <div class="safari-card fade-in">
+                    <div class="safari-image" style="background-image: url('images/cover_photo_3.jpg')">
+                        <div class="safari-duration">6 Days/ 5 Nights</div>
+                        <div class="safari-badge">Leopard & Tiger</div>
+                    </div>
+                    <div class="safari-content">
+                        <h3 class="safari-title">Jhalana & Jawai Safari</h3>
+                        <p class="safari-location">📍 Rajasthan</p>
+                        <p class="safari-description">Experience the best of both worlds - leopards in Jhalana and the unique landscape of Jawai with its granite hills and diverse wildlife.</p>
+                        <div class="safari-highlights">
+                            <span class="highlight-tag">Leopards</span>
+                            <span class="highlight-tag">Granite Hills</span>
+                            <span class="highlight-tag">Crocodiles</span>
+                            <span class="highlight-tag">Photography</span>
+                        </div>
+                        <button class="book-safari-btn" onclick="window.location.href='jhalana_jawai.html'">Book Safari</button>
+                    </div>
+                </div>
+
+                <div class="safari-card fade-in">
+                    <div class="safari-image" style="background-image: url('images/cover_photo_4.jpg')">
+                        <div class="safari-duration">4 Days/ 3 Nights</div>
+                        <div class="safari-badge">Leopard Haven</div>
+                    </div>
+                    <div class="safari-content">
+                        <h3 class="safari-title">Jawai Leopard Safari</h3>
+                        <p class="safari-location">📍 Rajasthan</p>
+                        <p class="safari-description">Discover the unique landscape where leopards coexist with local communities against dramatic granite outcrops and serene lakes.</p>
+                        <div class="safari-highlights">
+                            <span class="highlight-tag">Leopard Sightings</span>
+                            <span class="highlight-tag">Granite Landscape</span>
+                            <span class="highlight-tag">Cultural Harmony</span>
+                            <span class="highlight-tag">Sunset Views</span>
+                        </div>
+                        <button class="book-safari-btn" onclick="window.location.href='jawai.html'">Book Safari</button>
+                    </div>
+                </div>
+
+                <div class="safari-card fade-in">
+                    <div class="safari-image" style="background-image: url('images/img_23.jpg')">
+                        <div class="safari-duration">3 Days/ 3 Nights</div>
+                        <div class="safari-badge">Tiger Paradise</div>
+                    </div>
+                    <div class="safari-content">
+                        <h3 class="safari-title">Kanha Tiger Safari</h3>
+                        <p class="safari-location">📍 Madhya Pradesh</p>
+                        <p class="safari-description">Explore one of India's finest tiger reserves with its vast meadows, dense forests, and incredible biodiversity including the famous tigers of Kanha.</p>
+                        <div class="safari-highlights">
+                            <span class="highlight-tag">Bengal Tigers</span>
+                            <span class="highlight-tag">Barasingha</span>
+                            <span class="highlight-tag">Sal Forest</span>
+                            <span class="highlight-tag">Wildlife Photography</span>
+                        </div>
+                        <button class="book-safari-btn" onclick="window.location.href='kanha.html'">Book Safari</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guest Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">Guests Reviews</h2>
+                <p class="section-subtitle">Hear from fellow nature enthusiasts who have experienced the magic of our offbeat stays and wildlife safaris</p>
+            </div>
+            
+            <div class="testimonials-slider" id="testimonials-slider">
+                <div class="testimonials-track" id="testimonials-track">
+                    <div class="testimonial-card">
+                        <img src="images/review_adnaan.png" alt="Guest Avatar" class="testimonial-avatar">
+                        <div class="testimonial-rating">★★★★★</div>
+                        <div class="testimonial-content">
+                            "I stayed here for two days. And believe me this was the best location I could have found in Shangarh. Gets you a clear view of the meadows and also the snow capped mountains while also in close proximity to nearby shops and needs. You can even walk in their farms blossomed with green lush and fruit trees The stay was comfortable and both the staff guy was such an amazing welcoming people. Specially the caretaker, he made sure from the day one if I need anything right at the doorstep. I would give him a 10 star to be honest. And more stars for the food, cause it literally made me feel like getting pampered at home.Definitely coming here if I happen to be in Shangarh. 👍🏼"
+                        </div>
+                        <div class="testimonial-author">Adnaan Aatif</div>
+                        <div class="testimonial-location">Delhi, India</div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <img src="images/review_bhuvnesh.png" alt="Guest Avatar" class="testimonial-avatar">
+                        <div class="testimonial-rating">★★★★★</div>
+                        <div class="testimonial-content">
+                            "Arguably one of the best homestay to stay in Shangarh. Mesmerizing view of the famous meadows and snow clad mountains left us spellbound. Hosts were very kind and helpful. They treated us like their own family. Hari Om bhaiya and his family also prepared very delicious homemade food. Definitely going there again soon."
+                        </div>
+                        <div class="testimonial-author">Bhavnesh Bareth</div>
+                        <div class="testimonial-location">Delhi, India</div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <img src="images/review_p_photo.jpg" alt="Guest Avatar" class="testimonial-avatar">
+                        <div class="testimonial-rating">★★★★★</div>
+                        <div class="testimonial-content">
+                            "Jhargram River View Retreat was the perfect escape from city life. The sound of flowing water, bird watching sessions, and peaceful nature walks recharged our souls completely. Thank you for this wonderful experience!"
+                        </div>
+                        <div class="testimonial-author">Partha Banerjee</div>
+                        <div class="testimonial-location">Durgapur, India</div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <img src="images/review_p_photo.jpg" alt="Guest Avatar" class="testimonial-avatar">
+                        <div class="testimonial-rating">★★★★★</div>
+                        <div class="testimonial-content">
+                            "We are group of 8 heads explored Sunderban 1st time with Call of the Nature. There are many more tour operaters conduct package tour for 2 night 3 days. Here are the reasons for which we have decided to go with them.<br>
+1. They are very much co operative and you will get promp response all of the queries you have.<br>
+2. They keep max accomodation of 10-12 heads in a boat to avoid any chaos and keep the journey smooth.<br>
+3. Provide trained boatman and guide. These guys are really awesome and if you are really passionate about tiger siting they will took you to remote corner where chances will be high.<br>
+<!--
+4. Hotel room they have provided was spacious with AC and good toiletory fittings.<br>
+5. Last but not the least awesome mouth watering meal was served during boat journey.<br><br> -->
+
+Thank you CALL OF THE NATURE for a wonderful memory.. 🤟❤️"
+                        </div>
+                        <div class="testimonial-author">Puranjoy Banerjee</div>
+                        <div class="testimonial-location">Kolkata, India</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="slider-nav">
+                <button class="slider-btn" id="prevBtn">‹</button>
+                <div class="slider-dots" id="sliderDots"></div>
+                <button class="slider-btn" id="nextBtn">›</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Ready for Your Next Adventure?</h2>
+            <p>Let us craft the perfect combination of offbeat stays and wildlife encounters tailored just for you. Create memories that will last a lifetime.</p>
+            <a href="#contact" class="cta-button">Plan Your Journey</a>
         </div>
     </section>
 
@@ -725,41 +1650,48 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>Call of the Nature</h3>
-                    <p>Discover the world's most incredible wildlife destinations with expert guides and sustainable tourism.</p>
+                    <p>We specialize in curating extraordinary experiences that combine unique offbeat accommodations with unforgettable wildlife encounters across India.</p>
+                    <p style="margin-top: 1rem; font-style: italic;">"Where Every Journey Leads to Wonder"</p>
                 </div>
                 <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <p><a href="#">Home</a></p>
-                    <p><a href="#about">About Us</a></p>
-                    <p><a href="#destinations">Destinations</a></p>
-                    <p><a href="#contact">Contact</a></p>
+                    <h3>Our Experiences</h3>
+                    <p><a href="#stays">Offbeat Stays</a></p>
+                    <p><a href="#safaris">Wildlife Safaris</a></p>
+                    <p><a href="/gallery.html">Photo Gallery</a></p>
+                    <p><a href="#contact">Custom Packages</a></p>
                 </div>
                 <div class="footer-section">
-                    <h3>Contact Info</h3>
+                    <h3>Get in Touch</h3>
                     <p>📧 <a href="mailto:callofthenature01@gmail.com">callofthenature01@gmail.com</a></p>
                     <p>📞 <a href="tel:+918240443268">+91 82404 43268</a></p>
-                    <p>📍 Kolkata, West Bengal</p>
+                    <p>📍 Kolkata, West Bengal, India</p>
                 </div>
                 <div class="footer-section">
                     <h3>Follow Our Journey</h3>
-                    <p><a href="https://www.instagram.com/call_of_thenature/profilecard/?igsh=MXZ4d2dxMDd6bjJxbg==">Instagram</a></p>
-                    <p><a href="https://www.facebook.com/share/1AuiDmBZ2L/">Facebook</a></p>
-                    <p><a href="https://youtube.com/@callofdnature">YouTube</a></p>
+                    <p><a href="https://www.instagram.com/call_of_thenature/profilecard/?igsh=MXZ4d2dxMDd6bjJxbg==" target="_blank">📷 Instagram</a></p>
+                    <p><a href="https://www.facebook.com/share/1AuiDmBZ2L/" target="_blank">📘 Facebook</a></p>
+                    <p><a href="https://youtube.com/@callofdnature" target="_blank">📺 YouTube</a></p>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Call of the Nature. All rights reserved. | Designed for Wildlifers by Wildlifers</p>
+                <p>&copy; 2025 Call of the Nature. All rights reserved. | Crafted for Nature Enthusiasts & Adventure Seekers</p>
             </div>
         </div>
-
-        <div class="chat-btn">
-          <a href="https://api.whatsapp.com/send?phone=918240443268" target="_blank"><img src="images/icons8-whatsapp-50.png" alt="whatsapp icon and button that can be clicked to start a chat with Call of the Nature business Whatsapp number"/></a>
-        </div>
-
-        <div class="call-btn">
-          <a href="tel:+918240443268" target="_blank"><img src="images/icons8-telephone-64.png" alt="telephone icon and button that can be clicked to make a call to the Call of the Nature business number"/></a>
-        </div>
     </footer>
+
+    <!-- Contact Buttons -->
+    <div class="contact-buttons">
+        <a href="https://api.whatsapp.com/send?phone=918240443268" target="_blank" class="contact-btn whatsapp-btn">
+            <svg width="24" height="24" fill="white" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893A11.821 11.821 0 0020.525 3.687"/>
+            </svg>
+        </a>
+        <a href="tel:+918240443268" class="contact-btn call-btn">
+            <svg width="24" height="24" fill="white" viewBox="0 0 24 24">
+                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+            </svg>
+        </a>
+    </div>
 
     <script>
         // Loading screen
@@ -770,10 +1702,19 @@
             }, 1500);
         });
 
-        // Initialize gallery
-        document.addEventListener('DOMContentLoaded', function() {
-            setupMobileMenu();
-        });
+        // Hero image slider
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % totalSlides;
+            slides[currentSlide].classList.add('active');
+        }
+
+        // Auto-advance slides every 5 seconds
+        setInterval(nextSlide, 5000);
 
         // Navbar scroll effect
         window.addEventListener('scroll', function() {
@@ -791,9 +1732,10 @@
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+                    const offsetTop = target.offsetTop - 70;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
                     });
                 }
             });
@@ -817,41 +1759,91 @@
             observer.observe(el);
         });
 
-        // Parallax effect for hero and parallax sections
+        // Interactive hover effects for cards
+        document.querySelectorAll('.stay-card, .safari-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = this.classList.contains('stay-card') ? 
+                    'translateY(-15px) scale(1.02)' : 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        document.querySelectorAll('.stay-card').forEach(card => {
+            const comingSoonBadge = card.querySelector('.coming-soon-badge');
+            if (comingSoonBadge) {
+                const button = card.querySelector('.explore-btn');
+                if (button) {
+                    button.textContent = 'Coming Soon';
+                    button.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        // Optional: show a tooltip or alert
+                        console.log('This property is coming soon!');
+                    });
+                }
+            }
+        });
+
+        // Button click handlers
+        document.querySelectorAll('.explore-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Add your navigation logic here
+                const safariTitle = this.closest('.stay-card').querySelector('.stay-title').textContent;
+                if (safariTitle.includes('Shangarh')) {
+                    window.location.href = "shangarh.html";
+                } else if (safariTitle.includes('Jhargram')) {
+                    window.location.href = "jhargram.html";
+                } else {
+                    console.log('Exploring stay:', this.closest('.stay-card').querySelector('.stay-title').textContent);
+                }
+            });
+        });
+
+        document.querySelectorAll('.book-safari-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const safariTitle = this.closest('.safari-card').querySelector('.safari-title').textContent;
+                if (safariTitle.includes('Sundarbans')) {
+                    window.location.href = "sundarbans.html";
+                } else if (safariTitle.includes('Jhalana')) {
+                    window.location.href = "jhalana_jawai.html";
+                } else if (safariTitle.includes('Jawai')) {
+                    window.location.href = "jawai.html";
+                } else if (safariTitle.includes('Kanha')) {
+                    window.location.href = "kanha.html";
+                } else {
+                    // Add navigation logic for other safaris
+                    console.log('Booking safari:', safariTitle);
+                }
+            });
+        });
+
+        // Add subtle parallax effect to hero section
         window.addEventListener('scroll', function() {
             const scrolled = window.pageYOffset;
-            const parallax = document.querySelector('.hero');
-            const parallaxSection = document.querySelector('.parallax-section');
+            const heroSlider = document.getElementById('hero-slider');
             
-            if (parallax) {
-                const heroRect = parallax.getBoundingClientRect();
-                if (heroRect.bottom > 0) {
-                    // Calculate parallax offset relative to when the element comes into view
-                    const elementTop = parallax.offsetTop;
-                    const offset = (scrolled - elementTop) * 0.5;
-                    parallax.style.backgroundPosition = `center calc(50% + ${offset}px)`;
-                }
-            }
-            
-            if (parallaxSection) {
-                const rect = parallaxSection.getBoundingClientRect();
-                if (rect.top < window.innerHeight && rect.bottom > 0) {
-                    const offset = (scrolled - parallaxSection.offsetTop) * 0.3;
-                    parallaxSection.style.backgroundPosition = `center calc(50% + ${offset}px)`;
-                }
+            if (heroSlider && scrolled < window.innerHeight) {
+                const offset = scrolled * 0.5;
+                heroSlider.style.transform = `translateY(${offset}px)`;
             }
         });
 
-        // Book now button functionality
-        document.querySelector('.book-now-btn').addEventListener('click', function() {
-            window.location.href = "sundarbans.html";
+        // Add entrance animations with delays
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.stay-card, .safari-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.2}s`;
+            });
         });
 
+        // Complete Mobile Menu and Dropdown Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const navMenu = document.getElementById('nav-menu');
 
-        function setupMobileMenu() {
-            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-            const navMenu = document.querySelector('.nav-menu');
-
+            // Mobile menu toggle functionality
             if (mobileMenuBtn && navMenu) {
                 mobileMenuBtn.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -859,21 +1851,26 @@
                     
                     navMenu.classList.toggle('active');
                     
-                    // Change hamburger icon
                     if (navMenu.classList.contains('active')) {
                         this.innerHTML = '✕';
                     } else {
                         this.innerHTML = '☰';
+                        // Close all dropdowns when menu closes
+                        document.querySelectorAll('.dropdown-menu').forEach(d => d.classList.remove('mobile-active'));
+                        document.querySelectorAll('.dropdown-arrow').forEach(a => a.style.transform = 'rotate(0deg)');
                     }
                 });
 
-                // Close menu when clicking on nav links
-                document.querySelectorAll('.nav-link').forEach(link => {
+                // Close menu when clicking on regular nav links (not dropdown triggers)
+                document.querySelectorAll('.nav-link:not(.dropdown-trigger)').forEach(link => {
                     link.addEventListener('click', function() {
                         navMenu.classList.remove('active');
                         if (mobileMenuBtn) {
                             mobileMenuBtn.innerHTML = '☰';
                         }
+                        // Close all dropdowns
+                        document.querySelectorAll('.dropdown-menu').forEach(d => d.classList.remove('mobile-active'));
+                        document.querySelectorAll('.dropdown-arrow').forEach(a => a.style.transform = 'rotate(0deg)');
                     });
                 });
 
@@ -882,21 +1879,259 @@
                     if (!navMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
                         navMenu.classList.remove('active');
                         mobileMenuBtn.innerHTML = '☰';
+                        // Close all dropdowns
+                        document.querySelectorAll('.dropdown-menu').forEach(d => d.classList.remove('mobile-active'));
+                        document.querySelectorAll('.dropdown-arrow').forEach(a => a.style.transform = 'rotate(0deg)');
                     }
                 });
             }
-        }
 
-        // Add some interactive hover effects
-        document.querySelectorAll('.destination-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px) scale(1.02)';
+            // Dropdown functionality for both desktop and mobile
+            document.querySelectorAll('.dropdown-trigger').forEach(trigger => {
+                trigger.addEventListener('click', function(e) {
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        const dropdown = this.parentNode.querySelector('.dropdown-menu');
+                        const arrow = this.querySelector('.dropdown-arrow');
+                        
+                        if (dropdown.classList.contains('mobile-active')) {
+                            dropdown.classList.remove('mobile-active');
+                            arrow.style.transform = 'rotate(0deg)';
+                        } else {
+                            // Hide other dropdowns
+                            document.querySelectorAll('.dropdown-menu').forEach(d => d.classList.remove('mobile-active'));
+                            document.querySelectorAll('.dropdown-arrow').forEach(a => a.style.transform = 'rotate(0deg)');
+                            
+                            dropdown.classList.add('mobile-active');
+                            arrow.style.transform = 'rotate(180deg)';
+                        }
+                    }
+                    // On desktop, hover handles the dropdown, so we don't prevent default
+                });
             });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
+
+            // Close dropdown menu when clicking on dropdown links
+            document.querySelectorAll('.dropdown-link').forEach(link => {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth <= 768) {
+                        // Close the mobile menu completely when a dropdown link is clicked
+                        navMenu.classList.remove('active');
+                        mobileMenuBtn.innerHTML = '☰';
+                        // Close all dropdowns
+                        document.querySelectorAll('.dropdown-menu').forEach(d => d.classList.remove('mobile-active'));
+                        document.querySelectorAll('.dropdown-arrow').forEach(a => a.style.transform = 'rotate(0deg)');
+                    }
+                });
             });
         });
+
+        // Testimonials Slider Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const track = document.getElementById('testimonials-track');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const dotsContainer = document.getElementById('sliderDots');
+            
+            if (!track) return;
+            
+            const cards = track.querySelectorAll('.testimonial-card');
+            const totalCards = cards.length;
+            let currentIndex = 0;
+            
+            // Create dots
+            for (let i = 0; i < totalCards; i++) {
+                const dot = document.createElement('button');
+                dot.classList.add('dot');
+                if (i === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(i));
+                dotsContainer.appendChild(dot);
+            }
+            
+            const dots = dotsContainer.querySelectorAll('.dot');
+            
+            function updateSlider() {
+                track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                
+                // Update dots
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentIndex);
+                });
+                
+                // Update button states
+                prevBtn.disabled = currentIndex === 0;
+                nextBtn.disabled = currentIndex === totalCards - 1;
+            }
+            
+            function goToSlide(index) {
+                currentIndex = index;
+                updateSlider();
+            }
+            
+            function nextSlide() {
+                if (currentIndex < totalCards - 1) {
+                    currentIndex++;
+                    updateSlider();
+                }
+            }
+            
+            function prevSlide() {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    updateSlider();
+                }
+            }
+            
+            // Event listeners
+            if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+            if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+            
+            // Auto-advance testimonials
+            let autoSlideInterval = setInterval(() => {
+                if (currentIndex === totalCards - 1) {
+                    currentIndex = 0;
+                } else {
+                    currentIndex++;
+                }
+                updateSlider();
+            }, 6000);
+            
+            // Pause auto-advance on hover
+            const slider = document.getElementById('testimonials-slider');
+            if (slider) {
+                slider.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
+                slider.addEventListener('mouseleave', () => {
+                    autoSlideInterval = setInterval(() => {
+                        if (currentIndex === totalCards - 1) {
+                            currentIndex = 0;
+                        } else {
+                            currentIndex++;
+                        }
+                        updateSlider();
+                    }, 6000);
+                });
+
+
+
+                // // Mouse events
+                // slider.addEventListener('mousedown', handleStart);
+                // slider.addEventListener('mousemove', handleMove);
+                // slider.addEventListener('mouseup', handleEnd);
+                // slider.addEventListener('mouseleave', handleEnd);
+
+                // // Touch events
+                // slider.addEventListener('touchstart', handleStart, { passive: false });
+                // slider.addEventListener('touchmove', handleMove, { passive: false });
+                // slider.addEventListener('touchend', handleEnd);
+
+                // function handleStart(e) {
+                //     startTime = Date.now();
+                //     isDragging = true;
+                    
+                //     if (e.type === 'mousedown') {
+                //         startX = e.clientX;
+                //         startY = e.clientY;
+                //     } else {
+                //         startX = e.touches[0].clientX;
+                //         startY = e.touches[0].clientY;
+                //     }
+                    
+                //     // Pause auto-advance while dragging
+                //     if (autoSlideInterval) {
+                //         clearInterval(autoSlideInterval);
+                //     }
+                    
+                //     slider.style.cursor = 'grabbing';
+                // }
+
+                // function handleMove(e) {
+                //     if (!isDragging) return;
+                    
+                //     let currentX, currentY;
+                //     if (e.type === 'mousemove') {
+                //         currentX = e.clientX;
+                //         currentY = e.clientY;
+                //     } else {
+                //         currentX = e.touches[0].clientX;
+                //         currentY = e.touches[0].clientY;
+                //         e.preventDefault(); // Prevent scrolling
+                //     }
+                    
+                //     const diffX = Math.abs(currentX - startX);
+                //     const diffY = Math.abs(currentY - startY);
+                    
+                //     // If horizontal movement is greater than vertical, prevent vertical scroll
+                //     if (diffX > diffY && diffX > 10) {
+                //         e.preventDefault();
+                //     }
+                // }
+
+                // function handleEnd(e) {
+                //     if (!isDragging) return;
+                //     isDragging = false;
+                    
+                //     let endX, endY;
+                //     if (e.type === 'mouseup' || e.type === 'mouseleave') {
+                //         endX = e.clientX || startX;
+                //         endY = e.clientY || startY;
+                //     } else {
+                //         endX = e.changedTouches[0].clientX;
+                //         endY = e.changedTouches[0].clientY;
+                //     }
+                    
+                //     const diffX = startX - endX;
+                //     const diffY = Math.abs(startY - endY);
+                //     const diffTime = Date.now() - startTime;
+                    
+                //     // Only trigger slide if:
+                //     // - Horizontal movement is significant (> 50px)
+                //     // - Horizontal movement is greater than vertical movement
+                //     // - Gesture was quick enough (< 300ms) or moved far enough (> 100px)
+                //     if (Math.abs(diffX) > 50 && Math.abs(diffX) > diffY && 
+                //         (diffTime < 300 || Math.abs(diffX) > 100)) {
+                        
+                //         if (diffX > 0 && currentIndex < totalCards - 1) {
+                //             // Swiped left - next slide
+                //             currentIndex++;
+                //             updateSlider();
+                //         } else if (diffX < 0 && currentIndex > 0) {
+                //             // Swiped right - previous slide
+                //             currentIndex--;
+                //             updateSlider();
+                //         }
+                //     }
+                    
+                //     slider.style.cursor = 'grab';
+                    
+                //     // Restart auto-advance
+                //     restartAutoSlide();
+                // }
+
+                // // Function to restart auto-slide
+                // function restartAutoSlide() {
+                //     if (autoSlideInterval) {
+                //         clearInterval(autoSlideInterval);
+                //     }
+                //     autoSlideInterval = setInterval(() => {
+                //         if (currentIndex === totalCards - 1) {
+                //             currentIndex = 0;
+                //         } else {
+                //             currentIndex++;
+                //         }
+                //         updateSlider();
+                //     }, 6000);
+                // }
+
+                // // Prevent context menu on long press
+                // slider.addEventListener('contextmenu', e => e.preventDefault());
+
+
+
+            }
+            
+            // Initial setup
+            updateSlider();
+        });
+
     </script>
 </body>
 </html>
