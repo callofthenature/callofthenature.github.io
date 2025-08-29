@@ -302,17 +302,17 @@
 
         /* Offbeat Stays Section */
         .offbeat-stays {
-            padding: 1rem 1rem;
+            padding: 0rem 0rem;
             background: linear-gradient(135deg, var(--soft-white) 0%, var(--light-gray) 100%);
         }
 
-        .stays-grid {
+        /*.stays-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 1.5rem;
             max-width: 1400px;
             margin: 0 auto;
-        }
+        }*/
 
         .stay-card {
             background: white;
@@ -415,17 +415,17 @@
 
         /* Wildlife Safaris Section */
         .wildlife-safaris {
-            padding: 1rem 1rem;
+            padding: 0rem 0rem;
             background: var(--pure-white);
         }
 
-        .safaris-grid {
+        /*.safaris-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 1.5rem;
             max-width: 1400px;
             margin: 0 auto;
-        }
+        }*/
 
         .safari-card {
             background: white;
@@ -1298,6 +1298,87 @@
             }
             
         }
+
+	    /* Carousel Container */
+	    .carousel-container {
+	      width: 100%;
+	      max-width: 1200px;
+	      margin: auto;
+	      overflow: hidden;
+	      position: relative;
+	    }
+
+	    /* Carousel Track */
+	    .carousel-track {
+	      display: flex;
+	      transition: transform 0.5s ease;
+	    }
+
+	    /* Carousel Item */
+	    .stay-carousel-item {
+	      flex: 0 0 33.33%;
+	      box-sizing: border-box;
+	      padding: 15px;
+	    }
+
+	    .safari-carousel-item {
+	      flex: 0 0 33.33%;
+	      box-sizing: border-box;
+	      padding: 15px;
+	    }
+
+	    /* Course Card */
+	    .course-card {
+	      background: #fff;
+	      border-radius: 10px;
+	      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	      text-align: center;
+	      overflow: hidden;
+	    }
+
+	    .course-card img {
+	      width: 100%;
+	      height: auto;
+	    }
+
+	    .course-card h3 {
+	      margin: 10px 0;
+	    }
+
+	    .course-card p {
+	      font-size: 0.9em;
+	      padding: 0 10px;
+	    }
+
+	    /* Navigation Buttons */
+	    .carousel-button {
+	      position: absolute;
+	      top: 50%;
+	      transform: translateY(-50%);
+	      background-color: rgba(0, 0, 0, 0.6);
+	      color: white;
+	      border: none;
+	      padding: 10px;
+	      cursor: pointer;
+	      border-radius: 5px;
+	      z-index: 1;
+	    }
+
+	    .carousel-button.prev { left: 10px; }
+	    .carousel-button.next { right: 10px; }
+
+	    /* Responsive */
+	    @media (max-width: 768px) {
+	      .stay-carousel-item { flex: 0 0 100%; }
+	      .safari-carousel-item { flex: 0 0 100%; }
+	    }
+
+	    @media (max-width: 480px) {
+	      .stay-carousel-item { flex: 0 0 100%; }
+	      .safari-carousel-item { flex: 0 0 100%; }
+	    }
+
+
     </style>
 </head>
 <body>
@@ -1326,6 +1407,8 @@
                     <ul class="dropdown-menu">
                         <li><a href="shangarh.html" class="dropdown-link">Shangarh Mountain Retreat</a></li>
                         <li><a href="jhargram.html" class="dropdown-link">Jhargram River View Stay</a></li>
+                        <li><a href="jhargram_jungle_camp.html" class="dropdown-link">Jhargram Jungle Camp</a></li>
+                        <li><a href="jhargram_forest_lodge.html" class="dropdown-link">Jhargram Forest Lodge</a></li>
                         <!-- <li><a href="chilapata.html" class="dropdown-link">Chilapata Jungle Lodge</a></li> -->
                     </ul>
                 </li>
@@ -1339,6 +1422,7 @@
                         <li><a href="jhalana_jawai.html" class="dropdown-link">Jhalana & Jawai Safari</a></li>
                         <li><a href="jawai.html" class="dropdown-link">Jawai Leopard Safari</a></li>
                         <li><a href="kanha.html" class="dropdown-link">Kanha Tiger Safari</a></li>
+                        <li><a href="sanjay_dubri.html" class="dropdown-link">Sanjay Dubri Wildlife Safari</a></li>
                     </ul>
                 </li>
                 
@@ -1418,83 +1502,140 @@
     </section>
 
     <!-- Offbeat Stays Section -->
-    <section class="offbeat-stays" id="stays">
-        <div class="container">
-            <div class="section-header fade-in">
-                <h2 class="section-title">Offbeat Stays</h2>
-                <p class="section-subtitle">Escape the ordinary with our handpicked collection of unique accommodations nestled in nature's most beautiful settings</p>
-            </div>
-            
-            <div class="stays-grid">
-                <div class="stay-card fade-in">
-                    <div class="stay-image" style="background-image: url('images/cover_photo_1.jpg')">
-                        <div class="stay-badge">Mountain Retreat</div>
-                    </div>
-                    <div class="stay-content">
-                        <h3 class="stay-title">Shangarh Mountain Retreat</h3>
-                        <p class="stay-location">📍 Shangarh, Himachal Pradesh</p>
-                        <p class="stay-description">Perched high in the Himalayas, experience serenity like never before. Wake up to panoramic mountain views, crisp mountain air, and the melody of nature at this exclusive retreat.</p>
-                        <div class="stay-features">
-                            <span class="feature-tag">Mountain Views</span>
-                            <span class="feature-tag">Hiking Trails</span>
-                            <span class="feature-tag">Cozy Interiors</span>
-                            <span class="feature-tag">Local Cuisine</span>
-                        </div>
-                        <button class="explore-btn">Explore Retreat</button>
-                    </div>
-                </div>
+    <section class="section course-slider offbeat-stays" id="stays">
+	    <div class="carousel-container" id="stay-carousel-container">
+	      <!-- <h2 class="h2 section-title">Courses</h2> -->
 
-                <div class="stay-card fade-in">
-                    <div class="stay-image" style="background-image: url('images/FB_IMG_1754987980110.jpg')">
-                        <div class="stay-badge">Riverside Stay</div>
-                    </div>
-                    <div class="stay-content">
-                        <h3 class="stay-title">Jhargram River View Retreat</h3>
-                        <p class="stay-location">📍 Jhargram, West Bengal</p>
-                        <p class="stay-description">Unwind by the gentle flowing river surrounded by lush greenery. This peaceful retreat offers the perfect blend of comfort and nature's tranquility.</p>
-                        <div class="stay-features">
-                            <span class="feature-tag">Riverside</span>
-                            <span class="feature-tag">Bird Watching</span>
-                            <span class="feature-tag">Fishing</span>
-                            <span class="feature-tag">Nature Walks</span>
-                        </div>
-                        <button class="explore-btn">Explore Retreat</button>
-                    </div>
-                </div>
+	      <div class="section-header fade-in">
+	        <h2 class="section-title">Offbeat Stays</h2>
+	        <p class="section-subtitle">Escape the ordinary with our handpicked collection of unique accommodations nestled in nature's most beautiful settings</p>
+	    </div>
 
-                <div class="stay-card fade-in">
-                    <div class="stay-image" style="background-image: url('images/chilapata_coming_soon.jpg')">
-                        <div class="stay-badge">Jungle Lodge</div>
-                        <div class="coming-soon-badge">Coming Soon</div>
+	      <div class="carousel-track" id="stay-carousel-track">
+	        <!-- Slides -->
+	        <div class="stay-carousel-item">
+	          <div class="stay-card fade-in">
+	            <div class="stay-image" style="background-image: url('images/cover_photo_1.jpg')">
+	                <div class="stay-badge">Mountain Retreat</div>
+	            </div>
+	            <div class="stay-content">
+	                <h3 class="stay-title">Shangarh Mountain Retreat</h3>
+	                <p class="stay-location">📍 Shangarh, Himachal Pradesh</p>
+	                <p class="stay-description">Perched high in the Himalayas, experience serenity like never before. Wake up to panoramic mountain views, crisp mountain air, and the melody of nature at this exclusive retreat.</p>
+	                <div class="stay-features">
+	                    <span class="feature-tag">Mountain Views</span>
+	                    <span class="feature-tag">Hiking Trails</span>
+	                    <span class="feature-tag">Cozy Interiors</span>
+	                    <span class="feature-tag">Local Cuisine</span>
+	                </div>
+	                <br>
+	                <button class="explore-btn">Explore Retreat</button>
+	            </div>
+	        </div>
+	        </div>
+	        <div class="stay-carousel-item">
+	          <div class="stay-card fade-in">
+	            <div class="stay-image" style="background-image: url('images/FB_IMG_1754987980110.jpg')">
+	                <div class="stay-badge">Riverside Stay</div>
+	            </div>
+	            <div class="stay-content">
+	                <h3 class="stay-title">Jhargram River View Retreat</h3>
+	                <p class="stay-location">📍 Jhargram, West Bengal</p>
+	                <p class="stay-description">Unwind by the gentle flowing river surrounded by lush greenery. This peaceful retreat offers the perfect blend of comfort and nature's tranquility.</p>
+	                <div class="stay-features">
+	                    <span class="feature-tag">Riverside</span>
+	                    <span class="feature-tag">Bird Watching</span>
+	                    <span class="feature-tag">Fishing</span>
+	                    <span class="feature-tag">Nature Walks</span>
+	                </div>
+	                <button class="explore-btn">Explore Retreat</button>
+	            </div>
+	        </div>
+	        </div>
+
+	        <div class="stay-carousel-item">
+	          <div class="stay-card fade-in">
+	            <div class="stay-image" style="background-image: url('images/jhargram_jungle_camp.jpg')">
+	                <div class="stay-badge">Jungle Camp</div>
+	            </div>
+	            <div class="stay-content">
+	                <h3 class="stay-title">Jhargram Jungle Camp</h3>
+	                <p class="stay-location">📍 Jhargram, West Bengal</p>
+	                <p class="stay-description">Escape into the heart of the forest, where luxury villas and cozy tents meet the songs of birds and whispers of the wild.</p>
+	                <div class="stay-features">
+	                    <span class="feature-tag">Jungle</span>
+	                    <span class="feature-tag">Bird Watching</span>
+	                    <span class="feature-tag">Wildlife</span>
+	                    <span class="feature-tag">Nature Walks</span>
+	                </div>
+                    <br><br><br>
+	                <button class="explore-btn">Explore Retreat</button>
+	            </div>
+	        </div>
+	        </div>
+
+            <div class="stay-carousel-item">
+              <div class="stay-card fade-in">
+                <div class="stay-image" style="background-image: url('images/jhargram_forest_lodge.jpg')">
+                    <div class="stay-badge">Forest Lodge</div>
+                </div>
+                <div class="stay-content">
+                    <h3 class="stay-title">Jhargram Forest Lodge</h3>
+                    <p class="stay-location">📍 Jhargram, West Bengal</p>
+                    <p class="stay-description">Stay close to nature in a warm, homely lodge surrounded by tribal culture, forest trails, and Jhargram’s timeless charm.</p>
+                    <div class="stay-features">
+                        <span class="feature-tag">Forest</span>
+                        <span class="feature-tag">Bird Watching</span>
+                        <span class="feature-tag">Fishing</span>
+                        <span class="feature-tag">Nature Walks</span>
                     </div>
-                    <div class="stay-content">
-                        <h3 class="stay-title">Chilapata Jungle Lodge</h3>
-                        <p class="stay-location">📍 Chilapata, West Bengal</p>
-                        <p class="stay-description">Immerse yourself in the heart of the jungle where elephants roam freely. Experience wildlife encounters right from your doorstep in this unique forest lodge.</p>
-                        <div class="stay-features">
-                            <span class="feature-tag">Wildlife Views</span>
-                            <span class="feature-tag">Jungle Walks</span>
-                            <span class="feature-tag">Elephant Corridors</span>
-                        </div>
-                        <!-- <button class="explore-btn">Explore Lodge</button> -->
-                    </div>
+                    <br><br><br>
+                    <button class="explore-btn">Explore Retreat</button>
                 </div>
             </div>
-        </div>
-    </section>
+            </div>
+
+	        <div class="stay-carousel-item">
+	           <div class="stay-card fade-in">
+	            <div class="stay-image" style="background-image: url('images/chilapata_coming_soon.jpg')">
+	                <div class="stay-badge">Jungle Lodge</div>
+	                <div class="coming-soon-badge">Coming Soon</div>
+	            </div>
+	            <div class="stay-content">
+	                <h3 class="stay-title">Chilapata Jungle Lodge</h3>
+	                <p class="stay-location">📍 Chilapata, West Bengal</p>
+	                <p class="stay-description">Immerse yourself in the heart of the jungle where elephants roam freely. Experience wildlife encounters right from your doorstep in this unique forest lodge.</p>
+	                <div class="stay-features">
+	                    <span class="feature-tag">Wildlife Views</span>
+	                    <span class="feature-tag">Jungle Walks</span>
+	                    <span class="feature-tag">Elephant Corridors</span>
+	                </div>
+	                <br><br><br><br>
+	                <!-- <button class="explore-btn">Explore Lodge</button> -->
+	            </div>
+	        </div>
+	        </div>
+	      </div>
+
+	      <button class="carousel-button prev" id="stay-prev">&#10094;</button>
+	      <button class="carousel-button next" id="stay-next">&#10095;</button>
+	    </div>
+  </section>
 
     <!-- Wildlife Safaris Section -->
-    <section class="wildlife-safaris" id="safaris">
-        <div class="container">
+    <section class="section course-slider wildlife-safaris" id="safaris">
+        <div class="carousel-container" id="safari-carousel-container">
             <div class="section-header fade-in">
                 <h2 class="section-title">Wildlife Safaris</h2>
                 <p class="section-subtitle">Embark on extraordinary wildlife adventures and witness nature's most magnificent creatures in their natural habitat</p>
             </div>
             
-            <div class="safaris-grid">
+            <div class="carousel-track" id="safari-carousel-track">
+
+            	<div class="safari-carousel-item">
                 <div class="safari-card fade-in">
                     <div class="safari-image" style="background-image: url('images/sundarban_tiger_latest.jpg')">
-                        <div class="safari-duration">3 Days/ 2 Nights</div>
+                        <div class="safari-duration">3 Days / 2 Nights</div>
                         <div class="safari-badge">Tiger Territory</div>
                     </div>
                     <div class="safari-content">
@@ -1507,13 +1648,16 @@
                             <span class="highlight-tag">Boat Safari</span>
                             <span class="highlight-tag">Bird Watching</span>
                         </div>
+                        <br>
                         <button class="book-safari-btn" onclick="window.location.href='sundarbans.html'">Book Safari</button>
                     </div>
                 </div>
+            </div>
 
+            	<div class="safari-carousel-item">
                 <div class="safari-card fade-in">
                     <div class="safari-image" style="background-image: url('images/cover_photo_3.jpg')">
-                        <div class="safari-duration">6 Days/ 5 Nights</div>
+                        <div class="safari-duration">6 Days / 5 Nights</div>
                         <div class="safari-badge">Leopard & Tiger</div>
                     </div>
                     <div class="safari-content">
@@ -1526,13 +1670,16 @@
                             <span class="highlight-tag">Crocodiles</span>
                             <span class="highlight-tag">Photography</span>
                         </div>
+                        <br>
                         <button class="book-safari-btn" onclick="window.location.href='jhalana_jawai.html'">Book Safari</button>
                     </div>
                 </div>
+            </div>
 
+            	<div class="safari-carousel-item">
                 <div class="safari-card fade-in">
                     <div class="safari-image" style="background-image: url('images/cover_photo_4.jpg')">
-                        <div class="safari-duration">4 Days/ 3 Nights</div>
+                        <div class="safari-duration">4 Days / 3 Nights</div>
                         <div class="safari-badge">Leopard Haven</div>
                     </div>
                     <div class="safari-content">
@@ -1548,10 +1695,12 @@
                         <button class="book-safari-btn" onclick="window.location.href='jawai.html'">Book Safari</button>
                     </div>
                 </div>
+            </div>
 
+            <div class="safari-carousel-item">
                 <div class="safari-card fade-in">
                     <div class="safari-image" style="background-image: url('images/img_23.jpg')">
-                        <div class="safari-duration">3 Days/ 3 Nights</div>
+                        <div class="safari-duration">3 Days / 3 Nights</div>
                         <div class="safari-badge">Tiger Paradise</div>
                     </div>
                     <div class="safari-content">
@@ -1568,6 +1717,31 @@
                     </div>
                 </div>
             </div>
+
+            <div class="safari-carousel-item">
+                <div class="safari-card fade-in">
+                    <div class="safari-image" style="background-image: url('images/sanjay-dubri-mohan-white-tiger.jpg')">
+                        <div class="safari-duration">3 Days / 2 Nights</div>
+                        <div class="safari-badge">Tiger Paradise</div>
+                    </div>
+                    <div class="safari-content">
+                        <h3 class="safari-title">Sanjay Dubri Wildlife Safari</h3>
+                        <p class="safari-location">📍 Madhya Pradesh</p>
+                        <p class="safari-description">Witness the beauty of Sal forests and hundreds of other species of wild animals like tigers, leopards and sloth bears in this captivating journey through the National Park.</p>
+                        <div class="safari-highlights">
+                            <span class="highlight-tag">Tigers</span>
+                            <span class="highlight-tag">Leopards</span>
+                            <span class="highlight-tag">Sal Forest</span>
+                            <span class="highlight-tag">Wildlife Photography</span>
+                        </div>
+                        <button class="book-safari-btn" onclick="window.location.href='sanjay_dubri.html'">Book Safari</button>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+            <button class="carousel-button prev" id="safari-prev">&#10094;</button>
+	      	<button class="carousel-button next" id="safari-next">&#10095;</button>
         </div>
     </section>
 
@@ -1666,7 +1840,7 @@ Thank you CALL OF THE NATURE for a wonderful memory.. 🤟❤️"
                 </div>
                 <div class="footer-section">
                     <h3>Get in Touch</h3>
-                    <p>📧 <a href="mailto:callofthenature01@gmail.com">callofthenature01@gmail.com</a></p>
+                    <p>📧 <a href="mailto:callofthenatureinfo@gmail.com">callofthenatureinfo@gmail.com</a></p>
                     <p>📞 <a href="tel:+918240443268">+91 82404 43268</a> / <a href="tel:+919073757780">+91 90737 57780</a></p>
                     <p>📍 Kolkata, West Bengal, India</p>
                 </div>
@@ -1797,8 +1971,12 @@ Thank you CALL OF THE NATURE for a wonderful memory.. 🤟❤️"
                 const safariTitle = this.closest('.stay-card').querySelector('.stay-title').textContent;
                 if (safariTitle.includes('Shangarh')) {
                     window.location.href = "shangarh.html";
-                } else if (safariTitle.includes('Jhargram')) {
+                } else if (safariTitle.includes('Jhargram River')) {
                     window.location.href = "jhargram.html";
+                } else if (safariTitle.includes('Jhargram Jungle')) {
+                    window.location.href = "jhargram_jungle_camp.html";
+                } else if (safariTitle.includes('Jhargram Forest')) {
+                    window.location.href = "jhargram_forest_lodge.html";
                 } else {
                     console.log('Exploring stay:', this.closest('.stay-card').querySelector('.stay-title').textContent);
                 }
@@ -1816,6 +1994,8 @@ Thank you CALL OF THE NATURE for a wonderful memory.. 🤟❤️"
                     window.location.href = "jawai.html";
                 } else if (safariTitle.includes('Kanha')) {
                     window.location.href = "kanha.html";
+                } else if (safariTitle.includes('Sanjay')) {
+                    window.location.href = "sanjay_dubri.html";
                 } else {
                     // Add navigation logic for other safaris
                     console.log('Booking safari:', safariTitle);
@@ -2014,127 +2194,367 @@ Thank you CALL OF THE NATURE for a wonderful memory.. 🤟❤️"
                     }, 6000);
                 });
 
-
-
-                // // Mouse events
-                // slider.addEventListener('mousedown', handleStart);
-                // slider.addEventListener('mousemove', handleMove);
-                // slider.addEventListener('mouseup', handleEnd);
-                // slider.addEventListener('mouseleave', handleEnd);
-
-                // // Touch events
-                // slider.addEventListener('touchstart', handleStart, { passive: false });
-                // slider.addEventListener('touchmove', handleMove, { passive: false });
-                // slider.addEventListener('touchend', handleEnd);
-
-                // function handleStart(e) {
-                //     startTime = Date.now();
-                //     isDragging = true;
-                    
-                //     if (e.type === 'mousedown') {
-                //         startX = e.clientX;
-                //         startY = e.clientY;
-                //     } else {
-                //         startX = e.touches[0].clientX;
-                //         startY = e.touches[0].clientY;
-                //     }
-                    
-                //     // Pause auto-advance while dragging
-                //     if (autoSlideInterval) {
-                //         clearInterval(autoSlideInterval);
-                //     }
-                    
-                //     slider.style.cursor = 'grabbing';
-                // }
-
-                // function handleMove(e) {
-                //     if (!isDragging) return;
-                    
-                //     let currentX, currentY;
-                //     if (e.type === 'mousemove') {
-                //         currentX = e.clientX;
-                //         currentY = e.clientY;
-                //     } else {
-                //         currentX = e.touches[0].clientX;
-                //         currentY = e.touches[0].clientY;
-                //         e.preventDefault(); // Prevent scrolling
-                //     }
-                    
-                //     const diffX = Math.abs(currentX - startX);
-                //     const diffY = Math.abs(currentY - startY);
-                    
-                //     // If horizontal movement is greater than vertical, prevent vertical scroll
-                //     if (diffX > diffY && diffX > 10) {
-                //         e.preventDefault();
-                //     }
-                // }
-
-                // function handleEnd(e) {
-                //     if (!isDragging) return;
-                //     isDragging = false;
-                    
-                //     let endX, endY;
-                //     if (e.type === 'mouseup' || e.type === 'mouseleave') {
-                //         endX = e.clientX || startX;
-                //         endY = e.clientY || startY;
-                //     } else {
-                //         endX = e.changedTouches[0].clientX;
-                //         endY = e.changedTouches[0].clientY;
-                //     }
-                    
-                //     const diffX = startX - endX;
-                //     const diffY = Math.abs(startY - endY);
-                //     const diffTime = Date.now() - startTime;
-                    
-                //     // Only trigger slide if:
-                //     // - Horizontal movement is significant (> 50px)
-                //     // - Horizontal movement is greater than vertical movement
-                //     // - Gesture was quick enough (< 300ms) or moved far enough (> 100px)
-                //     if (Math.abs(diffX) > 50 && Math.abs(diffX) > diffY && 
-                //         (diffTime < 300 || Math.abs(diffX) > 100)) {
-                        
-                //         if (diffX > 0 && currentIndex < totalCards - 1) {
-                //             // Swiped left - next slide
-                //             currentIndex++;
-                //             updateSlider();
-                //         } else if (diffX < 0 && currentIndex > 0) {
-                //             // Swiped right - previous slide
-                //             currentIndex--;
-                //             updateSlider();
-                //         }
-                //     }
-                    
-                //     slider.style.cursor = 'grab';
-                    
-                //     // Restart auto-advance
-                //     restartAutoSlide();
-                // }
-
-                // // Function to restart auto-slide
-                // function restartAutoSlide() {
-                //     if (autoSlideInterval) {
-                //         clearInterval(autoSlideInterval);
-                //     }
-                //     autoSlideInterval = setInterval(() => {
-                //         if (currentIndex === totalCards - 1) {
-                //             currentIndex = 0;
-                //         } else {
-                //             currentIndex++;
-                //         }
-                //         updateSlider();
-                //     }, 6000);
-                // }
-
-                // // Prevent context menu on long press
-                // slider.addEventListener('contextmenu', e => e.preventDefault());
-
-
-
             }
             
             // Initial setup
             updateSlider();
+
+
+          //Offbeat Stays Slider
+          const mobileBreakpoint = 768; // Define breakpoint for mobile vs desktop
+		  let currentScript;
+
+		  // Mobile-oriented carousel logic
+		  function mobileCarousel() {
+
+		  	  const track = document.getElementById('stay-carousel-track');
+		      const items = document.querySelectorAll('.stay-carousel-item');
+		      const container = document.getElementById('stay-carousel-container');
+
+		      let currentIndex = 0;
+		      let startX = 0;
+		      let startY = 0;
+		      let currentX = 0;
+		      let currentY = 0;
+		      let isDragging = false;
+
+		      function updateCarousel() {
+		          if (!track || !items.length) return;
+		          const itemWidth = items[0].offsetWidth;
+		          track.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+		      }
+
+		      function nextSlide() {
+		          const itemsVisible = 1;
+		          if (currentIndex < items.length - itemsVisible) {
+		              currentIndex += 1;
+		          } else {
+		              currentIndex = 0;
+		          }
+		          updateCarousel();
+		      }
+
+		      function prevSlide() {
+		          const itemsVisible = 1;
+		          if (currentIndex > 0) {
+		              currentIndex -= 1;
+		          } else {
+		              currentIndex = items.length - itemsVisible;
+		          }
+		          updateCarousel();
+		      }
+
+		      function snapToSlide() {
+		          const itemWidth = items[0].offsetWidth;
+		          const dragDistance = currentX - startX;
+		          const threshold = itemWidth / 16;
+
+		          if (dragDistance > threshold && currentIndex > 0) {
+		              currentIndex -= 1;
+		          } else if (dragDistance < -threshold && currentIndex < items.length - 1) {
+		              currentIndex += 1;
+		          }
+
+		          updateCarousel();
+		      }
+
+		      function smoothDrag(dragDistance) {
+		          const itemWidth = items[0].offsetWidth;
+		          track.style.transform = `translateX(calc(-${currentIndex * itemWidth}px + ${dragDistance}px))`;
+		      }
+
+		      container.addEventListener('touchstart', (e) => {
+		          startX = e.touches[0].clientX;
+		          startY = e.touches[0].clientY;
+		          currentX = startX;
+		          currentY = startY;
+		          isDragging = true;
+		          track.style.transition = 'none';
+		      });
+
+		      container.addEventListener('touchmove', (e) => {
+		          if (!isDragging) return;
+		          currentX = e.touches[0].clientX;
+		          currentY = e.touches[0].clientY;
+
+		          const deltaX = Math.abs(currentX - startX);
+		          const deltaY = Math.abs(currentY - startY);
+
+		          // If vertical swipe is dominant, do not allow carousel dragging
+		          if (deltaY > deltaX) {
+		              isDragging = false;
+		              return;
+		          }
+
+		          smoothDrag(currentX - startX);
+		      });
+
+		      container.addEventListener('touchend', () => {
+		          if (!isDragging) return;
+		          isDragging = false;
+		          track.style.transition = 'transform 0.5s ease';
+		          snapToSlide();
+		      });
+
+		      // const prevButton = document.querySelector('.carousel-button.prev');
+		      // const nextButton = document.querySelector('.carousel-button.next');
+		      const prevButton = document.getElementById('stay-prev');
+		      const nextButton = document.getElementById('stay-next');
+
+		      if (prevButton) prevButton.addEventListener('click', prevSlide);
+		      if (nextButton) nextButton.addEventListener('click', nextSlide);
+
+		      window.addEventListener('resize', updateCarousel);
+		      updateCarousel();
+		  }
+
+		  // Desktop-oriented carousel logic
+		  function desktopCarousel() {
+		    const track = document.getElementById('stay-carousel-track');
+		    const items = document.querySelectorAll('.stay-carousel-item');
+		    const container = document.getElementById('stay-carousel-container');
+		    let currentIndex = 0;
+
+		    function updateCarousel() {
+		      if (!container || !track || !items.length) return;
+		      const itemWidth = items[0].offsetWidth;
+		      const itemsVisible = Math.floor(container.offsetWidth / itemWidth);
+		      track.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+		      return itemsVisible;
+		    }
+
+		    function nextSlide() {
+		      const itemsVisible = updateCarousel();
+		      if (currentIndex < items.length - itemsVisible) {
+		        currentIndex += 1;
+		      } else {
+		        currentIndex = 0;
+		      }
+		      updateCarousel();
+		    }
+
+		    function prevSlide() {
+		      const itemsVisible = updateCarousel();
+		      if (currentIndex > 0) {
+		        currentIndex -= 1;
+		      } else {
+		        currentIndex = items.length - itemsVisible;
+		      }
+		      updateCarousel();
+		    }
+
+		    const prevButton = document.getElementById('stay-prev');
+		    const nextButton = document.getElementById('stay-next');
+
+		    if (prevButton) prevButton.addEventListener('click', prevSlide);
+		    if (nextButton) nextButton.addEventListener('click', nextSlide);
+
+		    window.addEventListener('resize', updateCarousel);
+		    updateCarousel();
+		  }
+
+		  // Initialize appropriate carousel script
+		  function initializeCarousel() {
+		    const isMobile = window.innerWidth <= mobileBreakpoint;
+
+		    if (currentScript) {
+		      // Cleanup existing script
+		      window.removeEventListener('resize', currentScript);
+		    }
+
+		    if (isMobile) {
+		      currentScript = mobileCarousel;
+		    } else {
+		      currentScript = desktopCarousel;
+		    }
+
+		    currentScript();
+		  }
+
+		  // Listen for resize events to switch logic dynamically
+		  window.addEventListener('resize', initializeCarousel);
+
+		  // Initial load
+		  initializeCarousel();
+
+
+		  // Safari Slider
+		  // Mobile-oriented carousel logic
+		  function mobileSafariCarousel() {
+
+		  	  const track = document.getElementById('safari-carousel-track');
+		      const items = document.querySelectorAll('.safari-carousel-item');
+		      const container = document.getElementById('safari-carousel-container');
+
+		      let currentIndex = 0;
+		      let startX = 0;
+		      let startY = 0;
+		      let currentX = 0;
+		      let currentY = 0;
+		      let isDragging = false;
+
+		      function updateCarousel() {
+		          if (!track || !items.length) return;
+		          const itemWidth = items[0].offsetWidth;
+		          track.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+		      }
+
+		      function nextSlide() {
+		          const itemsVisible = 1;
+		          if (currentIndex < items.length - itemsVisible) {
+		              currentIndex += 1;
+		          } else {
+		              currentIndex = 0;
+		          }
+		          updateCarousel();
+		      }
+
+		      function prevSlide() {
+		          const itemsVisible = 1;
+		          if (currentIndex > 0) {
+		              currentIndex -= 1;
+		          } else {
+		              currentIndex = items.length - itemsVisible;
+		          }
+		          updateCarousel();
+		      }
+
+		      function snapToSlide() {
+		          const itemWidth = items[0].offsetWidth;
+		          const dragDistance = currentX - startX;
+		          const threshold = itemWidth / 16;
+
+		          if (dragDistance > threshold && currentIndex > 0) {
+		              currentIndex -= 1;
+		          } else if (dragDistance < -threshold && currentIndex < items.length - 1) {
+		              currentIndex += 1;
+		          }
+
+		          updateCarousel();
+		      }
+
+		      function smoothDrag(dragDistance) {
+		          const itemWidth = items[0].offsetWidth;
+		          track.style.transform = `translateX(calc(-${currentIndex * itemWidth}px + ${dragDistance}px))`;
+		      }
+
+		      container.addEventListener('touchstart', (e) => {
+		          startX = e.touches[0].clientX;
+		          startY = e.touches[0].clientY;
+		          currentX = startX;
+		          currentY = startY;
+		          isDragging = true;
+		          track.style.transition = 'none';
+		      });
+
+		      container.addEventListener('touchmove', (e) => {
+		          if (!isDragging) return;
+		          currentX = e.touches[0].clientX;
+		          currentY = e.touches[0].clientY;
+
+		          const deltaX = Math.abs(currentX - startX);
+		          const deltaY = Math.abs(currentY - startY);
+
+		          // If vertical swipe is dominant, do not allow carousel dragging
+		          if (deltaY > deltaX) {
+		              isDragging = false;
+		              return;
+		          }
+
+		          smoothDrag(currentX - startX);
+		      });
+
+		      container.addEventListener('touchend', () => {
+		          if (!isDragging) return;
+		          isDragging = false;
+		          track.style.transition = 'transform 0.5s ease';
+		          snapToSlide();
+		      });
+
+		      // const prevButton = document.querySelector('.carousel-button.prev');
+		      // const nextButton = document.querySelector('.carousel-button.next');
+		      const prevButton = document.getElementById('safari-prev');
+		      const nextButton = document.getElementById('safari-next');
+
+		      if (prevButton) prevButton.addEventListener('click', prevSlide);
+		      if (nextButton) nextButton.addEventListener('click', nextSlide);
+
+		      window.addEventListener('resize', updateCarousel);
+		      updateCarousel();
+		  }
+
+		  // Desktop-oriented carousel logic
+		  function desktopSafariCarousel() {
+		    const track = document.getElementById('safari-carousel-track');
+		    const items = document.querySelectorAll('.safari-carousel-item');
+		    const container = document.getElementById('safari-carousel-container');
+		    let currentIndex = 0;
+
+		    function updateCarousel() {
+		      if (!container || !track || !items.length) return;
+		      const itemWidth = items[0].offsetWidth;
+		      const itemsVisible = Math.floor(container.offsetWidth / itemWidth);
+		      track.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+		      return itemsVisible;
+		    }
+
+		    function nextSlide() {
+		      const itemsVisible = updateCarousel();
+		      if (currentIndex < items.length - itemsVisible) {
+		        currentIndex += 1;
+		      } else {
+		        currentIndex = 0;
+		      }
+		      updateCarousel();
+		    }
+
+		    function prevSlide() {
+		      const itemsVisible = updateCarousel();
+		      if (currentIndex > 0) {
+		        currentIndex -= 1;
+		      } else {
+		        currentIndex = items.length - itemsVisible;
+		      }
+		      updateCarousel();
+		    }
+
+		    const prevButton = document.getElementById('safari-prev');
+		    const nextButton = document.getElementById('safari-next');
+
+		    if (prevButton) prevButton.addEventListener('click', prevSlide);
+		    if (nextButton) nextButton.addEventListener('click', nextSlide);
+
+		    window.addEventListener('resize', updateCarousel);
+		    updateCarousel();
+		  }
+
+		  // Initialize appropriate carousel script
+		  function initializeSafariCarousel() {
+		    const isMobile = window.innerWidth <= mobileBreakpoint;
+
+		    if (currentScript) {
+		      // Cleanup existing script
+		      window.removeEventListener('resize', currentScript);
+		    }
+
+		    if (isMobile) {
+		      currentScript = mobileSafariCarousel;
+		    } else {
+		      currentScript = desktopSafariCarousel;
+		    }
+
+		    currentScript();
+		  }
+
+		  // Listen for resize events to switch logic dynamically
+		  window.addEventListener('resize', initializeSafariCarousel);
+
+		  // Initial load
+		  initializeSafariCarousel();
+
+
         });
+
 
     </script>
 </body>
