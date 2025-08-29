@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanjay Dubri Wildlife Safari - Call of the Nature</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&family=Crimson+Text:wght@400;600;700&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    
+    <!-- REUSABLE HEADER AND FOOTER COMPONENT CSS -->
+    <style>
+        /* Header/Footer Component Styles */
+        :root {
+            --primary-dark: #0f172a;
+            --secondary-dark: #1e293b;
+            --font-black: #000000;
+            --text-dark: #0f172a;
+            --accent-gold: #2563eb;
+            --warm-gold: #2E7D32;
+            --pure-white: #ffffff;
+            --soft-white: #fafafa;
+            --light-gray: #f5f5f5;
+            --medium-gray: #374151;
+            --border-gray: #e5e5e5;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --shadow-medium: rgba(0, 0, 0, 0.12);
+            --heading-font: 'Crimson Text', serif;
+            --brand-font: 'Merriweather', serif;
+            --body-font: 'Montserrat', sans-serif;
+            --deep-blue: #1d4ed8;
+            --light-blue: #60a5fa;
+            
+            /* Additional colors for Sanjay Dubri theme */
+            --primary-green: #2d5016;
+            --accent-green: #4a7c59;
+            --light-green: #7fb069;
+            --earth-brown: #8b4513;
+            --warm-beige: #f5f1e8;
+            --text-light: #666;
+            --gold-accent: #d4af37;
+            --whatsapp-green: #25D366;
+            --whatsapp-green-dark: #128C7E;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--body-font);
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navigation Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-gray);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 0.5rem 2rem;
+            box-shadow: 0 2px 20px var(--shadow-light);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--heading-font);
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            text-decoration: none;
+        }
+
+        .logo-img {
+            height: 40px;
+            width: auto;
+            border-radius: 50%;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-link {
+            color: var(--primary-dark);
+            text-decoration: none;
+            font-family: var(--body-font);
+            font-weight: 400;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-gold);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--accent-gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--primary-dark);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Dropdown Styles */
+        .nav-dropdown {
+            position: relative;
+        }
+
+        .dropdown-trigger {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .dropdown-arrow {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-dropdown:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px var(--shadow-medium);
+            border: 1px solid var(--border-gray);
+            min-width: 220px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1001;
+            list-style: none;
+            padding: 0.5rem 0;
+        }
+
+        .nav-dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-link {
+            display: block;
+            padding: 0.7rem 1.2rem;
+            color: var(--primary-dark);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 400;
+            transition: all 0.2s ease;
+            border-radius: 6px;
+            margin: 0 0.5rem;
+        }
+
+        .dropdown-link:hover {
+            background: var(--light-gray);
+            color: var(--accent-gold);
+            transform: translateX(4px);
+        }
+
+        /* Contact Buttons */
+        .contact-buttons {
+            position: fixed;
+            right: 2rem;
+            bottom: 2rem;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px var(--shadow-medium);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .contact-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .whatsapp-btn {
+            background: #25D366;
+        }
+
+        .call-btn {
+            background: var(--accent-gold);
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            padding-top: 80px;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 70vh;
+            background: linear-gradient(rgba(45, 80, 22, 0.3), rgba(45, 80, 22, 0.3)),
+                        url('images/kanha_tiger_1.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            color: white;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-family: var(--heading-font);
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero .location {
+            font-size: 1.2rem;
+            color: var(--gold-accent);
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+
+        /* Content Section */
+        .content {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: var(--heading-font);
+            font-size: 1.75rem;
+            color: var(--primary-green);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .overview-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .overview-text {
+            font-size: 0.9rem;
+            line-height: 1.8;
+            color: var(--text-light);
+        }
+
+        .overview-text h3 {
+            font-family: var(--heading-font);
+            font-size: 1.5rem;
+            color: var(--primary-green);
+            margin: 1rem 0 1rem 0;
+        }
+
+        .quick-info {
+            background: var(--warm-beige);
+            padding: 2rem;
+            border-radius: 15px;
+            height: fit-content;
+        }
+
+        .quick-info h3 {
+            font-family: var(--heading-font);
+            color: var(--primary-green);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(45, 80, 22, 0.1);
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .info-value {
+            color: var(--text-light);
+            text-align: right;
+        }
+
+        .book-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--whatsapp-green), var(--whatsapp-green-dark));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .book-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+            background: linear-gradient(135deg, #128C7E, #075E54);
+        }
+
+        .whatsapp-icon {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+
+        /* Itinerary Section */
+        .itinerary {
+            background: var(--warm-beige);
+            padding: 2rem 1rem;
+            margin: 2rem 0;
+        }
+
+        .itinerary-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .day-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .day-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .day-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .day-number {
+            background: var(--primary-green);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-right: 1rem;
+        }
+
+        .day-title {
+            font-family: var(--heading-font);
+            font-size: 1.2rem;
+            color: var(--primary-green);
+        }
+
+        .day-activities {
+            color: var(--text-light);
+            line-height: 1.7;
+            font-size: 0.9rem;
+        }
+
+        /* Highlights Grid */
+        .highlights {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .highlight-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .highlight-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .highlight-card h3 {
+            font-family: var(--heading-font);
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        .highlight-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Gallery Preview */
+        .gallery-preview {
+            background: var(--warm-beige);
+            padding: 4rem 2rem;
+        }
+
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, var(--accent-gold), var(--warm-gold));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .cta-button.secondary {
+            background: rgba(255, 255, 255, 1);
+            border: 2px solid white;
+            backdrop-filter: blur(10px);
+            color: var(--primary-dark);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.4);
+        }
+
+        .cta-button.secondary:hover {
+            background: white;
+            color: var(--primary-dark);
+        }
+
+        /* What to Expect */
+        .expectations {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .expectations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .expectation-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .expectation-icon {
+            background: var(--light-green);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+        }
+
+        .expectation-content h4 {
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .expectation-content p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Footer Styles */
+        .footer {
+            background: var(--light-gray);
+            padding: 3rem 2rem 1.5rem;
+            border-top: 1px solid var(--border-gray);
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--font-black);
+        }
+
+        .footer-section p, .footer-section a {
+            color: var(--font-black);
+            font-size: 1.0rem;
+            text-decoration: none;
+            line-height: 1.8;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-gold);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-gray);
+            color: var(--medium-gray);
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+
+            .dropdown-trigger {
+                margin-left: 3rem;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: rgba(255, 255, 255, 0.98);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                padding-top: 2rem;
+                transition: left 0.3s ease;
+                backdrop-filter: blur(20px);
+                border-top: 1px solid var(--border-gray);
+            }
+
+            .nav-menu.active {
+                left: 0;
+                display: flex;
+            }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 0;
+                visibility: hidden;
+                max-height: 0;
+                overflow: hidden;
+                transform: none;
+                box-shadow: none;
+                border: none;
+                background: rgba(255, 255, 255, 0.1);
+                margin-left: 1rem;
+                margin-top: 0;
+                transition: all 0.3s ease;
+            }
+            
+            .dropdown-menu.mobile-active {
+                opacity: 1;
+                visibility: visible;
+                max-height: 200px;
+                margin-top: 0.5rem;
+            }
+            
+            .dropdown-link {
+                margin: 0;
+                padding: 0.5rem 0;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+                color: var(--primary-dark);
+            }
+            
+            .dropdown-link:hover {
+                background: rgba(0,0,0,0.05);
+                transform: translateX(4px);
+            }
+
+            .contact-buttons {
+                right: 1rem;
+                bottom: 1rem;
+            }
+
+            .contact-btn {
+                width: 50px;
+                height: 50px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+            }
+
+            .overview-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .highlights-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .expectations-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .navbar {
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER HTML -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="images/cotn_logo.jpg" alt="Call of the Nature Logo" class="logo-img">
+                <span>Call of the Nature</span>
+            </a>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html#home" class="nav-link">Home</a></li>
+                
+                <li class="nav-dropdown">
+                    <a href="index.html#stays" class="nav-link dropdown-trigger">
+                        Offbeat Stays <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="shangarh.html" class="dropdown-link">Shangarh Mountain Retreat</a></li>
+                        <li><a href="jhargram.html" class="dropdown-link">Jhargram River View Stay</a></li>
+                        <li><a href="jhargram_jungle_camp.html" class="dropdown-link">Jhargram Jungle Camp</a></li>
+                        <li><a href="jhargram_forest_lodge.html" class="dropdown-link">Jhargram Forest Lodge</a></li>
+                        <!-- <li><a href="chilapata.html" class="dropdown-link">Chilapata Jungle Lodge</a></li> -->
+                    </ul>
+                </li>
+                
+                <li class="nav-dropdown">
+                    <a href="index.html#safaris" class="nav-link dropdown-trigger">
+                        Wildlife Safaris <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="sundarbans.html" class="dropdown-link">Sundarbans Tiger Safari</a></li>
+                        <li><a href="jhalana_jawai.html" class="dropdown-link">Jhalana & Jawai Safari</a></li>
+                        <li><a href="jawai.html" class="dropdown-link">Jawai Leopard Safari</a></li>
+                        <li><a href="kanha.html" class="dropdown-link">Kanha Tiger Safari</a></li>
+                        <li><a href="sanjay_dubri.html" class="dropdown-link">Sanjay Dubri Tiger Safari</a></li>
+                    </ul>
+                </li>
+                
+                <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Sanjay Dubri Wildlife Safari</h1>
+                <p class="location">📍 Sidhi District, Madhya Pradesh, India</p>
+                <p>Discover the hidden gem of Madhya Pradesh with exclusive tiger, leopard, and sloth bear encounters in pristine sal forests and grasslands</p>
+            </div>
+        </section>
+
+        <!-- Overview Section -->
+        <section class="content">
+            <div class="overview-grid">
+                <div class="overview-text fade-in">
+                    <h2 class="section-title" style="text-align: left; margin-bottom: 1rem;">Discover the Hidden Tiger Paradise</h2>
+                    <p>Sanjay Dubri National Park, a lesser-known gem in Madhya Pradesh's Sidhi district, offers an intimate wildlife experience away from crowded tourist circuits. This pristine tiger reserve spans over 1,674 square kilometers of sal forests, bamboo groves, and grasslands, providing sanctuary to diverse wildlife including tigers, leopards, and the rare sloth bears.</p>
+                    
+                    <h3>Legacy of the White Tiger</h3>
+                    <p>This remarkable landscape holds special significance in tiger conservation history - it's where the famous white tiger "Mohan" was discovered in 1951 by the Maharaja of Rewa. Today, most white tigers in zoos worldwide trace their lineage back to this very forest, and one of the park's ranges bears Mohan's name in tribute.</p>
+                    
+                    <h3>Why Choose Sanjay Dubri?</h3>
+                    <p>Experience the raw wilderness of central India with minimal tourist crowds. Our carefully planned safari itinerary focuses on the park's core areas where tigers, leopards, and sloth bears are most active, offering exceptional photography opportunities and authentic wildlife encounters in their natural habitat.</p>
+                    
+                    <h3>Tiger-Focused Safari Experience</h3>
+                    <p>Our specialized 3-day program includes 4 tiger-focused safaris designed for serious wildlife enthusiasts. With strategic positioning in prime territories and expert local guides who understand animal behavior patterns, maximize your chances of witnessing these magnificent predators in action.</p>
+                </div>
+                
+                <div class="quick-info fade-in">
+                    <h3>Quick Information</h3>
+                    <div class="info-item">
+                        <span class="info-label">Duration</span>
+                        <span class="info-value">2 Nights / 3 Days</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Group Size</span>
+                        <span class="info-value">Small Groups</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Best Time</span>
+                        <span class="info-value">October - June</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Safari Count</span>
+                        <span class="info-value">4 Tiger Safaris</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Nearest Station</span>
+                        <span class="info-value">Beohari (30 KM)</span>
+                    </div>
+                    
+                    <a href="https://wa.me/918240443268?text=Hi! I'm interested in booking a Sanjay Dubri tiger safari adventure." class="book-btn" target="_blank">
+                        <svg class="whatsapp-icon" viewBox="0 0 24 24">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                        </svg>
+                        Chat on WhatsApp
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Itinerary Section -->
+        <section class="itinerary">
+            <div class="itinerary-container">
+                <h2 class="section-title">Detailed Itinerary</h2>
+                
+                <div class="day-card fade-in">
+                    <div class="day-header">
+                        <div class="day-number">1</div>
+                        <div class="day-title">Arrival at Sanjay Dubri Resort – Evening Safari</div>
+                    </div>
+                    <div class="day-activities">
+                        <strong>Arrival:</strong> Pickup from Beohari Railway Station and check-in at Sanjay Dubri Resort by afternoon.<br>
+                        <strong>Lunch:</strong> Welcome lunch at the resort with local cuisine.<br>
+                        <strong>Evening Safari:</strong> First tiger-focused safari during golden hours for optimal wildlife photography.<br>
+                        <strong>Night:</strong> Dinner and overnight stay at resort with astrophotography opportunities if weather permits.<br>
+                    </div>
+                </div>
+
+                <div class="day-card fade-in">
+                    <div class="day-header">
+                        <div class="day-number">2</div>
+                        <div class="day-title">Double Safari Day – Prime Tiger Territory</div>
+                    </div>
+                    <div class="day-activities">
+                        <strong>Morning Safari:</strong> Early morning safari targeting prime tiger and leopard territories with expert wildlife tracking.<br>
+                        <strong>Breakfast & Rest:</strong> Return to resort for breakfast and relaxation during midday heat.<br>
+                        <strong>Lunch:</strong> Traditional lunch at resort with regional specialties.<br>
+                        <strong>Evening Safari:</strong> Second evening safari focusing on sloth bear habitats and golden light photography.<br>
+                        <strong>Night:</strong> Dinner and overnight stay with optional night sky photography session.<br>
+                    </div>
+                </div>
+
+                <div class="day-card fade-in">
+                    <div class="day-header">
+                        <div class="day-number">3</div>
+                        <div class="day-title">Final Safari & Departure</div>
+                    </div>
+                    <div class="day-activities">
+                        <strong>Morning Safari:</strong> Final tiger-focused safari in core areas for last wildlife encounters and photography.<br>
+                        <strong>Breakfast:</strong> Leisurely breakfast at resort while sharing safari experiences.<br>
+                        <strong>Check Out:</strong> Resort check-out and preparation for departure.<br>
+                        <strong>Departure:</strong> Drop-off at Beohari Railway Station for onward journey.<br>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Highlights Section -->
+        <section class="highlights">
+            <h2 class="section-title">Adventure Highlights</h2>
+            <div class="highlights-grid">
+                <div class="highlight-card fade-in">
+                    <div class="highlight-icon">🐅</div>
+                    <h3>White Tiger Legacy</h3>
+                    <p>Explore the historic homeland of Mohan, the legendary white tiger whose lineage continues in zoos worldwide, in pristine tiger territories.</p>
+                </div>
+                
+                <div class="highlight-card fade-in">
+                    <div class="highlight-icon">🐻</div>
+                    <h3>Sloth Bear Encounters</h3>
+                    <p>Witness the elusive sloth bears in their natural habitat, known for their unique behavior and distinctive appearance in central Indian forests.</p>
+                </div>
+                
+                <div class="highlight-card fade-in">
+                    <div class="highlight-icon">🐆</div>
+                    <h3>Leopard Territory</h3>
+                    <p>Experience close encounters with leopards in their preferred rocky outcrops and dense forest cover, showcasing their stealth and agility.</p>
+                </div>
+                
+                <div class="highlight-card fade-in">
+                    <div class="highlight-icon">🌟</div>
+                    <h3>Astrophotography</h3>
+                    <p>Capture stunning night sky photography in minimal light pollution areas, perfect for stargazing and milky way captures after safaris.</p>
+                </div>
+                
+                <div class="highlight-card fade-in">
+                    <div class="highlight-icon">📍</div>
+                    <h3>Off-the-Beaten-Path</h3>
+                    <p>Discover this hidden gem away from crowded tourist circuits, offering authentic wilderness experiences with minimal human interference.</p>
+                </div>
+                
+                <div class="highlight-card fade-in">
+                    <div class="highlight-icon">🌅</div>
+                    <h3>Golden Hour Safaris</h3>
+                    <p>Strategically timed morning and evening safaris during optimal wildlife activity periods with perfect natural lighting for photography.</p>
+                </div>
+                
+                <div class="highlight-card fade-in">
+                    <div class="highlight-icon">🌿</div>
+                    <h3>Sal Forest Ecosystem</h3>
+                    <p>Explore diverse sal forests, bamboo groves, and grasslands supporting rich biodiversity and complex predator-prey relationships.</p>
+                </div>
+                
+                <div class="highlight-card fade-in">
+                    <div class="highlight-icon">🏞️</div>
+                    <h3>Pristine Wilderness</h3>
+                    <p>Experience untouched forest landscapes with minimal tourist footprint, allowing for genuine wildlife behavior observation.</p>
+                </div>
+                
+                <div class="highlight-card fade-in">
+                    <div class="highlight-icon">🎯</div>
+                    <h3>Tiger-Focused Approach</h3>
+                    <p>Specialized safari strategy targeting known tiger territories with expert local guides who understand movement patterns and behaviors.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Preview -->
+        <section class="gallery-preview">
+            <div class="gallery-container">
+                <h2 class="section-title">Photo Gallery</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="images/kanha_tiger_1.jpg" alt="Sanjay Dubri Tiger" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/kanha_tiger_2.jpg" alt="Sanjay Dubri Leopard" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/sanjay_dubri_sloth_bear.jpg" alt="Sanjay Dubri Sloth Bear" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/kanha_tiger_5.jpg" alt="Sanjay Dubri Forest" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 2rem;">
+                    <a href="gallery.html" class="cta-button">View Full Gallery</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- What to Expect -->
+        <section class="expectations">
+            <h2 class="section-title">What to Expect</h2>
+            <div class="expectations-grid">
+                <div class="expectation-item fade-in">
+                    <div class="expectation-icon">✓</div>
+                    <div class="expectation-content">
+                        <h4>Expert Local Guides</h4>
+                        <p>Experienced naturalists with intimate knowledge of Sanjay Dubri's tiger territories, leopard movement patterns, and sloth bear habitats for optimal wildlife tracking.</p>
+                    </div>
+                </div>
+                
+                <div class="expectation-item fade-in">
+                    <div class="expectation-icon">✓</div>
+                    <div class="expectation-content">
+                        <h4>Resort Accommodation</h4>
+                        <p>Comfortable stay at Sanjay Dubri Resort with modern amenities, positioned strategically near park entrance for easy safari access.</p>
+                    </div>
+                </div>
+                
+                <div class="expectation-item fade-in">
+                    <div class="expectation-icon">✓</div>
+                    <div class="expectation-content">
+                        <h4>All Meals Included</h4>
+                        <p>Complete meal plan with breakfast, lunch, and dinner featuring authentic regional cuisine and local specialties prepared fresh at the resort.</p>
+                    </div>
+                </div>
+                
+                <div class="expectation-item fade-in">
+                    <div class="expectation-icon">✓</div>
+                    <div class="expectation-content">
+                        <h4>Tiger Photography Focus</h4>
+                        <p>Four strategic safaris designed specifically for tiger photography with optimal timing, positioning, and expert guidance for the best wildlife captures.</p>
+                    </div>
+                </div>
+                
+                <div class="expectation-item fade-in">
+                    <div class="expectation-icon">✓</div>
+                    <div class="expectation-content">
+                        <h4>Station Transfers</h4>
+                        <p>Convenient pickup and drop-off service from Beohari Railway Station, ensuring smooth connectivity to and from the wildlife sanctuary.</p>
+                    </div>
+                </div>
+
+                <div class="expectation-item fade-in">
+                    <div class="expectation-icon">✓</div>
+                    <div class="expectation-content">
+                        <h4>Astrophotography Opportunity</h4>
+                        <p>Clear skies and minimal light pollution provide excellent conditions for night sky photography, perfect for capturing stars and celestial phenomena.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- FOOTER HTML -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Call of the Nature</h3>
+                    <p>We specialize in curating extraordinary experiences that combine unique offbeat accommodations with unforgettable wildlife encounters across India.</p>
+                    <p style="margin-top: 1rem; font-style: italic;">"Where Every Journey Leads to Wonder"</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Our Experiences</h3>
+                    <p><a href="index.html#stays">Offbeat Stays</a></p>
+                    <p><a href="index.html#safaris">Wildlife Safaris</a></p>
+                    <p><a href="gallery.html">Photo Gallery</a></p>
+                    <p><a href="index.html#contact">Custom Packages</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Get in Touch</h3>
+                    <p>📧 <a href="mailto:callofthenatureinfo@gmail.com">callofthenatureinfo@gmail.com</a></p>
+                    <p>📞 <a href="tel:+918240443268">+91 82404 43268</a> / <a href="tel:+919073757780">+91 90737 57780</a></p>
+                    <p>📍 Kolkata, West Bengal, India</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Our Journey</h3>
+                    <p><a href="https://www.instagram.com/call_of_thenature/profilecard/?igsh=MXZ4d2dxMDd6bjJxbg==" target="_blank">📷 Instagram</a></p>
+                    <p><a href="https://www.facebook.com/share/1AuiDmBZ2L/" target="_blank">📘 Facebook</a></p>
+                    <p><a href="https://youtube.com/@callofdnature" target="_blank">📺 YouTube</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Call of the Nature. All rights reserved. | Crafted for Nature Enthusiasts & Adventure Seekers</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Contact Buttons -->
+    <div class="contact-buttons">
+        <a href="https://api.whatsapp.com/send?phone=918240443268" target="_blank" class="contact-btn whatsapp-btn">
+            <svg width="24" height="24" fill="white" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.525 3.687"/>
+            </svg>
+        </a>
+        <a href="tel:+918240443268" class="contact-btn call-btn">
+            <svg width="24" height="24" fill="white" viewBox="0 0 24 24">
+                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+            </svg>
+        </a>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Header/Footer Component JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navbar scroll effect
+            window.addEventListener('scroll', function() {
+                const navbar = document.getElementById('navbar');
+                if (navbar) {
+                    if (window.scrollY > 50) {
+                        navbar.classList.add('scrolled');
+                    } else {
+                        navbar.classList.remove('scrolled');
+                    }
+                }
+            });
+
+            // Mobile menu and dropdown functionality
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const navMenu = document.getElementById('nav-menu');
+
+            if (mobileMenuBtn && navMenu) {
+                mobileMenuBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    navMenu.classList.toggle('active');
+                    
+                    if (navMenu.classList.contains('active')) {
+                        this.innerHTML = '✕';
+                    } else {
+                        this.innerHTML = '☰';
+                        // Close all dropdowns when menu closes
+                        document.querySelectorAll('.dropdown-menu').forEach(d => d.classList.remove('mobile-active'));
+                        document.querySelectorAll('.dropdown-arrow').forEach(a => a.style.transform = 'rotate(0deg)');
+                    }
+                });
+
+                // Close menu when clicking on regular nav links
+                document.querySelectorAll('.nav-link:not(.dropdown-trigger)').forEach(link => {
+                    link.addEventListener('click', function() {
+                        navMenu.classList.remove('active');
+                        if (mobileMenuBtn) {
+                            mobileMenuBtn.innerHTML = '☰';
+                        }
+                        document.querySelectorAll('.dropdown-menu').forEach(d => d.classList.remove('mobile-active'));
+                        document.querySelectorAll('.dropdown-arrow').forEach(a => a.style.transform = 'rotate(0deg)');
+                    });
+                });
+
+                // Close menu when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!navMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                        navMenu.classList.remove('active');
+                        mobileMenuBtn.innerHTML = '☰';
+                        document.querySelectorAll('.dropdown-menu').forEach(d => d.classList.remove('mobile-active'));
+                        document.querySelectorAll('.dropdown-arrow').forEach(a => a.style.transform = 'rotate(0deg)');
+                    }
+                });
+            }
+
+            // Dropdown functionality
+            document.querySelectorAll('.dropdown-trigger').forEach(trigger => {
+                trigger.addEventListener('click', function(e) {
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        const dropdown = this.parentNode.querySelector('.dropdown-menu');
+                        const arrow = this.querySelector('.dropdown-arrow');
+                        
+                        if (dropdown.classList.contains('mobile-active')) {
+                            dropdown.classList.remove('mobile-active');
+                            arrow.style.transform = 'rotate(0deg)';
+                        } else {
+                            document.querySelectorAll('.dropdown-menu').forEach(d => d.classList.remove('mobile-active'));
+                            document.querySelectorAll('.dropdown-arrow').forEach(a => a.style.transform = 'rotate(0deg)');
+                            
+                            dropdown.classList.add('mobile-active');
+                            arrow.style.transform = 'rotate(180deg)';
+                        }
+                    }
+                });
+            });
+
+            // Close dropdown menu when clicking on dropdown links
+            document.querySelectorAll('.dropdown-link').forEach(link => {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth <= 768) {
+                        const navMenu = document.getElementById('nav-menu');
+                        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+                        if (navMenu && mobileMenuBtn) {
+                            navMenu.classList.remove('active');
+                            mobileMenuBtn.innerHTML = '☰';
+                        }
+                        document.querySelectorAll('.dropdown-menu').forEach(d => d.classList.remove('mobile-active'));
+                        document.querySelectorAll('.dropdown-arrow').forEach(a => a.style.transform = 'rotate(0deg)');
+                    }
+                });
+            });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        e.preventDefault();
+                        const offsetTop = target.offsetTop - 70;
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Fade in animation on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Gallery items click
+            document.querySelectorAll('.gallery-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    window.location.href = 'gallery.html';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
