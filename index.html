@@ -65,7 +65,7 @@
             top: 0;
             width: 100%;
             padding: 1rem 2rem;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 1.0);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border-gray);
             z-index: 1000;
@@ -73,8 +73,8 @@
         }
 
         .navbar.scrolled {
-            background: rgba(255, 255, 255, 0.98);
-            padding: 0.5rem 2rem;
+            background: rgba(255, 255, 255, 1.0);
+            /*padding: 0rem 2rem;*/
             box-shadow: 0 2px 20px var(--shadow-light);
         }
 
@@ -698,6 +698,13 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
+
+            body.no-scroll {
+                overflow: hidden;
+                position: fixed;
+                width: 100%;
+            }
+
             .mobile-menu-btn {
                 display: block;
             }
@@ -708,7 +715,7 @@
                 left: -100%;
                 width: 100%;
                 height: calc(100vh - 70px);
-                background: rgba(255, 255, 255, 0.98);
+                background: rgba(255, 255, 255, 1.0);
                 flex-direction: column;
                 justify-content: flex-start;
                 align-items: center;
@@ -1299,84 +1306,84 @@
             
         }
 
-	    /* Carousel Container */
-	    .carousel-container {
-	      width: 100%;
-	      max-width: 1200px;
-	      margin: auto;
-	      overflow: hidden;
-	      position: relative;
-	    }
+        /* Carousel Container */
+        .carousel-container {
+          width: 100%;
+          max-width: 1200px;
+          margin: auto;
+          overflow: hidden;
+          position: relative;
+        }
 
-	    /* Carousel Track */
-	    .carousel-track {
-	      display: flex;
-	      transition: transform 0.5s ease;
-	    }
+        /* Carousel Track */
+        .carousel-track {
+          display: flex;
+          transition: transform 0.5s ease;
+        }
 
-	    /* Carousel Item */
-	    .stay-carousel-item {
-	      flex: 0 0 33.33%;
-	      box-sizing: border-box;
-	      padding: 15px;
-	    }
+        /* Carousel Item */
+        .stay-carousel-item {
+          flex: 0 0 33.33%;
+          box-sizing: border-box;
+          padding: 15px;
+        }
 
-	    .safari-carousel-item {
-	      flex: 0 0 33.33%;
-	      box-sizing: border-box;
-	      padding: 15px;
-	    }
+        .safari-carousel-item {
+          flex: 0 0 33.33%;
+          box-sizing: border-box;
+          padding: 15px;
+        }
 
-	    /* Course Card */
-	    .course-card {
-	      background: #fff;
-	      border-radius: 10px;
-	      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-	      text-align: center;
-	      overflow: hidden;
-	    }
+        /* Course Card */
+        .course-card {
+          background: #fff;
+          border-radius: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+          text-align: center;
+          overflow: hidden;
+        }
 
-	    .course-card img {
-	      width: 100%;
-	      height: auto;
-	    }
+        .course-card img {
+          width: 100%;
+          height: auto;
+        }
 
-	    .course-card h3 {
-	      margin: 10px 0;
-	    }
+        .course-card h3 {
+          margin: 10px 0;
+        }
 
-	    .course-card p {
-	      font-size: 0.9em;
-	      padding: 0 10px;
-	    }
+        .course-card p {
+          font-size: 0.9em;
+          padding: 0 10px;
+        }
 
-	    /* Navigation Buttons */
-	    .carousel-button {
-	      position: absolute;
-	      top: 50%;
-	      transform: translateY(-50%);
-	      background-color: rgba(0, 0, 0, 0.6);
-	      color: white;
-	      border: none;
-	      padding: 10px;
-	      cursor: pointer;
-	      border-radius: 5px;
-	      z-index: 1;
-	    }
+        /* Navigation Buttons */
+        .carousel-button {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          background-color: rgba(0, 0, 0, 0.6);
+          color: white;
+          border: none;
+          padding: 10px;
+          cursor: pointer;
+          border-radius: 5px;
+          z-index: 1;
+        }
 
-	    .carousel-button.prev { left: 10px; }
-	    .carousel-button.next { right: 10px; }
+        .carousel-button.prev { left: 10px; }
+        .carousel-button.next { right: 10px; }
 
-	    /* Responsive */
-	    @media (max-width: 768px) {
-	      .stay-carousel-item { flex: 0 0 100%; }
-	      .safari-carousel-item { flex: 0 0 100%; }
-	    }
+        /* Responsive */
+        @media (max-width: 768px) {
+          .stay-carousel-item { flex: 0 0 100%; }
+          .safari-carousel-item { flex: 0 0 100%; }
+        }
 
-	    @media (max-width: 480px) {
-	      .stay-carousel-item { flex: 0 0 100%; }
-	      .safari-carousel-item { flex: 0 0 100%; }
-	    }
+        @media (max-width: 480px) {
+          .stay-carousel-item { flex: 0 0 100%; }
+          .safari-carousel-item { flex: 0 0 100%; }
+        }
 
 
     </style>
@@ -1503,76 +1510,76 @@
 
     <!-- Offbeat Stays Section -->
     <section class="section course-slider offbeat-stays" id="stays">
-	    <div class="carousel-container" id="stay-carousel-container">
-	      <!-- <h2 class="h2 section-title">Courses</h2> -->
+        <div class="carousel-container" id="stay-carousel-container">
+          <!-- <h2 class="h2 section-title">Courses</h2> -->
 
-	      <div class="section-header fade-in">
-	        <h2 class="section-title">Offbeat Stays</h2>
-	        <p class="section-subtitle">Escape the ordinary with our handpicked collection of unique accommodations nestled in nature's most beautiful settings</p>
-	    </div>
+          <div class="section-header fade-in">
+            <h2 class="section-title">Offbeat Stays</h2>
+            <p class="section-subtitle">Escape the ordinary with our handpicked collection of unique accommodations nestled in nature's most beautiful settings</p>
+        </div>
 
-	      <div class="carousel-track fade-in" id="stay-carousel-track">
-	        <!-- Slides -->
-	        <div class="stay-carousel-item">
-	          <div class="stay-card">
-	            <div class="stay-image" style="background-image: url('images/cover_photo_1.jpg')">
-	                <div class="stay-badge">Mountain Retreat</div>
-	            </div>
-	            <div class="stay-content">
-	                <h3 class="stay-title">Shangarh Mountain Retreat</h3>
-	                <p class="stay-location">📍 Shangarh, Himachal Pradesh</p>
-	                <p class="stay-description">Perched high in the Himalayas, experience serenity like never before. Wake up to panoramic mountain views, crisp mountain air, and the melody of nature at this exclusive retreat.</p>
-	                <div class="stay-features">
-	                    <span class="feature-tag">Mountain Views</span>
-	                    <span class="feature-tag">Hiking Trails</span>
-	                    <span class="feature-tag">Cozy Interiors</span>
-	                    <span class="feature-tag">Local Cuisine</span>
-	                </div>
-	                <br>
-	                <button class="explore-btn">Explore Retreat</button>
-	            </div>
-	        </div>
-	        </div>
-	        <div class="stay-carousel-item">
-	          <div class="stay-card">
-	            <div class="stay-image" style="background-image: url('images/FB_IMG_1754987980110.jpg')">
-	                <div class="stay-badge">Riverside Stay</div>
-	            </div>
-	            <div class="stay-content">
-	                <h3 class="stay-title">Jhargram River View Retreat</h3>
-	                <p class="stay-location">📍 Jhargram, West Bengal</p>
-	                <p class="stay-description">Unwind by the gentle flowing river surrounded by lush greenery. This peaceful retreat offers the perfect blend of comfort and nature's tranquility.</p>
-	                <div class="stay-features">
-	                    <span class="feature-tag">Riverside</span>
-	                    <span class="feature-tag">Bird Watching</span>
-	                    <span class="feature-tag">Fishing</span>
-	                    <span class="feature-tag">Nature Walks</span>
-	                </div>
-	                <button class="explore-btn">Explore Retreat</button>
-	            </div>
-	        </div>
-	        </div>
+          <div class="carousel-track fade-in" id="stay-carousel-track">
+            <!-- Slides -->
+            <div class="stay-carousel-item">
+              <div class="stay-card">
+                <div class="stay-image" style="background-image: url('images/cover_photo_1.jpg')">
+                    <div class="stay-badge">Mountain Retreat</div>
+                </div>
+                <div class="stay-content">
+                    <h3 class="stay-title">Shangarh Mountain Retreat</h3>
+                    <p class="stay-location">📍 Shangarh, Himachal Pradesh</p>
+                    <p class="stay-description">Perched high in the Himalayas, experience serenity like never before. Wake up to panoramic mountain views, crisp mountain air, and the melody of nature at this exclusive retreat.</p>
+                    <div class="stay-features">
+                        <span class="feature-tag">Mountain Views</span>
+                        <span class="feature-tag">Hiking Trails</span>
+                        <span class="feature-tag">Cozy Interiors</span>
+                        <span class="feature-tag">Local Cuisine</span>
+                    </div>
+                    <br>
+                    <button class="explore-btn">Explore Retreat</button>
+                </div>
+            </div>
+            </div>
+            <div class="stay-carousel-item">
+              <div class="stay-card">
+                <div class="stay-image" style="background-image: url('images/FB_IMG_1754987980110.jpg')">
+                    <div class="stay-badge">Riverside Stay</div>
+                </div>
+                <div class="stay-content">
+                    <h3 class="stay-title">Jhargram River View Retreat</h3>
+                    <p class="stay-location">📍 Jhargram, West Bengal</p>
+                    <p class="stay-description">Unwind by the gentle flowing river surrounded by lush greenery. This peaceful retreat offers the perfect blend of comfort and nature's tranquility.</p>
+                    <div class="stay-features">
+                        <span class="feature-tag">Riverside</span>
+                        <span class="feature-tag">Bird Watching</span>
+                        <span class="feature-tag">Fishing</span>
+                        <span class="feature-tag">Nature Walks</span>
+                    </div>
+                    <button class="explore-btn">Explore Retreat</button>
+                </div>
+            </div>
+            </div>
 
-	        <div class="stay-carousel-item">
-	          <div class="stay-card">
-	            <div class="stay-image" style="background-image: url('images/jhargram_jungle_camp.jpg')">
-	                <div class="stay-badge">Jungle Camp</div>
-	            </div>
-	            <div class="stay-content">
-	                <h3 class="stay-title">Jhargram Jungle Camp</h3>
-	                <p class="stay-location">📍 Jhargram, West Bengal</p>
-	                <p class="stay-description">Escape into the heart of the forest, where luxury villas and cozy tents meet the songs of birds and whispers of the wild.</p>
-	                <div class="stay-features">
-	                    <span class="feature-tag">Jungle</span>
-	                    <span class="feature-tag">Bird Watching</span>
-	                    <span class="feature-tag">Wildlife</span>
-	                    <span class="feature-tag">Nature Walks</span>
-	                </div>
+            <div class="stay-carousel-item">
+              <div class="stay-card">
+                <div class="stay-image" style="background-image: url('images/jhargram_jungle_camp.jpg')">
+                    <div class="stay-badge">Jungle Camp</div>
+                </div>
+                <div class="stay-content">
+                    <h3 class="stay-title">Jhargram Jungle Camp</h3>
+                    <p class="stay-location">📍 Jhargram, West Bengal</p>
+                    <p class="stay-description">Escape into the heart of the forest, where luxury villas and cozy tents meet the songs of birds and whispers of the wild.</p>
+                    <div class="stay-features">
+                        <span class="feature-tag">Jungle</span>
+                        <span class="feature-tag">Bird Watching</span>
+                        <span class="feature-tag">Wildlife</span>
+                        <span class="feature-tag">Nature Walks</span>
+                    </div>
                     <br><br><br>
-	                <button class="explore-btn">Explore Retreat</button>
-	            </div>
-	        </div>
-	        </div>
+                    <button class="explore-btn">Explore Retreat</button>
+                </div>
+            </div>
+            </div>
 
             <div class="stay-carousel-item">
               <div class="stay-card">
@@ -1595,31 +1602,31 @@
             </div>
             </div>
 
-	        <div class="stay-carousel-item">
-	           <div class="stay-card">
-	            <div class="stay-image" style="background-image: url('images/chilapata_coming_soon.jpg')">
-	                <div class="stay-badge">Jungle Lodge</div>
-	                <div class="coming-soon-badge">Coming Soon</div>
-	            </div>
-	            <div class="stay-content">
-	                <h3 class="stay-title">Chilapata Jungle Lodge</h3>
-	                <p class="stay-location">📍 Chilapata, West Bengal</p>
-	                <p class="stay-description">Immerse yourself in the heart of the jungle where elephants roam freely. Experience wildlife encounters right from your doorstep in this unique forest lodge.</p>
-	                <div class="stay-features">
-	                    <span class="feature-tag">Wildlife Views</span>
-	                    <span class="feature-tag">Jungle Walks</span>
-	                    <span class="feature-tag">Elephant Corridors</span>
-	                </div>
-	                <br><br><br><br>
-	                <!-- <button class="explore-btn">Explore Lodge</button> -->
-	            </div>
-	        </div>
-	        </div>
-	      </div>
+            <div class="stay-carousel-item">
+               <div class="stay-card">
+                <div class="stay-image" style="background-image: url('images/chilapata_coming_soon.jpg')">
+                    <div class="stay-badge">Jungle Lodge</div>
+                    <div class="coming-soon-badge">Coming Soon</div>
+                </div>
+                <div class="stay-content">
+                    <h3 class="stay-title">Chilapata Jungle Lodge</h3>
+                    <p class="stay-location">📍 Chilapata, West Bengal</p>
+                    <p class="stay-description">Immerse yourself in the heart of the jungle where elephants roam freely. Experience wildlife encounters right from your doorstep in this unique forest lodge.</p>
+                    <div class="stay-features">
+                        <span class="feature-tag">Wildlife Views</span>
+                        <span class="feature-tag">Jungle Walks</span>
+                        <span class="feature-tag">Elephant Corridors</span>
+                    </div>
+                    <br><br><br><br>
+                    <!-- <button class="explore-btn">Explore Lodge</button> -->
+                </div>
+            </div>
+            </div>
+          </div>
 
-	      <button class="carousel-button prev" id="stay-prev">&#10094;</button>
-	      <button class="carousel-button next" id="stay-next">&#10095;</button>
-	    </div>
+          <button class="carousel-button prev" id="stay-prev">&#10094;</button>
+          <button class="carousel-button next" id="stay-next">&#10095;</button>
+        </div>
   </section>
 
     <!-- Wildlife Safaris Section -->
@@ -1632,7 +1639,7 @@
             
             <div class="carousel-track fade-in" id="safari-carousel-track">
 
-            	<div class="safari-carousel-item">
+                <div class="safari-carousel-item">
                 <div class="safari-card">
                     <div class="safari-image" style="background-image: url('images/sundarban_tiger_latest.jpg')">
                         <div class="safari-duration">3 Days / 2 Nights</div>
@@ -1654,7 +1661,7 @@
                 </div>
             </div>
 
-            	<div class="safari-carousel-item">
+                <div class="safari-carousel-item">
                 <div class="safari-card">
                     <div class="safari-image" style="background-image: url('images/cover_photo_3.jpg')">
                         <div class="safari-duration">6 Days / 5 Nights</div>
@@ -1676,7 +1683,7 @@
                 </div>
             </div>
 
-            	<div class="safari-carousel-item">
+                <div class="safari-carousel-item">
                 <div class="safari-card">
                     <div class="safari-image" style="background-image: url('images/cover_photo_4.jpg')">
                         <div class="safari-duration">4 Days / 3 Nights</div>
@@ -1741,7 +1748,7 @@
 
             </div>
             <button class="carousel-button prev" id="safari-prev">&#10094;</button>
-	      	<button class="carousel-button next" id="safari-next">&#10095;</button>
+            <button class="carousel-button next" id="safari-next">&#10095;</button>
         </div>
     </section>
 
@@ -2037,11 +2044,13 @@ Thank you CALL OF THE NATURE for a wonderful memory.. 🤟❤️"
                     
                     if (navMenu.classList.contains('active')) {
                         this.innerHTML = '✕';
+                        document.body.classList.add("no-scroll");
                     } else {
                         this.innerHTML = '☰';
                         // Close all dropdowns when menu closes
                         document.querySelectorAll('.dropdown-menu').forEach(d => d.classList.remove('mobile-active'));
                         document.querySelectorAll('.dropdown-arrow').forEach(a => a.style.transform = 'rotate(0deg)');
+                        document.body.classList.remove("no-scroll");
                     }
                 });
 
@@ -2202,355 +2211,355 @@ Thank you CALL OF THE NATURE for a wonderful memory.. 🤟❤️"
 
           //Offbeat Stays Slider
           const mobileBreakpoint = 768; // Define breakpoint for mobile vs desktop
-		  let currentScript;
-
-		  // Mobile-oriented carousel logic
-		  function mobileCarousel() {
-
-		  	  const track = document.getElementById('stay-carousel-track');
-		      const items = document.querySelectorAll('.stay-carousel-item');
-		      const container = document.getElementById('stay-carousel-container');
-
-		      let currentIndex = 0;
-		      let startX = 0;
-		      let startY = 0;
-		      let currentX = 0;
-		      let currentY = 0;
-		      let isDragging = false;
-
-		      function updateCarousel() {
-		          if (!track || !items.length) return;
-		          const itemWidth = items[0].offsetWidth;
-		          track.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
-		      }
-
-		      function nextSlide() {
-		          const itemsVisible = 1;
-		          if (currentIndex < items.length - itemsVisible) {
-		              currentIndex += 1;
-		          } else {
-		              currentIndex = 0;
-		          }
-		          updateCarousel();
-		      }
-
-		      function prevSlide() {
-		          const itemsVisible = 1;
-		          if (currentIndex > 0) {
-		              currentIndex -= 1;
-		          } else {
-		              currentIndex = items.length - itemsVisible;
-		          }
-		          updateCarousel();
-		      }
-
-		      function snapToSlide() {
-		          const itemWidth = items[0].offsetWidth;
-		          const dragDistance = currentX - startX;
-		          const threshold = itemWidth / 16;
-
-		          if (dragDistance > threshold && currentIndex > 0) {
-		              currentIndex -= 1;
-		          } else if (dragDistance < -threshold && currentIndex < items.length - 1) {
-		              currentIndex += 1;
-		          }
-
-		          updateCarousel();
-		      }
-
-		      function smoothDrag(dragDistance) {
-		          const itemWidth = items[0].offsetWidth;
-		          track.style.transform = `translateX(calc(-${currentIndex * itemWidth}px + ${dragDistance}px))`;
-		      }
-
-		      container.addEventListener('touchstart', (e) => {
-		          startX = e.touches[0].clientX;
-		          startY = e.touches[0].clientY;
-		          currentX = startX;
-		          currentY = startY;
-		          isDragging = true;
-		          track.style.transition = 'none';
-		      });
-
-		      container.addEventListener('touchmove', (e) => {
-		          if (!isDragging) return;
-		          currentX = e.touches[0].clientX;
-		          currentY = e.touches[0].clientY;
-
-		          const deltaX = Math.abs(currentX - startX);
-		          const deltaY = Math.abs(currentY - startY);
-
-		          // If vertical swipe is dominant, do not allow carousel dragging
-		          if (deltaY > deltaX) {
-		              isDragging = false;
-		              return;
-		          }
-
-		          smoothDrag(currentX - startX);
-		      });
-
-		      container.addEventListener('touchend', () => {
-		          if (!isDragging) return;
-		          isDragging = false;
-		          track.style.transition = 'transform 0.5s ease';
-		          snapToSlide();
-		      });
-
-		      // const prevButton = document.querySelector('.carousel-button.prev');
-		      // const nextButton = document.querySelector('.carousel-button.next');
-		      const prevButton = document.getElementById('stay-prev');
-		      const nextButton = document.getElementById('stay-next');
-
-		      if (prevButton) prevButton.addEventListener('click', prevSlide);
-		      if (nextButton) nextButton.addEventListener('click', nextSlide);
-
-		      window.addEventListener('resize', updateCarousel);
-		      updateCarousel();
-		  }
-
-		  // Desktop-oriented carousel logic
-		  function desktopCarousel() {
-		    const track = document.getElementById('stay-carousel-track');
-		    const items = document.querySelectorAll('.stay-carousel-item');
-		    const container = document.getElementById('stay-carousel-container');
-		    let currentIndex = 0;
-
-		    function updateCarousel() {
-		      if (!container || !track || !items.length) return;
-		      const itemWidth = items[0].offsetWidth;
-		      const itemsVisible = Math.floor(container.offsetWidth / itemWidth);
-		      track.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
-		      return itemsVisible;
-		    }
-
-		    function nextSlide() {
-		      const itemsVisible = updateCarousel();
-		      if (currentIndex < items.length - itemsVisible) {
-		        currentIndex += 1;
-		      } else {
-		        currentIndex = 0;
-		      }
-		      updateCarousel();
-		    }
-
-		    function prevSlide() {
-		      const itemsVisible = updateCarousel();
-		      if (currentIndex > 0) {
-		        currentIndex -= 1;
-		      } else {
-		        currentIndex = items.length - itemsVisible;
-		      }
-		      updateCarousel();
-		    }
-
-		    const prevButton = document.getElementById('stay-prev');
-		    const nextButton = document.getElementById('stay-next');
-
-		    if (prevButton) prevButton.addEventListener('click', prevSlide);
-		    if (nextButton) nextButton.addEventListener('click', nextSlide);
-
-		    window.addEventListener('resize', updateCarousel);
-		    updateCarousel();
-		  }
-
-		  // Initialize appropriate carousel script
-		  function initializeCarousel() {
-		    const isMobile = window.innerWidth <= mobileBreakpoint;
-
-		    if (currentScript) {
-		      // Cleanup existing script
-		      window.removeEventListener('resize', currentScript);
-		    }
-
-		    if (isMobile) {
-		      currentScript = mobileCarousel;
-		    } else {
-		      currentScript = desktopCarousel;
-		    }
-
-		    currentScript();
-		  }
-
-		  // Listen for resize events to switch logic dynamically
-		  window.addEventListener('resize', initializeCarousel);
-
-		  // Initial load
-		  initializeCarousel();
-
-
-		  // Safari Slider
-		  // Mobile-oriented carousel logic
-		  function mobileSafariCarousel() {
-
-		  	  const track = document.getElementById('safari-carousel-track');
-		      const items = document.querySelectorAll('.safari-carousel-item');
-		      const container = document.getElementById('safari-carousel-container');
-
-		      let currentIndex = 0;
-		      let startX = 0;
-		      let startY = 0;
-		      let currentX = 0;
-		      let currentY = 0;
-		      let isDragging = false;
-
-		      function updateCarousel() {
-		          if (!track || !items.length) return;
-		          const itemWidth = items[0].offsetWidth;
-		          track.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
-		      }
-
-		      function nextSlide() {
-		          const itemsVisible = 1;
-		          if (currentIndex < items.length - itemsVisible) {
-		              currentIndex += 1;
-		          } else {
-		              currentIndex = 0;
-		          }
-		          updateCarousel();
-		      }
-
-		      function prevSlide() {
-		          const itemsVisible = 1;
-		          if (currentIndex > 0) {
-		              currentIndex -= 1;
-		          } else {
-		              currentIndex = items.length - itemsVisible;
-		          }
-		          updateCarousel();
-		      }
-
-		      function snapToSlide() {
-		          const itemWidth = items[0].offsetWidth;
-		          const dragDistance = currentX - startX;
-		          const threshold = itemWidth / 16;
-
-		          if (dragDistance > threshold && currentIndex > 0) {
-		              currentIndex -= 1;
-		          } else if (dragDistance < -threshold && currentIndex < items.length - 1) {
-		              currentIndex += 1;
-		          }
-
-		          updateCarousel();
-		      }
-
-		      function smoothDrag(dragDistance) {
-		          const itemWidth = items[0].offsetWidth;
-		          track.style.transform = `translateX(calc(-${currentIndex * itemWidth}px + ${dragDistance}px))`;
-		      }
-
-		      container.addEventListener('touchstart', (e) => {
-		          startX = e.touches[0].clientX;
-		          startY = e.touches[0].clientY;
-		          currentX = startX;
-		          currentY = startY;
-		          isDragging = true;
-		          track.style.transition = 'none';
-		      });
-
-		      container.addEventListener('touchmove', (e) => {
-		          if (!isDragging) return;
-		          currentX = e.touches[0].clientX;
-		          currentY = e.touches[0].clientY;
-
-		          const deltaX = Math.abs(currentX - startX);
-		          const deltaY = Math.abs(currentY - startY);
-
-		          // If vertical swipe is dominant, do not allow carousel dragging
-		          if (deltaY > deltaX) {
-		              isDragging = false;
-		              return;
-		          }
-
-		          smoothDrag(currentX - startX);
-		      });
-
-		      container.addEventListener('touchend', () => {
-		          if (!isDragging) return;
-		          isDragging = false;
-		          track.style.transition = 'transform 0.5s ease';
-		          snapToSlide();
-		      });
-
-		      // const prevButton = document.querySelector('.carousel-button.prev');
-		      // const nextButton = document.querySelector('.carousel-button.next');
-		      const prevButton = document.getElementById('safari-prev');
-		      const nextButton = document.getElementById('safari-next');
-
-		      if (prevButton) prevButton.addEventListener('click', prevSlide);
-		      if (nextButton) nextButton.addEventListener('click', nextSlide);
-
-		      window.addEventListener('resize', updateCarousel);
-		      updateCarousel();
-		  }
-
-		  // Desktop-oriented carousel logic
-		  function desktopSafariCarousel() {
-		    const track = document.getElementById('safari-carousel-track');
-		    const items = document.querySelectorAll('.safari-carousel-item');
-		    const container = document.getElementById('safari-carousel-container');
-		    let currentIndex = 0;
-
-		    function updateCarousel() {
-		      if (!container || !track || !items.length) return;
-		      const itemWidth = items[0].offsetWidth;
-		      const itemsVisible = Math.floor(container.offsetWidth / itemWidth);
-		      track.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
-		      return itemsVisible;
-		    }
-
-		    function nextSlide() {
-		      const itemsVisible = updateCarousel();
-		      if (currentIndex < items.length - itemsVisible) {
-		        currentIndex += 1;
-		      } else {
-		        currentIndex = 0;
-		      }
-		      updateCarousel();
-		    }
-
-		    function prevSlide() {
-		      const itemsVisible = updateCarousel();
-		      if (currentIndex > 0) {
-		        currentIndex -= 1;
-		      } else {
-		        currentIndex = items.length - itemsVisible;
-		      }
-		      updateCarousel();
-		    }
-
-		    const prevButton = document.getElementById('safari-prev');
-		    const nextButton = document.getElementById('safari-next');
-
-		    if (prevButton) prevButton.addEventListener('click', prevSlide);
-		    if (nextButton) nextButton.addEventListener('click', nextSlide);
-
-		    window.addEventListener('resize', updateCarousel);
-		    updateCarousel();
-		  }
-
-		  // Initialize appropriate carousel script
-		  function initializeSafariCarousel() {
-		    const isMobile = window.innerWidth <= mobileBreakpoint;
-
-		    if (currentScript) {
-		      // Cleanup existing script
-		      window.removeEventListener('resize', currentScript);
-		    }
-
-		    if (isMobile) {
-		      currentScript = mobileSafariCarousel;
-		    } else {
-		      currentScript = desktopSafariCarousel;
-		    }
-
-		    currentScript();
-		  }
-
-		  // Listen for resize events to switch logic dynamically
-		  window.addEventListener('resize', initializeSafariCarousel);
-
-		  // Initial load
-		  initializeSafariCarousel();
+          let currentScript;
+
+          // Mobile-oriented carousel logic
+          function mobileCarousel() {
+
+              const track = document.getElementById('stay-carousel-track');
+              const items = document.querySelectorAll('.stay-carousel-item');
+              const container = document.getElementById('stay-carousel-container');
+
+              let currentIndex = 0;
+              let startX = 0;
+              let startY = 0;
+              let currentX = 0;
+              let currentY = 0;
+              let isDragging = false;
+
+              function updateCarousel() {
+                  if (!track || !items.length) return;
+                  const itemWidth = items[0].offsetWidth;
+                  track.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+              }
+
+              function nextSlide() {
+                  const itemsVisible = 1;
+                  if (currentIndex < items.length - itemsVisible) {
+                      currentIndex += 1;
+                  } else {
+                      currentIndex = 0;
+                  }
+                  updateCarousel();
+              }
+
+              function prevSlide() {
+                  const itemsVisible = 1;
+                  if (currentIndex > 0) {
+                      currentIndex -= 1;
+                  } else {
+                      currentIndex = items.length - itemsVisible;
+                  }
+                  updateCarousel();
+              }
+
+              function snapToSlide() {
+                  const itemWidth = items[0].offsetWidth;
+                  const dragDistance = currentX - startX;
+                  const threshold = itemWidth / 16;
+
+                  if (dragDistance > threshold && currentIndex > 0) {
+                      currentIndex -= 1;
+                  } else if (dragDistance < -threshold && currentIndex < items.length - 1) {
+                      currentIndex += 1;
+                  }
+
+                  updateCarousel();
+              }
+
+              function smoothDrag(dragDistance) {
+                  const itemWidth = items[0].offsetWidth;
+                  track.style.transform = `translateX(calc(-${currentIndex * itemWidth}px + ${dragDistance}px))`;
+              }
+
+              container.addEventListener('touchstart', (e) => {
+                  startX = e.touches[0].clientX;
+                  startY = e.touches[0].clientY;
+                  currentX = startX;
+                  currentY = startY;
+                  isDragging = true;
+                  track.style.transition = 'none';
+              });
+
+              container.addEventListener('touchmove', (e) => {
+                  if (!isDragging) return;
+                  currentX = e.touches[0].clientX;
+                  currentY = e.touches[0].clientY;
+
+                  const deltaX = Math.abs(currentX - startX);
+                  const deltaY = Math.abs(currentY - startY);
+
+                  // If vertical swipe is dominant, do not allow carousel dragging
+                  if (deltaY > deltaX) {
+                      isDragging = false;
+                      return;
+                  }
+
+                  smoothDrag(currentX - startX);
+              });
+
+              container.addEventListener('touchend', () => {
+                  if (!isDragging) return;
+                  isDragging = false;
+                  track.style.transition = 'transform 0.5s ease';
+                  snapToSlide();
+              });
+
+              // const prevButton = document.querySelector('.carousel-button.prev');
+              // const nextButton = document.querySelector('.carousel-button.next');
+              const prevButton = document.getElementById('stay-prev');
+              const nextButton = document.getElementById('stay-next');
+
+              if (prevButton) prevButton.addEventListener('click', prevSlide);
+              if (nextButton) nextButton.addEventListener('click', nextSlide);
+
+              window.addEventListener('resize', updateCarousel);
+              updateCarousel();
+          }
+
+          // Desktop-oriented carousel logic
+          function desktopCarousel() {
+            const track = document.getElementById('stay-carousel-track');
+            const items = document.querySelectorAll('.stay-carousel-item');
+            const container = document.getElementById('stay-carousel-container');
+            let currentIndex = 0;
+
+            function updateCarousel() {
+              if (!container || !track || !items.length) return;
+              const itemWidth = items[0].offsetWidth;
+              const itemsVisible = Math.floor(container.offsetWidth / itemWidth);
+              track.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+              return itemsVisible;
+            }
+
+            function nextSlide() {
+              const itemsVisible = updateCarousel();
+              if (currentIndex < items.length - itemsVisible) {
+                currentIndex += 1;
+              } else {
+                currentIndex = 0;
+              }
+              updateCarousel();
+            }
+
+            function prevSlide() {
+              const itemsVisible = updateCarousel();
+              if (currentIndex > 0) {
+                currentIndex -= 1;
+              } else {
+                currentIndex = items.length - itemsVisible;
+              }
+              updateCarousel();
+            }
+
+            const prevButton = document.getElementById('stay-prev');
+            const nextButton = document.getElementById('stay-next');
+
+            if (prevButton) prevButton.addEventListener('click', prevSlide);
+            if (nextButton) nextButton.addEventListener('click', nextSlide);
+
+            window.addEventListener('resize', updateCarousel);
+            updateCarousel();
+          }
+
+          // Initialize appropriate carousel script
+          function initializeCarousel() {
+            const isMobile = window.innerWidth <= mobileBreakpoint;
+
+            if (currentScript) {
+              // Cleanup existing script
+              window.removeEventListener('resize', currentScript);
+            }
+
+            if (isMobile) {
+              currentScript = mobileCarousel;
+            } else {
+              currentScript = desktopCarousel;
+            }
+
+            currentScript();
+          }
+
+          // Listen for resize events to switch logic dynamically
+          window.addEventListener('resize', initializeCarousel);
+
+          // Initial load
+          initializeCarousel();
+
+
+          // Safari Slider
+          // Mobile-oriented carousel logic
+          function mobileSafariCarousel() {
+
+              const track = document.getElementById('safari-carousel-track');
+              const items = document.querySelectorAll('.safari-carousel-item');
+              const container = document.getElementById('safari-carousel-container');
+
+              let currentIndex = 0;
+              let startX = 0;
+              let startY = 0;
+              let currentX = 0;
+              let currentY = 0;
+              let isDragging = false;
+
+              function updateCarousel() {
+                  if (!track || !items.length) return;
+                  const itemWidth = items[0].offsetWidth;
+                  track.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+              }
+
+              function nextSlide() {
+                  const itemsVisible = 1;
+                  if (currentIndex < items.length - itemsVisible) {
+                      currentIndex += 1;
+                  } else {
+                      currentIndex = 0;
+                  }
+                  updateCarousel();
+              }
+
+              function prevSlide() {
+                  const itemsVisible = 1;
+                  if (currentIndex > 0) {
+                      currentIndex -= 1;
+                  } else {
+                      currentIndex = items.length - itemsVisible;
+                  }
+                  updateCarousel();
+              }
+
+              function snapToSlide() {
+                  const itemWidth = items[0].offsetWidth;
+                  const dragDistance = currentX - startX;
+                  const threshold = itemWidth / 16;
+
+                  if (dragDistance > threshold && currentIndex > 0) {
+                      currentIndex -= 1;
+                  } else if (dragDistance < -threshold && currentIndex < items.length - 1) {
+                      currentIndex += 1;
+                  }
+
+                  updateCarousel();
+              }
+
+              function smoothDrag(dragDistance) {
+                  const itemWidth = items[0].offsetWidth;
+                  track.style.transform = `translateX(calc(-${currentIndex * itemWidth}px + ${dragDistance}px))`;
+              }
+
+              container.addEventListener('touchstart', (e) => {
+                  startX = e.touches[0].clientX;
+                  startY = e.touches[0].clientY;
+                  currentX = startX;
+                  currentY = startY;
+                  isDragging = true;
+                  track.style.transition = 'none';
+              });
+
+              container.addEventListener('touchmove', (e) => {
+                  if (!isDragging) return;
+                  currentX = e.touches[0].clientX;
+                  currentY = e.touches[0].clientY;
+
+                  const deltaX = Math.abs(currentX - startX);
+                  const deltaY = Math.abs(currentY - startY);
+
+                  // If vertical swipe is dominant, do not allow carousel dragging
+                  if (deltaY > deltaX) {
+                      isDragging = false;
+                      return;
+                  }
+
+                  smoothDrag(currentX - startX);
+              });
+
+              container.addEventListener('touchend', () => {
+                  if (!isDragging) return;
+                  isDragging = false;
+                  track.style.transition = 'transform 0.5s ease';
+                  snapToSlide();
+              });
+
+              // const prevButton = document.querySelector('.carousel-button.prev');
+              // const nextButton = document.querySelector('.carousel-button.next');
+              const prevButton = document.getElementById('safari-prev');
+              const nextButton = document.getElementById('safari-next');
+
+              if (prevButton) prevButton.addEventListener('click', prevSlide);
+              if (nextButton) nextButton.addEventListener('click', nextSlide);
+
+              window.addEventListener('resize', updateCarousel);
+              updateCarousel();
+          }
+
+          // Desktop-oriented carousel logic
+          function desktopSafariCarousel() {
+            const track = document.getElementById('safari-carousel-track');
+            const items = document.querySelectorAll('.safari-carousel-item');
+            const container = document.getElementById('safari-carousel-container');
+            let currentIndex = 0;
+
+            function updateCarousel() {
+              if (!container || !track || !items.length) return;
+              const itemWidth = items[0].offsetWidth;
+              const itemsVisible = Math.floor(container.offsetWidth / itemWidth);
+              track.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+              return itemsVisible;
+            }
+
+            function nextSlide() {
+              const itemsVisible = updateCarousel();
+              if (currentIndex < items.length - itemsVisible) {
+                currentIndex += 1;
+              } else {
+                currentIndex = 0;
+              }
+              updateCarousel();
+            }
+
+            function prevSlide() {
+              const itemsVisible = updateCarousel();
+              if (currentIndex > 0) {
+                currentIndex -= 1;
+              } else {
+                currentIndex = items.length - itemsVisible;
+              }
+              updateCarousel();
+            }
+
+            const prevButton = document.getElementById('safari-prev');
+            const nextButton = document.getElementById('safari-next');
+
+            if (prevButton) prevButton.addEventListener('click', prevSlide);
+            if (nextButton) nextButton.addEventListener('click', nextSlide);
+
+            window.addEventListener('resize', updateCarousel);
+            updateCarousel();
+          }
+
+          // Initialize appropriate carousel script
+          function initializeSafariCarousel() {
+            const isMobile = window.innerWidth <= mobileBreakpoint;
+
+            if (currentScript) {
+              // Cleanup existing script
+              window.removeEventListener('resize', currentScript);
+            }
+
+            if (isMobile) {
+              currentScript = mobileSafariCarousel;
+            } else {
+              currentScript = desktopSafariCarousel;
+            }
+
+            currentScript();
+          }
+
+          // Listen for resize events to switch logic dynamically
+          window.addEventListener('resize', initializeSafariCarousel);
+
+          // Initial load
+          initializeSafariCarousel();
 
 
         });
