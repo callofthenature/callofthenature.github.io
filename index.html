@@ -1416,6 +1416,8 @@
                         <li><a href="jhargram.html" class="dropdown-link">Jhargram River View Stay</a></li>
                         <li><a href="jhargram_jungle_camp.html" class="dropdown-link">Jhargram Jungle Camp</a></li>
                         <li><a href="jhargram_forest_lodge.html" class="dropdown-link">Jhargram Forest Lodge</a></li>
+                        <li><a href="bangriposi.html" class="dropdown-link">Bangriposi Nature Lodge</a></li>
+                        <li><a href="kaziranga.html" class="dropdown-link">Kaziranga Forest Bungalow</a></li>
                         <!-- <li><a href="chilapata.html" class="dropdown-link">Chilapata Jungle Lodge</a></li> -->
                     </ul>
                 </li>
@@ -1597,6 +1599,48 @@
                         <span class="feature-tag">Nature Walks</span>
                     </div>
                     <br><br><br>
+                    <button class="explore-btn">Explore Retreat</button>
+                </div>
+            </div>
+            </div>
+
+            <div class="stay-carousel-item">
+              <div class="stay-card">
+                <div class="stay-image" style="background-image: url('images/bangriposi_gallery_4.jpg')">
+                    <div class="stay-badge">Nature Lodge</div>
+                </div>
+                <div class="stay-content">
+                    <h3 class="stay-title">Bangriposi Nature Lodge</h3>
+                    <p class="stay-location">📍 Mayurbhanj, Odisha</p>
+                    <p class="stay-description">Immerse yourself in literary history and pristine wilderness where celebrated novels were born, surrounded by ancient forests, cascading waterfalls, and vibrant tribal heritage.</p>
+                    <div class="stay-features">
+                        <span class="feature-tag">Waterfalls</span>
+                        <span class="feature-tag">Literary Heritage</span>
+                        <span class="feature-tag">Tribal Culture</span>
+                        <span class="feature-tag">Wildlife Safari</span>
+                    </div>
+                    <br><br>
+                    <button class="explore-btn">Explore Retreat</button>
+                </div>
+            </div>
+            </div>
+
+            <div class="stay-carousel-item">
+              <div class="stay-card">
+                <div class="stay-image" style="background-image: url('images/kaziranga_main.jpg')">
+                    <div class="stay-badge">Forest Bungalow</div>
+                </div>
+                <div class="stay-content">
+                    <h3 class="stay-title">Kaziranga Forest Bungalow</h3>
+                    <p class="stay-location">📍 Kaziranga, Assam</p>
+                    <p class="stay-description">Experience world-class wildlife from your doorstep at this intimate eco-lodge, where one-horned rhinos graze in view and Assam's rich biodiversity unfolds just steps away.</p>
+                    <div class="stay-features">
+                        <span class="feature-tag">Rhino Spotting</span>
+                        <span class="feature-tag">Elephant Safari</span>
+                        <span class="feature-tag">Bird Watching</span>
+                        <span class="feature-tag">River Cruise</span>
+                    </div>
+                    <br><br>
                     <button class="explore-btn">Explore Retreat</button>
                 </div>
             </div>
@@ -1984,6 +2028,10 @@ Thank you CALL OF THE NATURE for a wonderful memory.. 🤟❤️"
                     window.location.href = "jhargram_jungle_camp.html";
                 } else if (safariTitle.includes('Jhargram Forest')) {
                     window.location.href = "jhargram_forest_lodge.html";
+                } else if (safariTitle.includes('Bangriposi Nature')) {
+                    window.location.href = "bangriposi.html";
+                } else if (safariTitle.includes('Kaziranga Forest')) {
+                    window.location.href = "kaziranga.html";
                 } else {
                     console.log('Exploring stay:', this.closest('.stay-card').querySelector('.stay-title').textContent);
                 }
