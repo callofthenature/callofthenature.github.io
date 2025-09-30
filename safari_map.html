@@ -1,0 +1,2517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wildlife Safaris in India - Interactive Map</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+    <!-- Leaflet MarkerCluster CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.Default.css" />
+    <link rel="stylesheet" href="css/safari_map_style.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🐅 Wildlife Safaris in India</h1>
+            <p>Discover incredible wildlife destinations across the country</p>
+        </div>
+        
+        <div class="map-container">
+            <div class="controls">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="🔍 Search safaris...">
+                </div>
+                
+                <div class="filter-container">
+                    <div class="filter-title">Filter by Wildlife</div>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="tiger">🐅 Tiger</button>
+                        <button class="filter-btn" data-filter="elephant">🐘 Elephant</button>
+                        <button class="filter-btn" data-filter="rhino">🦏 Rhino</button>
+                        <button class="filter-btn" data-filter="leopard">🐆 Leopard</button>
+                        <button class="filter-btn" data-filter="lion">🦁 Lion</button>
+                        <button class="filter-btn" data-filter="bird">🦅 Birds</button>
+                    </div>
+                </div>
+            </div>
+            <div id="map"></div>
+            
+            <div class="legend">
+                <div class="legend-title">Safari Types</div>
+                <div class="legend-item">
+                    <div class="legend-icon" style="background: #d35400; color: white;">🐅</div>
+                    <span>Tiger Reserve</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-icon" style="background: #16a085; color: white;">🐘</div>
+                    <span>Elephant Sanctuary</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-icon" style="background: #7f8c8d; color: white;">🦏</div>
+                    <span>Rhino Park</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-icon" style="background: #c0392b; color: white;">🦁</div>
+                    <span>Lion Sanctuary</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-icon" style="background: #8e44ad; color: white;">🦅</div>
+                    <span>Bird Sanctuary</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile popup container (independent, not inside map) -->
+        <div id="mobilePopup" class="mobile-popup"></div>
+
+    </div>
+    
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- Leaflet JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <!-- Leaflet MarkerCluster -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.min.js"></script>
+    
+    <script>
+        // Safari data with detailed information
+        const safariData = [
+            {
+                name: "Jim Corbett National Park",
+                state: "Uttarakhand",
+                lat: 29.5319,
+                lng: 78.7680,
+                photo: "images/tiger_1.jpg",
+                type: "tiger",
+                wildlife: ["tiger", "elephant", "leopard", "bird"],
+                bestTime: "November to June",
+                description: "India's oldest national park, famous for Bengal tigers and rich biodiversity.",
+                area: "520 sq km",
+                icon: "🐅",
+                color: "#d35400",
+                // Detailed info for experts
+                zones: "5 safari zones (Dhikala, Bijrani, Jhirna, Dhela, Durgadevi)",
+                accommodation: "Forest rest houses, luxury resorts nearby",
+                safariTypes: "Jeep Safari, Canter Safari, Elephant Safari",
+                entryFee: "₹1,500 - ₹5,000 per vehicle",
+                nearestAirport: "Pantnagar Airport (80 km)",
+                nearestRailway: "Ramnagar Railway Station (12 km)",
+                permits: "Online booking mandatory, advance booking recommended",
+                keySpecies: "380+ bird species including Siberian Crane, Painted Stork, Spoonbill, Pelican, numerous migratory waterfowl",
+                photographyTips: "Best light early morning. Carry long lens. Walk silently for close bird shots",
+                insider: "Former hunting ground of Maharajas. Now wetland paradise. Python point for raptors",
+                climate: "Extreme temperatures. Winter brings migratory birds. Summer very hot",
+                conservation: "Ramsar wetland site. Saved from conversion to farmland by Salim Ali"
+            },
+            {
+                name: "Bandipur National Park",
+                state: "Karnataka",
+                lat: 11.6694,
+                lng: 76.5753,
+                photo: "images/tiger_2.jpg",
+                type: "tiger",
+                wildlife: ["tiger", "elephant", "leopard", "bird"],
+                bestTime: "October to May",
+                description: "Rich biodiversity with tigers, elephants and diverse wildlife.",
+                area: "874 sq km",
+                icon: "🐅",
+                color: "#d35400",
+                zones: "Multiple safari routes through deciduous forests",
+                accommodation: "Forest department lodges, resorts on highway",
+                safariTypes: "Bus safari (government), private jeep safari",
+                entryFee: "₹300 - ₹2,500 depending on vehicle",
+                nearestAirport: "Mysore Airport (80 km), Bangalore (220 km)",
+                nearestRailway: "Mysore (80 km)",
+                permits: "Book at park entrance or online",
+                keySpecies: "Bengal Tiger, Asian Elephant (large population), Indian Gaur, Leopard, Wild Dog, Four-horned Antelope",
+                photographyTips: "Good visibility in dry season. Elephant herds common. Morning safaris productive",
+                insider: "Night traffic ban on highway (9pm-6am) excellent for wildlife. Part of Nilgiri Biosphere",
+                climate: "Tropical dry. Pleasant winters. Very hot summers before monsoon",
+                conservation: "Part of largest protected area in South India. Elephant corridor critical"
+            },
+            {
+                name: "Nagarhole National Park",
+                state: "Karnataka",
+                lat: 12.0092,
+                lng: 76.0861,
+                photo: "images/elephant.jpeg",
+                type: "elephant",
+                wildlife: ["elephant", "tiger", "leopard", "bird"],
+                bestTime: "October to May",
+                description: "Dense forest with high density of herbivores and predators.",
+                area: "643 sq km",
+                icon: "🐘",
+                color: "#16a085",
+                zones: "Kabini backwaters area, forest zones",
+                accommodation: "Luxury resorts near Kabini dam, forest lodges",
+                safariTypes: "Jeep safari, boat safari on Kabini reservoir",
+                entryFee: "₹1,500 - ₹4,000 per vehicle",
+                nearestAirport: "Mysore (96 km), Bangalore (236 km)",
+                nearestRailway: "Mysore (94 km)",
+                permits: "Book through resorts or online forest department portal",
+                keySpecies: "Asian Elephant (massive herds), Tiger, Leopard, Wild Dog, Gaur, over 270 bird species",
+                photographyTips: "Kabini backwaters superb for elephant photography. Dry season concentrates wildlife",
+                insider: "Summer (Mar-May) best for sightings as animals congregate at water. Boat safari unique experience",
+                climate: "Tropical wet. Heavy monsoon. Dry season ideal for wildlife",
+                conservation: "Part of Nilgiri Biosphere. Rehabilitated tribal settlements successfully"
+            },
+            {
+                name: "Tadoba National Park",
+                state: "Maharashtra",
+                lat: 20.2333,
+                lng: 79.3333,
+                photo: "images/tiger_3.jpg",
+                type: "tiger",
+                wildlife: ["tiger", "leopard", "bird"],
+                bestTime: "October to June",
+                description: "Maharashtra's oldest and largest national park, excellent tiger sightings.",
+                area: "625 sq km",
+                icon: "🐅",
+                color: "#d35400",
+                zones: "Core zones (Moharli, Kolsa, Tadoba North) and buffer zones",
+                accommodation: "Luxury resorts outside gates, forest rest houses inside",
+                safariTypes: "Jeep safari (6 seater gypsy)",
+                entryFee: "₹2,500 - ₹5,000 per jeep",
+                nearestAirport: "Nagpur Airport (140 km)",
+                nearestRailway: "Chandrapur (45 km)",
+                permits: "Online booking 120 days in advance. High demand",
+                keySpecies: "Bengal Tiger (famous named tigers like Maya, Matkasur), Leopard, Sloth Bear, Wild Dog, Gaur",
+                photographyTips: "Excellent tiger sightings probability. Tadoba lake area hotspot. Carry long lens",
+                insider: "Buffer zones also excellent. Famous for dominant female tigers. Summer best for tiger sightings",
+                climate: "Tropical dry. Very hot summers (up to 47°C). Cool winters",
+                conservation: "Successful tiger translocation. Growing tiger population"
+            },
+            {
+                name: "Ranthambore National Park",
+                state: "Rajasthan",
+                lat: 26.0173,
+                lng: 76.5026,
+                photo: "images/tiger_1.jpg",
+                type: "tiger",
+                wildlife: ["tiger", "leopard", "bird"],
+                bestTime: "October to April",
+                description: "Famous for tiger sightings and historic Ranthambore Fort.",
+                area: "392 sq km",
+                icon: "🐅",
+                color: "#d35400",
+                zones: "10 safari zones (Zone 1-6 core, 6-10 buffer)",
+                accommodation: "Luxury resorts, budget hotels in Sawai Madhopur",
+                safariTypes: "Jeep Safari (6 seater), Canter Safari (20 seater)",
+                entryFee: "₹1,000 - ₹3,500 per vehicle",
+                nearestAirport: "Jaipur Airport (180 km)",
+                nearestRailway: "Sawai Madhopur Railway Station (11 km)",
+                permits: "Online booking opens 90 days in advance. High demand",
+                keySpecies: "Bengal Tiger (famous named tigers like Machli, Arrowhead), Leopard, Sloth Bear, Crocodile",
+                photographyTips: "Tigers often visible in daytime around lakes. Zone 3,4,5 most popular",
+                insider: "Book zone 1-5 for better chances. Tigers habituated to vehicles, great for photography",
+                climate: "Hot and dry. Best visibility in summers despite heat",
+                conservation: "UNESCO World Heritage Site (fort). Critical Tiger Habitat"
+            },
+            {
+                name: "Kaziranga National Park",
+                state: "Assam",
+                lat: 26.5775,
+                lng: 93.1711,
+                photo: "images/rhino_1.jpg",
+                type: "rhino",
+                wildlife: ["rhino", "elephant", "tiger", "bird"],
+                bestTime: "November to April",
+                description: "UNESCO World Heritage Site, home to two-thirds of world's one-horned rhinos.",
+                area: "430 sq km",
+                icon: "🦏",
+                color: "#7f8c8d",
+                zones: "4 ranges (Central, Western, Eastern, Burapahar)",
+                accommodation: "Government lodges, private resorts near park gates",
+                safariTypes: "Elephant Safari, Jeep Safari, boat rides on Brahmaputra",
+                entryFee: "₹750 - ₹2,500 per vehicle + ₹2,500 for elephant safari",
+                nearestAirport: "Guwahati Airport (217 km)",
+                nearestRailway: "Furkating Junction (75 km)",
+                permits: "Book at range offices. Advance booking recommended in peak season",
+                keySpecies: "One-horned Rhino (2,200+), Wild Water Buffalo, Swamp Deer, Bengal Tiger, Elephants",
+                photographyTips: "Elephant safari best for rhinos. Early morning mist creates dramatic shots",
+                insider: "Central range best for rhinos. Eastern range for birds. Monsoon closed (park floods)",
+                climate: "Tropical monsoon. Heavy rainfall July-Sept. Park closed in monsoon",
+                conservation: "World's most successful rhino conservation. Tiger and elephant corridor"
+            },
+            {
+                name: "Bandhavgarh National Park",
+                state: "Madhya Pradesh",
+                lat: 23.6614,
+                lng: 81.0289,
+                photo: "images/tiger_2.jpg",
+                type: "tiger",
+                wildlife: ["tiger", "leopard", "bird"],
+                bestTime: "October to June",
+                description: "Highest density of Bengal tigers in India with stunning fort ruins.",
+                area: "716 sq km",
+                icon: "🐅",
+                color: "#d35400",
+                zones: "4 core zones (Tala, Magdhi, Khitauli, Panpatha)",
+                accommodation: "Luxury lodges, forest rest houses",
+                safariTypes: "Jeep Safari only (6 seater)",
+                entryFee: "₹2,000 - ₹6,000 per jeep",
+                nearestAirport: "Jabalpur Airport (195 km), Khajuraho (237 km)",
+                nearestRailway: "Umaria Railway Station (35 km)",
+                permits: "Online booking. Tala zone most popular, book early",
+                keySpecies: "Bengal Tiger (highest density), Leopard, Sloth Bear, Indian Bison, Spotted Deer",
+                photographyTips: "Excellent sighting probability. Tala zone offers fort backdrop for tiger photos",
+                insider: "Morning safari better than afternoon. White tigers historically from here",
+                climate: "Tropical. Very hot summers (45°C). Pleasant winters",
+                conservation: "Critical tiger breeding ground. Important genetic diversity"
+            },
+            {
+                name: "Kanha National Park",
+                state: "Madhya Pradesh",
+                lat: 22.3344,
+                lng: 80.6110,
+                photo: "images/tiger_1.jpg",
+                type: "tiger",
+                wildlife: ["tiger", "leopard", "bird"],
+                bestTime: "October to June",
+                description: "Inspiration for Jungle Book, famous for tigers and barasingha.",
+                area: "940 sq km",
+                icon: "🐅",
+                color: "#d35400",
+                zones: "4 zones (Kanha, Kisli, Mukki, Sarhi)",
+                accommodation: "Resorts, government lodges, homestays",
+                safariTypes: "Jeep Safari, some zones allow canter",
+                entryFee: "₹2,000 - ₹5,500 per vehicle",
+                nearestAirport: "Jabalpur (165 km), Nagpur (250 km)",
+                nearestRailway: "Jabalpur (160 km)",
+                permits: "Online booking mandatory. 90 days advance",
+                keySpecies: "Bengal Tiger, Barasingha (hard ground swamp deer - saved from extinction), Leopard, Indian Wild Dog",
+                photographyTips: "Open meadows (maidans) excellent for wildlife photography. Sunrise shots spectacular",
+                insider: "Kanha and Mukki zones best. Dawn safari for barasingha in meadows",
+                climate: "Tropical. Cool winters ideal. Closed July-September",
+                conservation: "Saved barasingha from extinction. Model for Project Tiger"
+            },
+            {
+                name: "Gir National Park",
+                state: "Gujarat",
+                lat: 21.1247,
+                lng: 70.7977,
+                photo: "images/lion_1.jpg",
+                type: "lion",
+                wildlife: ["lion", "leopard", "bird"],
+                bestTime: "December to March",
+                description: "Only home of Asiatic lions in the world.",
+                area: "1412 sq km",
+                icon: "🦁",
+                color: "#c0392b",
+                zones: "Multiple interpretation zones",
+                accommodation: "Gir Birding Lodge, Sinh Sadan, private resorts",
+                safariTypes: "Jeep Safari only (authorized vehicles)",
+                entryFee: "₹2,000 - ₹4,000 per jeep",
+                nearestAirport: "Rajkot Airport (160 km), Diu (90 km)",
+                nearestRailway: "Junagadh (65 km), Veraval (50 km)",
+                permits: "Online booking. Limited permits per day",
+                keySpecies: "Asiatic Lion (only wild population - 600+), Leopard, Hyena, Marsh Crocodile, Chinkara",
+                photographyTips: "Lions often visible near roads. Good chance of prides. Devaliya safari park for guaranteed sightings",
+                insider: "Visit Devaliya interpretation zone for certain lion sightings. Main forest needs luck",
+                climate: "Hot and dry. Extreme summer heat. Winter most comfortable",
+                conservation: "Last refuge of Asiatic lion. Critical conservation success and concern (genetic bottleneck)"
+            },
+            {
+                name: "Periyar Wildlife Sanctuary",
+                state: "Kerala",
+                lat: 9.4603,
+                lng: 77.2350,
+                photo: "images/elephant.jpeg",
+                type: "elephant",
+                wildlife: ["elephant", "tiger", "leopard", "bird"],
+                bestTime: "September to March",
+                description: "Beautiful lake-based sanctuary known for elephants and tigers.",
+                area: "925 sq km",
+                icon: "🐘",
+                color: "#16a085",
+                zones: "Lake area, trekking zones, tiger trail",
+                accommodation: "Thekkady town hotels, tree houses, KTDC properties",
+                safariTypes: "Boat cruise, jungle trek, bamboo rafting, border hiking",
+                entryFee: "₹75 - ₹1,500 depending on activity",
+                nearestAirport: "Madurai Airport (140 km), Cochin (190 km)",
+                nearestRailway: "Kottayam (114 km)",
+                permits: "Book at Periyar Tiger Reserve office",
+                keySpecies: "Asian Elephant (large herds), Gaur, Sambhar, Tiger, Nilgiri Langur, Great Hornbill",
+                photographyTips: "Boat safari best for elephants bathing. Early morning boat rides recommended",
+                insider: "Tiger trail overnight trek is unique. Boat rides often see elephants at lake edge",
+                climate: "Pleasant year-round. Monsoon heavy but sanctuary operational. Cool hill climate",
+                conservation: "Model eco-tourism. Former sandalwood smuggler Veerappan's territory"
+            },
+            {
+                name: "Sundarbans National Park",
+                state: "West Bengal",
+                lat: 21.9497,
+                lng: 88.8998,
+                photo: "images/tiger_1.jpg",
+                type: "tiger",
+                wildlife: ["tiger", "bird"],
+                bestTime: "September to March",
+                description: "Largest mangrove forest, home to Royal Bengal tigers.",
+                area: "1330 sq km",
+                icon: "🐅",
+                color: "#d35400",
+                zones: "Core and buffer areas, multiple river routes",
+                accommodation: "Forest lodges, houseboats, Gosaba town hotels",
+                safariTypes: "Boat safari only (no jeep safaris)",
+                entryFee: "₹500 - ₹3,000 per boat",
+                nearestAirport: "Kolkata Airport (112 km)",
+                nearestRailway: "Canning Railway Station (48 km)",
+                permits: "Book through registered tour operators",
+                keySpecies: "Royal Bengal Tiger (swimming tigers), Saltwater Crocodile, Spotted Deer, Water Monitor, Dolphins",
+                photographyTips: "Tiger sightings rare (dense mangroves). Focus on landscape, birds, and crocodiles",
+                insider: "Tigers swim between islands. Pugmarks common, sightings rare. Unique mangrove ecosystem experience",
+                climate: "Humid tropical. Cyclone prone. Best in winter",
+                conservation: "UNESCO World Heritage. Tigers adapted to saline environment. Man-eater conflict zone"
+            },
+            {
+                name: "Pench National Park",
+                state: "Madhya Pradesh",
+                lat: 21.6417,
+                lng: 79.2961,
+                photo: "images/tiger_2.jpg",
+                type: "tiger",
+                wildlife: ["tiger", "leopard", "bird"],
+                bestTime: "November to May",
+                description: "Mowgli's land, inspired Kipling's Jungle Book with rich tiger population.",
+                area: "758 sq km",
+                icon: "🐅",
+                color: "#d35400",
+                zones: "Turiya, Karmajhiri, Jamtara gates with multiple zones",
+                accommodation: "Luxury resorts near gates, MP Tourism properties",
+                safariTypes: "Jeep Safari (6 seater gypsy)",
+                entryFee: "₹2,000 - ₹5,000 per jeep",
+                nearestAirport: "Nagpur Airport (92 km)",
+                nearestRailway: "Nagpur (90 km)",
+                permits: "Online booking 120 days advance. Book early for peak season",
+                keySpecies: "Bengal Tiger, Leopard, Wild Dog, Sloth Bear, Indian Wolf, Chital, Sambar",
+                photographyTips: "Open terrain good for photography. Water sources in summer attract wildlife",
+                insider: "Straddling MP-Maharashtra border. Book MP side for better infrastructure",
+                climate: "Tropical dry deciduous. Hot summers ideal for sightings. Pleasant winters",
+                conservation: "Project Tiger reserve. Important central India tiger corridor"
+            },
+            {
+                name: "Panna National Park",
+                state: "Madhya Pradesh",
+                lat: 24.7167,
+                lng: 80.0333,
+                photo: "images/tiger_1.jpg",
+                type: "tiger",
+                wildlife: ["tiger", "leopard", "bird"],
+                bestTime: "October to June",
+                description: "Famous for successful tiger reintroduction and diamond mines.",
+                area: "543 sq km",
+                icon: "🐅",
+                color: "#d35400",
+                zones: "Madla, Hinouta gates with forest zones",
+                accommodation: "Ken River Lodge, MP Tourism resorts, budget hotels in Panna town",
+                safariTypes: "Jeep Safari, boat safari on Ken River",
+                entryFee: "₹1,500 - ₹4,000 per jeep",
+                nearestAirport: "Khajuraho Airport (25 km)",
+                nearestRailway: "Satna (86 km)",
+                permits: "Online booking available. Less crowded than other MP parks",
+                keySpecies: "Bengal Tiger (reintroduced population thriving), Leopard, Sloth Bear, Gharial, Vultures",
+                photographyTips: "Pandav Falls scenic spot. Ken River boat safari excellent for gharials and birds",
+                insider: "Tiger reintroduction success story. All tigers locally extinct by 2009, now breeding well",
+                climate: "Tropical. Very hot summers. Winter and spring best for wildlife",
+                conservation: "Model tiger reintroduction. 6 tigers translocated from other parks, now 50+"
+            },
+            {
+                name: "Satpura National Park",
+                state: "Madhya Pradesh",
+                lat: 22.4894,
+                lng: 78.4378,
+                photo: "images/tiger_3.jpg",
+                type: "tiger",
+                wildlife: ["tiger", "leopard", "elephant", "bird"],
+                bestTime: "November to June",
+                description: "Unique walking safaris and diverse topography from valleys to hills.",
+                area: "524 sq km",
+                icon: "🐅",
+                color: "#d35400",
+                zones: "Madhai gate, multiple trekking zones",
+                accommodation: "Forsyth Lodge, MP Tourism, Reni Pani Jungle Lodge",
+                safariTypes: "Jeep Safari, Walking Safari, Boat Safari, Elephant Safari",
+                entryFee: "₹1,800 - ₹4,500 per vehicle",
+                nearestAirport: "Bhopal Airport (180 km)",
+                nearestRailway: "Pipariya (55 km)",
+                permits: "Online booking. Walking safaris have limited slots",
+                keySpecies: "Bengal Tiger, Leopard, Sloth Bear, Indian Giant Squirrel, Flying Squirrel, Gaur",
+                photographyTips: "Walking safaris offer unique perspectives. Boat safari on Denwa River for birds",
+                insider: "One of few parks allowing walking safaris with armed guards. Rugged landscape less crowded",
+                climate: "Hilly terrain cooler than plains. Pleasant winters. Hot summers",
+                conservation: "Part of Satpura-Maikal landscape. Important biodiversity hotspot"
+            },
+            {
+                name: "Sariska Tiger Reserve",
+                state: "Rajasthan",
+                lat: 27.2675,
+                lng: 76.3333,
+                photo: "images/tiger_1.jpg",
+                type: "tiger",
+                wildlife: ["tiger", "leopard", "bird"],
+                bestTime: "October to March",
+                description: "Historic hunting preserve with reintroduced tigers and ancient temples.",
+                area: "866 sq km",
+                icon: "🐅",
+                color: "#d35400",
+                zones: "Multiple safari routes, Kankwari Fort area",
+                accommodation: "RTDC hotels, private resorts in Alwar",
+                safariTypes: "Jeep Safari, Canter Safari",
+                entryFee: "₹1,500 - ₹3,500 per vehicle",
+                nearestAirport: "Delhi IGI Airport (200 km)",
+                nearestRailway: "Alwar Railway Station (37 km)",
+                permits: "Book at park entrance or online",
+                keySpecies: "Bengal Tiger (reintroduced), Leopard, Striped Hyena, Indian Wild Dog, Nilgai",
+                photographyTips: "Pandupol and Kankwari Fort areas scenic. Winter best for photography",
+                insider: "Tigers were poached to extinction by 2005. Reintroduced from Ranthambore since 2008",
+                climate: "Semi-arid. Hot summers, cold winters. Best visibility October-March",
+                conservation: "Tiger reintroduction project. Ancient Pandupol temples and Kankwari Fort inside park"
+            },
+            {
+                name: "Mudumalai National Park",
+                state: "Tamil Nadu",
+                lat: 11.5833,
+                lng: 76.5333,
+                photo: "images/elephant.jpeg",
+                type: "elephant",
+                wildlife: ["elephant", "tiger", "leopard", "bird"],
+                bestTime: "October to May",
+                description: "First wildlife sanctuary of South India, part of Nilgiri Biosphere.",
+                area: "321 sq km",
+                icon: "🐘",
+                color: "#16a085",
+                zones: "Theppakadu, Masinagudi areas",
+                accommodation: "Jungle Hut, forest lodges, Masinagudi resorts",
+                safariTypes: "Jeep Safari, Van Safari, Elephant Safari",
+                entryFee: "₹500 - ₹2,000 per vehicle",
+                nearestAirport: "Bhubaneswar Airport (250 km)",
+                nearestRailway: "Balasore (60 km)",
+                permits: "Entry permit at Pithabata. Limited vehicles allowed",
+                keySpecies: "Bengal Tiger (pseudo-melanistic/black tigers reported), Asian Elephant, Leopard, Gaur, Giant Squirrel",
+                photographyTips: "Barehipani and Joranda waterfalls scenic. Dense forest makes tiger photography challenging",
+                insider: "Famous for melanistic (pseudo-black) tigers. Tribal villages inside reserve. Sal forests dominant",
+                climate: "Tropical. Monsoon heavy. Waterfalls spectacular in monsoon but park closed",
+                conservation: "Biosphere Reserve. Tiger Reserve. Unique melanistic tiger genetics"
+            },
+            {
+                name: "Chilika Lake",
+                state: "Odisha",
+                lat: 19.7167,
+                lng: 85.3167,
+                photo: "images/bird_1.jpg",
+                type: "bird",
+                wildlife: ["bird"],
+                bestTime: "November to February",
+                description: "Asia's largest brackish water lagoon with million migratory birds.",
+                area: "1100 sq km",
+                icon: "🦅",
+                color: "#3498db",
+                zones: "Nalabana Bird Sanctuary, Mangalajodi, Satapada",
+                accommodation: "Puri, Barkul, Rambha, Satapada resorts",
+                safariTypes: "Boat safari",
+                entryFee: "₹200 - ₹1,000 per boat",
+                nearestAirport: "Bhubaneswar Airport (100 km)",
+                nearestRailway: "Balugaon (8 km from Chilika)",
+                permits: "Entry ticket at boat stations. Nalabana requires special permit in season",
+                keySpecies: "Over 1 million migratory birds, Irrawaddy Dolphins, Flamingos, Brahminy Ducks, fishing cats",
+                photographyTips: "Mangalajodi best for bird photography. Sunrise shots spectacular. Satapada for dolphins",
+                insider: "Nalabana island becomes bird paradise in winter. Dolphins in Satapada sector year-round",
+                climate: "Coastal tropical. Pleasant winters. Very hot summers. Cyclone prone",
+                conservation: "Ramsar site. First Indian wetland under Montreux Record (now removed after restoration)"
+            },
+            {
+                name: "Bhadra Wildlife Sanctuary",
+                state: "Karnataka",
+                lat: 13.5667,
+                lng: 75.6500,
+                photo: "images/tiger_1.jpg",
+                type: "tiger",
+                wildlife: ["tiger", "elephant", "leopard", "bird"],
+                bestTime: "October to May",
+                description: "Western Ghats reserve with tigers, elephants and Bhadra reservoir.",
+                area: "492 sq km",
+                icon: "🐅",
+                color: "#d35400",
+                zones: "Multiple zones around Bhadra reservoir",
+                accommodation: "Jungle Lodges, Muthodi, River Tern Lodge",
+                safariTypes: "Jeep Safari, boat safari, trekking",
+                entryFee: "₹1,500 - ₹3,000 per vehicle",
+                nearestAirport: "Mangalore Airport (130 km)",
+                nearestRailway: "Kadur (28 km), Tarikere (40 km)",
+                permits: "Book through Jungle Lodges or forest department",
+                keySpecies: "Bengal Tiger, Asian Elephant, Leopard, Gaur, Wild Dog, Malabar Giant Squirrel",
+                photographyTips: "Boat safari on reservoir unique perspective. Dry season best for wildlife concentration",
+                insider: "Successfully relocated tribal villages. Now prime tiger habitat. Coffee estates surround park",
+                climate: "Western Ghats monsoon. Heavy rainfall. October-May best for safaris",
+                conservation: "Project Tiger reserve. Model tribal rehabilitation program"
+            },
+            {
+                name: "Dandeli Wildlife Sanctuary",
+                state: "Karnataka",
+                lat: 15.2667,
+                lng: 74.6167,
+                photo: "images/tiger_2.jpg",
+                type: "tiger",
+                wildlife: ["tiger", "elephant", "leopard", "bird"],
+                bestTime: "October to May",
+                description: "Kali river sanctuary with black panthers and hornbills.",
+                area: "866 sq km",
+                icon: "🐅",
+                color: "#d35400",
+                zones: "Kali river zones, Anshi, Syntheri rock area",
+                accommodation: "Jungle Lodges, Dandeli resorts, homestays",
+                safariTypes: "Jeep Safari, boat safari, white water rafting",
+                entryFee: "₹1,000 - ₹2,500 per vehicle",
+                nearestAirport: "Hubli Airport (75 km), Goa (100 km)",
+                nearestRailway: "Alnavar (28 km), Londa (30 km)",
+                permits: "Book at range offices or through resorts",
+                keySpecies: "Black Panther (melanistic leopard), Tiger, Elephant, King Cobra, Great Hornbill, crocodiles",
+                photographyTips: "Black panther sightings possible. Kali river boat safari scenic. Syntheri rocks dramatic",
+                insider: "One of best places for black panther. White water rafting on Kali river. Syntheri rock formation stunning",
+                climate: "Western Ghats. Heavy monsoon. Best visibility October-March",
+                conservation: "Tiger reserve. Important Western Ghats corridor. Hornbill conservation"
+            },
+            {
+                name: "BR Hills (Biligirirangana Hills)",
+                state: "Karnataka",
+                lat: 11.9833,
+                lng: 77.1667,
+                photo: "images/elephant.jpeg",
+                type: "elephant",
+                wildlife: ["elephant", "tiger", "leopard", "bird"],
+                bestTime: "October to May",
+                description: "Eastern Ghats reserve connecting Western Ghats, critical wildlife corridor.",
+                area: "540 sq km",
+                icon: "🐘",
+                color: "#16a085",
+                zones: "Hill slopes, Soligas tribal areas",
+                accommodation: "Jungle Lodges (K Gudi), forest lodges",
+                safariTypes: "Jeep Safari, guided treks",
+                entryFee: "₹1,500 - ₹3,000 per vehicle",
+                nearestAirport: "Mysore Airport (100 km), Bangalore (180 km)",
+                nearestRailway: "Chamarajanagar (60 km)",
+                permits: "Book through Jungle Lodges",
+                keySpecies: "Asian Elephant (corridor), Bengal Tiger, Leopard, Gaur, Four-horned Antelope, Grizzled Giant Squirrel",
+                photographyTips: "Hill landscape scenic. Good for elephant herds. Leopard sightings possible",
+                insider: "Connects Western and Eastern Ghats. Soligas tribe co-manages forest. Ancient Ranganatha temple",
+                climate: "Hill climate moderate. Pleasant most of year. Monsoon June-September",
+                conservation: "Critical elephant corridor. Indigenous community forest rights model"
+            },
+            {
+                name: "Anshi National Park",
+                state: "Karnataka",
+                lat: 15.1500,
+                lng: 74.4333,
+                photo: "images/tiger_2.jpg",
+                type: "tiger",
+                wildlife: ["tiger", "elephant", "leopard", "bird"],
+                bestTime: "October to May",
+                description: "Western Ghats park with dense forests and black panthers.",
+                area: "340 sq km",
+                icon: "🐅",
+                color: "#d35400",
+                zones: "Dense forest zones",
+                accommodation: "Limited forest rest houses, Dandeli resorts nearby",
+                safariTypes: "Limited jeep safari (mostly closed for tourism)",
+                entryFee: "₹500 - ₹1,500 (limited access)",
+                nearestAirport: "Hubli Airport (100 km)",
+                nearestRailway: "Londa (45 km)",
+                permits: "Special permission required. Mostly closed to tourism",
+                keySpecies: "Bengal Tiger, Black Panther, Asian Elephant, King Cobra, Malabar Civet",
+                photographyTips: "Very limited tourism access. Dense Western Ghats forest",
+                insider: "Contiguous with Dandeli. Mostly closed for conservation. Very pristine habitat",
+                climate: "Heavy Western Ghats rainfall. Dense evergreen forests",
+                conservation: "Project Tiger. Minimal human disturbance. Research focused"
+            },
+            {
+                name: "Silent Valley National Park",
+                state: "Kerala",
+                lat: 11.0833,
+                lng: 76.4333,
+                photo: "images/bird_1.jpg",
+                type: "bird",
+                wildlife: ["bird", "elephant", "tiger", "leopard"],
+                bestTime: "September to March",
+                description: "Pristine rainforest saved from dam project, biodiversity hotspot.",
+                area: "237 sq km",
+                icon: "🌳",
+                color: "#27ae60",
+                zones: "Core rainforest zones",
+                accommodation: "Mukkali base camp, Mannarkkad town (25 km)",
+                safariTypes: "Trekking with guides only (no vehicle safari)",
+                entryFee: "₹200 entry + guide fees",
+                nearestAirport: "Coimbatore Airport (55 km)",
+                nearestRailway: "Palakkad (50 km)",
+                permits: "Advance permission from Wildlife Warden required",
+                keySpecies: "Lion-tailed Macaque, Nilgiri Langur, Tiger, Leopard, 400+ bird species, numerous endemic species",
+                photographyTips: "Dense rainforest challenging. Focus on birds and landscape. Macro photography for insects",
+                insider: "Saved by environmental movement in 1970s. No tribal habitation ever. Pristine ecosystem",
+                climate: "Tropical evergreen rainforest. Heavy rainfall. Best in drier months",
+                conservation: "UNESCO World Heritage (part of Western Ghats). Zero human habitation. Strict protection"
+            },
+            {
+                name: "Eravikulam National Park",
+                state: "Kerala",
+                lat: 10.1167,
+                lng: 77.0833,
+                photo: "images/bird_1.jpg",
+                type: "bird",
+                wildlife: ["bird"],
+                bestTime: "September to May",
+                description: "Rolling grasslands with endangered Nilgiri Tahr and Neelakurinji flowers.",
+                area: "97 sq km",
+                icon: "🐐",
+                color: "#9b59b6",
+                zones: "Grassland plateau, Anamudi peak area",
+                accommodation: "Munnar town hotels and resorts",
+                safariTypes: "Walking trail (vehicles not allowed)",
+                entryFee: "₹125 - ₹550 entry",
+                nearestAirport: "Cochin International Airport (110 km)",
+                nearestRailway: "Aluva (110 km)",
+                permits: "Entry ticket at Rajamalai entrance. Limited daily visitors",
+                keySpecies: "Nilgiri Tahr (endemic, endangered), Nilgiri Marten, Atlas Moth, Neelakurinji (blooms once in 12 years)",
+                photographyTips: "Tahr habituated, excellent close-up opportunities. Neelakurinji mass bloom (next 2030). Landscape stunning",
+                insider: "Highest peak in South India (Anamudi 2695m). Tahr conservation success. Neelakurinji purple bloom spectacular",
+                climate: "High altitude montane. Cool year-round. Monsoon heavy. Occasional frost",
+                conservation: "Critical Nilgiri Tahr habitat. Grassland ecosystem protection. UNESCO World Heritage"
+            },
+            {
+                name: "Parambikulam Tiger Reserve",
+                state: "Kerala",
+                lat: 10.3667,
+                lng: 76.7667,
+                photo: "images/tiger_2.jpg",
+                type: "tiger",
+                wildlife: ["tiger", "elephant", "leopard", "bird"],
+                bestTime: "October to May",
+                description: "Reservoir-based reserve with ancient teak trees and tribal culture.",
+                area: "643 sq km",
+                icon: "🐅",
+                color: "#d35400",
+                zones: "Multiple zones around reservoirs",
+                accommodation: "Eco-tourism cottages, tree houses, tribal huts",
+                safariTypes: "Jeep Safari, boat safari, bamboo rafting, trekking",
+                entryFee: "₹1,000 - ₹3,000 package based",
+                nearestAirport: "Coimbatore Airport (100 km)",
+                nearestRailway: "Palakkad (90 km)",
+                permits: "Pre-booking mandatory through Kerala Forest website. Packaged eco-tourism",
+                keySpecies: "Bengal Tiger, Asian Elephant, Lion-tailed Macaque, Leopard, Gaur, Crocodile",
+                photographyTips: "Boat safari on reservoirs scenic. Ancient teak trees (Kannimara teak). Tribal settlement visits",
+                insider: "Ancient teak 'Kannimara' over 400 years old. Model tribal integration. Boat house stays unique",
+                climate: "Western Ghats climate. Monsoon heavy. Pleasant winters",
+                conservation: "India's first-ever Green Governance award (UN). Community eco-tourism model"
+            },
+            {
+                name: "Chinnar Wildlife Sanctuary",
+                state: "Kerala",
+                lat: 10.3333,
+                lng: 77.2167,
+                photo: "images/bird_1.jpg",
+                type: "bird",
+                wildlife: ["bird", "elephant", "leopard"],
+                bestTime: "October to March",
+                description: "Dry zone sanctuary with endangered grizzled giant squirrel.",
+                area: "90 sq km",
+                icon: "🐿️",
+                color: "#e67e22",
+                zones: "Dry thorny scrub zones",
+                accommodation: "Trekker's hut, Munnar resorts (60 km)",
+                safariTypes: "Trekking, guided walks",
+                entryFee: "₹150 - ₹400 entry",
+                nearestAirport: "Cochin Airport (145 km)",
+                nearestRailway: "Udumalpet (60 km)",
+                permits: "Entry permit at sanctuary office",
+                keySpecies: "Grizzled Giant Squirrel (endangered), Star Tortoise, Mugger Crocodile, Spotted Deer, Giant Squirrel",
+                photographyTips: "Grizzled giant squirrel best photographed early morning. Dry landscape unique in Kerala",
+                insider: "Rain shadow zone. Drastically different from wet Kerala forests. Ancient stone age paintings",
+                climate: "Dry tropical. Much less rain than rest of Kerala. Hot summers",
+                conservation: "Critical habitat for endangered grizzled giant squirrel. Buffer to Eravikulam"
+            },
+            {
+                name: "Wayanad Wildlife Sanctuary",
+                state: "Kerala",
+                lat: 11.6833,
+                lng: 76.2500,
+                photo: "images/elephant.jpeg",
+                type: "elephant",
+                wildlife: ["elephant", "tiger", "leopard", "bird"],
+                bestTime: "October to May",
+                description: "Part of Nilgiri Biosphere, rich in elephants and pristine forests.",
+                area: "344 sq km",
+                icon: "🐘",
+                color: "#16a085",
+                zones: "Muthanga, Kurichiat, Tholpetty sectors",
+                accommodation: "Wayanad resorts, homestays, forest lodges",
+                safariTypes: "Jeep Safari",
+                entryFee: "₹1,000 - ₹2,500 per jeep",
+                nearestAirport: "Calicut International Airport (110 km)",
+                nearestRailway: "Kozhikode (95 km)",
+                permits: "Book at entry gates or online",
+                keySpecies: "Asian Elephant (large population), Bengal Tiger, Leopard, Gaur, Malabar Giant Squirrel, Wild Dog",
+                photographyTips: "Elephant herds common. Tholpetty sector best for sightings. Morning safaris productive",
+                insider: "Contiguous with Nagarhole and Bandipur. Part of largest protected area in India. Ancient Edakkal caves nearby",
+                climate: "Western Ghats monsoon. Heavy rain July-September. Pleasant weather rest of year",
+                conservation: "Part of Nilgiri Biosphere Reserve. Critical elephant corridor. Human-wildlife conflict zone"
+            },
+            {
+                name: "Pilibhit Tiger Reserve",
+                state: "Uttar Pradesh",
+                lat: 28.6333,
+                lng: 80.0833,
+                photo: "images/tiger_1.jpg",
+                type: "tiger",
+                wildlife: ["tiger", "leopard", "elephant", "bird"],
+                bestTime: "November to June",
+                description: "Terai forest with tigers and unique swamp deer habitat.",
+                area: "730 sq km",
+                icon: "🐅",
+                color: "#d35400",
+                zones: "Core zones with sal forests",
+                accommodation: "Forest rest houses, Pilibhit town hotels",
+                safariTypes: "Jeep Safari",
+                entryFee: "₹2,000 - ₹4,000 per jeep",
+                nearestAirport: "Pantnagar Airport (180 km)",
+                nearestRailway: "Pilibhit Junction (2 km)",
+                permits: "Online booking available",
+                keySpecies: "Bengal Tiger, Leopard, Swamp Deer, Hispid Hare, Bengal Florican, Python",
+                photographyTips: "Dense sal forests. Summer water holes good for wildlife. Grasslands for swamp deer",
+                insider: "Part of Terai Arc Landscape. Less crowded than other UP parks. Good tiger population",
+                climate: "Terai climate. Very hot summers. Pleasant winters. Monsoon heavy",
+                conservation: "Tiger Reserve since 2014. Important Terai grassland conservation"
+            },
+            {
+                name: "Valmiki Tiger Reserve (Valmikinagar)",
+                state: "Bihar",
+                lat: 27.2667,
+                lng: 84.3833,
+                photo: "images/tiger_3.jpg",
+                type: "tiger",
+                wildlife: ["tiger", "elephant", "leopard", "bird"],
+                bestTime: "November to May",
+                description: "Bihar's only national park, part of Himalayan foothills.",
+                area: "899 sq km",
+                icon: "🐅",
+                color: "#d35400",
+                zones: "Core forest zones along Nepal border",
+                accommodation: "Forest rest houses, Bettiah town (100 km)",
+                safariTypes: "Limited Jeep Safari",
+                entryFee: "₹500 - ₹2,000 per vehicle",
+                nearestAirport: "Patna Airport (200 km)",
+                nearestRailway: "Narkatiaganj (45 km)",
+                permits: "Permission from DFO required. Limited tourism infrastructure",
+                keySpecies: "Bengal Tiger, Asian Elephant, Leopard, Sloth Bear, Gharial (in Gandak river)",
+                photographyTips: "Infrastructure limited. Focus on landscape and birds. River areas for gharials",
+                insider: "Only tiger reserve in Bihar. Contiguous with Nepal's Chitwan. Under-visited",
+                climate: "Sub-Himalayan. Hot summers. Pleasant winters. Monsoon floods common",
+                conservation: "Project Tiger. Trans-boundary conservation with Nepal. Under-resourced"
+            },
+            {
+                name: "Dampa Tiger Reserve",
+                state: "Mizoram",
+                lat: 23.4833,
+                lng: 92.4167,
+                photo: "images/tiger_2.jpg",
+                type: "tiger",
+                wildlife: ["tiger", "elephant", "leopard", "bird"],
+                bestTime: "November to April",
+                description: "Northeast biodiversity hotspot with hoolock gibbons.",
+                area: "500 sq km",
+                icon: "🐅",
+                color: "#d35400",
+                zones: "Dense hill forest zones",
+                accommodation: "Basic forest rest house, Mamit town",
+                safariTypes: "Trekking with guides",
+                entryFee: "₹200 - ₹500 entry",
+                nearestAirport: "Aizawl Airport (127 km)",
+                nearestRailway: "Silchar (130 km)",
+                permits: "Inner Line Permit required for Mizoram. Entry permit at sanctuary",
+                keySpecies: "Hoolock Gibbon, Clouded Leopard, Tiger, Elephant, Serow, numerous birds and orchids",
+                photographyTips: "Dense forests, difficult terrain. Best for bird and gibbon photography. Patient tracking needed",
+                insider: "Hoolock gibbon calls heard early morning. Minimal tourism. Very pristine forests",
+                climate: "Tropical monsoon hills. Heavy rainfall. Best in dry season",
+                conservation: "Important biodiversity corridor. Hoolock gibbon sanctuary. Minimal human pressure"
+            },
+            {
+                name: "Intanki National Park",
+                state: "Nagaland",
+                lat: 25.6333,
+                lng: 93.9333,
+                photo: "images/tiger_1.jpg",
+                type: "tiger",
+                wildlife: ["tiger", "elephant", "bird"],
+                bestTime: "November to March",
+                description: "Nagaland's largest protected area with diverse wildlife.",
+                area: "202 sq km",
+                icon: "🐅",
+                color: "#d35400",
+                zones: "Hill forest zones",
+                accommodation: "Basic guest house, Dimapur hotels (45 km)",
+                safariTypes: "Guided trekking",
+                entryFee: "₹200 - ₹500 entry",
+                nearestAirport: "Dimapur Airport (38 km)",
+                nearestRailway: "Dimapur (40 km)",
+                permits: "Inner Line Permit for Nagaland. Forest permit at entry",
+                keySpecies: "Tiger, Asian Elephant, Hoolock Gibbon, Golden Langur, Great Hornbill, Blyth's Tragopan",
+                photographyTips: "Challenging terrain. Bird photography good. Hornbills and pheasants specialty",
+                insider: "Recovering from years of hunting. Still fragile populations. Conservation awareness growing",
+                climate: "Subtropical hills. Heavy monsoon. Winter best for trekking",
+                conservation: "Recovering wildlife populations. Community conservation initiatives starting"
+            },
+            {
+                name: "Keibul Lamjao National Park",
+                state: "Manipur",
+                lat: 24.5167,
+                lng: 93.8167,
+                photo: "images/bird_1.jpg",
+                type: "bird",
+                wildlife: ["bird"],
+                bestTime: "November to March",
+                description: "World's only floating national park, home to endangered Sangai deer.",
+                area: "40 sq km",
+                icon: "🦌",
+                color: "#1abc9c",
+                zones: "Floating phumdi (vegetation) zones on Loktak Lake",
+                accommodation: "Imphal city hotels (45 km), Sendra island resort",
+                safariTypes: "Boat safari only",
+                entryFee: "₹500 - ₹1,000 per boat",
+                nearestAirport: "Imphal Airport (53 km)",
+                nearestRailway: "Dimapur (215 km)",
+                permits: "Inner Line Permit for Manipur. Entry at Sendra tourism complex",
+                keySpecies: "Sangai (brow-antlered deer - state animal, critically endangered), migratory waterfowl, pythons",
+                photographyTips: "Unique floating biomass. Sangai best photographed early morning. Boat safari essential",
+                insider: "World's only floating national park. Sangai found nowhere else. Saved from extinction",
+                climate: "Subtropical. Pleasant winters. Monsoon raises lake levels",
+                conservation: "Critical habitat for Sangai (150-200 individuals). Ramsar wetland. Threatened by hydropower"
+            },
+            {
+                name: "Mouling National Park",
+                state: "Arunachal Pradesh",
+                lat: 28.5833,
+                lng: 95.0000,
+                photo: "images/bird_1.jpg",
+                type: "bird",
+                wildlife: ["bird", "tiger", "leopard"],
+                bestTime: "October to April",
+                description: "Remote park with takin, red panda, and pristine forests.",
+                area: "483 sq km",
+                icon: "🐼",
+                color: "#c0392b",
+                zones: "High altitude forests",
+                accommodation: "Very basic facilities, Pasighat town (100 km)",
+                safariTypes: "Multi-day trekking expeditions",
+                entryFee: "₹500 entry (trek costs separate)",
+                nearestAirport: "Dibrugarh Airport (180 km)",
+                nearestRailway: "North Lakhimpur (125 km)",
+                permits: "Protected Area Permit mandatory. Very remote, requires expedition planning",
+                keySpecies: "Mishmi Takin, Red Panda, Clouded Leopard, Himalayan Black Bear, Gongshan Muntjac",
+                photographyTips: "Extremely challenging access. High altitude. For serious wildlife enthusiasts only",
+                insider: "One of most remote parks in India. Minimal tourism. Adi tribal territory",
+                climate: "High altitude temperate. Heavy rainfall. Leeches in monsoon. Cold winters",
+                conservation: "Pristine biodiversity. Minimal human impact. Research focused"
+            },
+            {
+                name: "Hemis National Park",
+                state: "Ladakh",
+                lat: 34.0000,
+                lng: 77.5833,
+                photo: "images/leopard_1.jpg",
+                type: "leopard",
+                wildlife: ["leopard", "bird"],
+                bestTime: "May to September",
+                description: "Largest national park in India, home to endangered snow leopards.",
+                area: "4400 sq km",
+                icon: "🐆",
+                color: "#95a5a6",
+                zones: "Rumbak, Markha Valley, multiple high-altitude zones",
+                accommodation: "Homestays in villages, luxury camps in Leh",
+                safariTypes: "Snow Leopard Trekking expeditions",
+                entryFee: "₹100 - ₹500 entry (trekking package costs separate)",
+                nearestAirport: "Leh Airport (45 km)",
+                nearestRailway: "Jammu (700 km - no direct train)",
+                permits: "Inner line permit required. Book through tour operators",
+                keySpecies: "Snow Leopard, Tibetan Wolf, Eurasian Brown Bear, Bharal (Blue Sheep), Ibex, Lammergeier",
+                photographyTips: "Extreme cold. Long lens essential. Patient waiting at high altitudes. Winter best for snow leopard",
+                insider: "February-March best for snow leopard (breeding season, visible at lower altitudes)",
+                climate: "High altitude cold desert. Extreme cold. Accessible May-September. Winter expeditions for snow leopard",
+                conservation: "India's largest national park. Critical snow leopard habitat. Buddhist monastery inside park"
+            },
+            {
+                name: "Manas National Park",
+                state: "Assam",
+                lat: 26.7100,
+                lng: 90.9100,
+                photo: "images/tiger_1.jpg",
+                type: "tiger",
+                wildlife: ["tiger", "elephant", "rhino", "bird"],
+                bestTime: "November to April",
+                description: "UNESCO World Heritage Site with tiger, elephant, and pygmy hog.",
+                area: "950 sq km",
+                icon: "🐅",
+                color: "#d35400",
+                zones: "Central range, Panbari, Bansbari ranges",
+                accommodation: "Government lodges, Bansbari Lodge, Mathanguri Forest Lodge",
+                safariTypes: "Jeep Safari, Elephant Safari, river rafting",
+                entryFee: "₹1,000 - ₹3,000 per vehicle",
+                nearestAirport: "Guwahati Airport (176 km)",
+                nearestRailway: "Barpeta Road (40 km)",
+                permits: "Book at park office or online",
+                keySpecies: "Bengal Tiger, Asian Elephant, Indian Rhinoceros, Pygmy Hog, Golden Langur, Hispid Hare",
+                photographyTips: "Manas River scenic backdrop. Grasslands good for visibility. Elephant back best for photography",
+                insider: "Recovered from insurgency. UNESCO delisted then relisted after conservation success",
+                climate: "Tropical monsoon. Heavy rainfall. Park closed June-October",
+                conservation: "UNESCO World Heritage. Project Tiger, Project Elephant. Rare endemic species"
+            },
+            {
+                name: "Nameri National Park",
+                state: "Assam",
+                lat: 27.0333,
+                lng: 92.8333,
+                photo: "images/elephant.jpeg",
+                type: "elephant",
+                wildlife: ["elephant", "tiger", "bird"],
+                bestTime: "November to April",
+                description: "River-based park with white-winged wood duck and elephant herds.",
+                area: "200 sq km",
+                icon: "🐘",
+                color: "#16a085",
+                zones: "Riverside zones, trekking areas",
+                accommodation: "Eco-camps, Nameri Eco Camp, Potasali",
+                safariTypes: "Jeep Safari, River rafting on Jia Bhoroli, Trekking",
+                entryFee: "₹500 - ₹1,500 per vehicle",
+                nearestAirport: "Tezpur Airport (35 km)",
+                nearestRailway: "Rangapara (25 km)",
+                permits: "Book at park office",
+                keySpecies: "Asian Elephant, Tiger, Clouded Leopard, White-winged Wood Duck (endangered), Gaur",
+                photographyTips: "River rafting offers unique wildlife angles. Bird photography excellent near river",
+                insider: "One of few parks offering river rafting through wildlife habitat. Less crowded than Kaziranga",
+                climate: "Tropical. Heavy monsoon. Best November-March for wildlife",
+                conservation: "Tiger reserve. Important elephant corridor. Critical for white-winged wood duck"
+            },
+            {
+                name: "Dibru-Saikhowa National Park",
+                state: "Assam",
+                lat: 27.5833,
+                lng: 95.2500,
+                photo: "images/bird_1.jpg",
+                type: "bird",
+                wildlife: ["bird", "elephant"],
+                bestTime: "November to March",
+                description: "Wetland park with rare white-winged wood duck and wild horses.",
+                area: "340 sq km",
+                icon: "🦅",
+                color: "#3498db",
+                zones: "Wetland areas, grasslands, river islands",
+                accommodation: "Circuit house at Guijan, basic lodges",
+                safariTypes: "Boat safari, jeep safari on grasslands",
+                entryFee: "₹500 - ₹1,000",
+                nearestAirport: "Dibrugarh Airport (12 km)",
+                nearestRailway: "Dibrugarh (13 km)",
+                permits: "Book at range office",
+                keySpecies: "White-winged Wood Duck, Feral Horses, Bengal Florican, Elephant, Gangetic Dolphin",
+                photographyTips: "Boat safari best for water birds. Grasslands for Bengal florican. Morning light ideal",
+                insider: "One of 19 biodiversity hotspots in world. Mysterious wild horse population",
+                climate: "Tropical wet. Floods common. Winter best for birds",
+                conservation: "Biosphere reserve. Critical for endangered white-winged wood duck and Bengal florican"
+            },
+            {
+                name: "Keoladeo National Park (Bharatpur)",
+                state: "Rajasthan",
+                lat: 27.1594,
+                lng: 77.5280,
+                photo: "images/bird_1.jpg",
+                type: "bird",
+                wildlife: ["bird"],
+                bestTime: "October to March",
+                description: "UNESCO World Heritage Site, premier bird sanctuary with 370+ species.",
+                area: "29 sq km",
+                icon: "🦅",
+                color: "#3498db",
+                zones: "Wetland areas, walking trails, cycling paths",
+                accommodation: "Bharatpur hotels, resorts, RTDC properties",
+                safariTypes: "Cycle rickshaw, walking, cycling",
+                entryFee: "₹75 - ₹200 entry",
+                nearestAirport: "Delhi IGI Airport (190 km), Agra (56 km)",
+                nearestRailway: "Bharatpur Junction (5 km)",
+                permits: "Entry ticket at gate. No advance booking needed",
+                keySpecies: "Siberian Crane (historic), Sarus Crane, Painted Stork, Spoonbills, Pelicans, numerous migratory waterfowl",
+                photographyTips: "Early morning best light. Walk silently for close bird shots. Long lens recommended",
+                insider: "Former duck hunting reserve of Maharajas. Now wetland paradise. Python Point for raptors",
+                climate: "Semi-arid. Winter brings migratory birds. Summer very hot",
+                conservation: "Ramsar wetland site. Saved from conversion to farmland by Salim Ali"
+            },
+            {
+                name: "Little Rann of Kutch",
+                state: "Gujarat",
+                lat: 23.8333,
+                lng: 71.1667,
+                photo: "images/bird_1.jpg",
+                type: "bird",
+                wildlife: ["bird"],
+                bestTime: "November to February",
+                description: "Salt marsh with last remaining wild Asiatic wild ass population.",
+                area: "4953 sq km",
+                icon: "🐴",
+                color: "#ecf0f1",
+                zones: "Salt flats, seasonal wetlands",
+                accommodation: "Rann Riders, Desert Coursers, eco-lodges",
+                safariTypes: "Jeep Safari on salt flats",
+                entryFee: "₹500 - ₹2,000 per vehicle",
+                nearestAirport: "Ahmedabad Airport (130 km)",
+                nearestRailway: "Viramgam (80 km)",
+                permits: "Book through resorts and tour operators",
+                keySpecies: "Indian Wild Ass (only habitat - 4,000+ population), Flamingos, Desert Fox, Caracal, Nilgai",
+                photographyTips: "Unique white salt landscape. Wild ass running creates dramatic shots. Flamingos in season",
+                insider: "White Rann salt desert transforms to wetland in monsoon. Flamingos arrive October",
+                climate: "Hot arid desert. Extreme temperatures. Winter only season for tourism",
+                conservation: "Only wild ass habitat in world. Sanctuary for last population"
+            },
+            {
+                name: "Velavadar Blackbuck National Park",
+                state: "Gujarat",
+                lat: 21.8667,
+                lng: 72.1333,
+                photo: "images/bird_1.jpg",
+                type: "bird",
+                wildlife: ["bird"],
+                bestTime: "October to March",
+                description: "Grassland park famous for blackbuck and harriers.",
+                area: "34 sq km",
+                icon: "🦌",
+                color: "#8e44ad",
+                zones: "Open grasslands",
+                accommodation: "Forest guest house, Bhavnagar hotels (40 km)",
+                safariTypes: "Jeep Safari, walking permitted in designated areas",
+                entryFee: "₹200 - ₹600 per vehicle",
+                nearestAirport: "Bhavnagar Airport (65 km)",
+                nearestRailway: "Bhavnagar (42 km)",
+                permits: "Entry at gate. No advance booking",
+                keySpecies: "Blackbuck (large herds), Harriers (wintering ground for world's harriers), Lesser Florican, Indian Wolf",
+                photographyTips: "Open grasslands excellent for blackbuck herds. Harrier roost dramatic at dawn",
+                insider: "World's largest congregation of harriers in winter. 2,000+ blackbuck in 34 sq km",
+                climate: "Hot coastal. Monsoon grasslands lush. Winter best for birds and blackbuck",
+                conservation: "Last tropical grassland in India. Critical harrier habitat"
+            },
+            {
+                name: "Eaglenest Wildlife Sanctuary",
+                state: "Arunachal Pradesh",
+                lat: 27.2500,
+                lng: 92.4167,
+                photo: "images/bird_1.jpg",
+                type: "bird",
+                wildlife: ["bird", "leopard"],
+                bestTime: "November to April",
+                description: "Birding paradise with 500+ species and red panda.",
+                area: "218 sq km",
+                icon: "🦅",
+                color: "#3498db",
+                zones: "Different elevation zones for varied bird species",
+                accommodation: "Lama Camp, Bompu Camp, Tenga Valley homestays",
+                safariTypes: "Birding walks, trekking",
+                entryFee: "₹500 - ₹1,000 entry",
+                nearestAirport: "Tezpur Airport (180 km)",
+                nearestRailway: "Bhalukpong (30 km)",
+                permits: "Protected Area Permit required for Arunachal. Book through tour operators",
+                keySpecies: "500+ bird species, Red Panda, Clouded Leopard, Asian Golden Cat, Bugun Liocichla (critically endangered)",
+                photographyTips: "Altitude variation creates diverse habitats. Early morning bird photography. Very steep terrain",
+                insider: "One of Asia's premier birding sites. Bugun Liocichla discovered here in 2006",
+                climate: "Subtropical to temperate. Heavy monsoon. Winter-spring best for birding",
+                conservation: "Biodiversity hotspot. New species still being discovered"
+            },
+            {
+                name: "Namdapha National Park",
+                state: "Arunachal Pradesh",
+                lat: 27.5167,
+                lng: 96.3500,
+                photo: "images/tiger_1.jpg",
+                type: "tiger",
+                wildlife: ["tiger", "leopard", "elephant", "bird"],
+                bestTime: "October to April",
+                description: "Only park with four big cats - tiger, leopard, clouded leopard, snow leopard.",
+                area: "1985 sq km",
+                icon: "🐅",
+                color: "#d35400",
+                zones: "Lowland tropical to alpine zones",
+                accommodation: "Forest rest houses, Miao town hotels",
+                safariTypes: "Trekking expeditions (no vehicle safari)",
+                entryFee: "₹500 entry (trekking costs extra)",
+                nearestAirport: "Dibrugarh Airport (150 km)",
+                nearestRailway: "Tinsukia (60 km)",
+                permits: "Protected Area Permit mandatory for Arunachal Pradesh. Book through tour operators",
+                keySpecies: "Tiger, Clouded Leopard, Snow Leopard, Common Leopard (all four cats), Red Panda, Hoolock Gibbon",
+                photographyTips: "Dense jungle, sightings difficult. Focus on birds and landscape. Multi-day treks required",
+                insider: "Only park in world with four big cat species. Remote and challenging terrain",
+                climate: "Tropical to alpine. Heavy rainfall. Leeches common in monsoon",
+                conservation: "Mega biodiversity hotspot. Flying squirrel, hoolock gibbon sanctuary"
+            },
+            {
+                name: "Pakke Tiger Reserve (Pakhui)",
+                state: "Arunachal Pradesh",
+                lat: 27.2500,
+                lng: 93.0000,
+                photo: "images/bird_1.jpg",
+                type: "bird",
+                wildlife: ["bird", "tiger", "elephant"],
+                bestTime: "November to March",
+                description: "Hornbill paradise with four hornbill species and tigers.",
+                area: "862 sq km",
+                icon: "🦅",
+                color: "#3498db",
+                zones: "Lowland forests, bamboo zones",
+                accommodation: "Pakke Jungle Camp, Seijosa town hotels",
+                safariTypes: "Jeep Safari, hornbill nest watching",
+                entryFee: "₹1,000 - ₹2,500 per vehicle",
+                nearestAirport: "Tezpur Airport (100 km)",
+                nearestRailway: "Bhalukpong (20 km)",
+                permits: "Protected Area Permit required. Book through resorts",
+                keySpecies: "Four hornbill species (Great, Wreathed, Oriental Pied, Rufous-necked), Tiger, Clouded Leopard, Elephant",
+                photographyTips: "Hornbill nesting season (March-June) spectacular. Camera traps deployed by researchers",
+                insider: "Community-based hornbill conservation success. Pakke Paga festival celebrates hornbills",
+                climate: "Tropical. Heavy rainfall. Best November-March for wildlife and birds",
+                conservation: "Model for community conservation. Camera trap research hub"
+            },
+            {
+                name: "Valley of Flowers National Park",
+                state: "Uttarakhand",
+                lat: 30.7167,
+                lng: 79.6000,
+                photo: "images/bird_1.jpg",
+                type: "bird",
+                wildlife: ["bird", "leopard"],
+                bestTime: "July to September",
+                description: "UNESCO World Heritage Site with alpine meadows and rare flowers.",
+                area: "87 sq km",
+                icon: "🌸",
+                color: "#e91e63",
+                zones: "Alpine meadows, trekking routes",
+                accommodation: "Ghangaria village (base camp), trekking lodges",
+                safariTypes: "Trekking only (14 km trek from Govindghat)",
+                entryFee: "₹150 entry + ₹600 trek fee",
+                nearestAirport: "Dehradun Airport (295 km)",
+                nearestRailway: "Rishikesh (273 km)",
+                permits: "Entry tickets at Govindghat",
+                keySpecies: "Snow Leopard, Himalayan Musk Deer, Blue Sheep, Himalayan Black Bear, 600+ flower species",
+                photographyTips: "Monsoon bloom peak (July-August). Macro photography for flowers. Landscape stunning",
+                insider: "Discovered by Frank Smythe in 1931. Sister park to Nanda Devi. Flowers carpet valley",
+                climate: "Alpine. Open only monsoon season (flowers bloom). Heavy rainfall. Cold at altitude",
+                conservation: "UNESCO World Heritage. Grazing banned. Endemic Himalayan flora"
+            },
+            {
+                name: "Rajaji National Park",
+                state: "Uttarakhand",
+                lat: 30.0333,
+                lng: 78.2500,
+                photo: "images/elephant.jpeg",
+                type: "elephant",
+                wildlife: ["elephant", "tiger", "leopard", "bird"],
+                bestTime: "November to June",
+                description: "Foothills park with elephants and tigers near Haridwar.",
+                area: "820 sq km",
+                icon: "🐘",
+                color: "#16a085",
+                zones: "Chilla, Motichur, Rajaji ranges",
+                accommodation: "Forest rest houses, Haridwar hotels (20 km)",
+                safariTypes: "Jeep Safari, elephant safari",
+                entryFee: "₹1,500 - ₹3,500 per jeep",
+                nearestAirport: "Dehradun Airport (35 km)",
+                nearestRailway: "Haridwar (10 km)",
+                permits: "Online booking. Book at entry gates",
+                keySpecies: "Asian Elephant (large population), Bengal Tiger, Leopard, King Cobra, Goral",
+                photographyTips: "Chilla zone best for elephants. River areas scenic. Tiger sightings increasing",
+                insider: "Named after C. Rajagopalachari. Elephant corridor to Corbett. Ganges flows through park",
+                climate: "Sub-Himalayan. Hot summers. Pleasant winters. Monsoon closed",
+                conservation: "Critical elephant corridor. Forest connectivity being restored"
+            },
+            {
+                name: "Dudhwa National Park",
+                state: "Uttar Pradesh",
+                lat: 28.5267,
+                lng: 80.7733,
+                photo: "images/tiger_1.jpg",
+                type: "tiger",
+                wildlife: ["tiger", "rhino", "elephant", "bird"],
+                bestTime: "November to June",
+                description: "Terai grassland park with reintroduced rhinos and tigers.",
+                area: "811 sq km",
+                icon: "🐅",
+                color: "#d35400",
+                zones: "Dudhwa, Kishanpur, Katerniaghat zones",
+                accommodation: "Forest rest houses, Palia Kalan town hotels",
+                safariTypes: "Jeep Safari, elephant safari",
+                entryFee: "₹2,000 - ₹4,500 per jeep",
+                nearestAirport: "Lucknow Airport (238 km), Pant Nagar (150 km)",
+                nearestRailway: "Dudhwa Railway Station (8 km)",
+                permits: "Online booking available",
+                keySpecies: "Bengal Tiger, Indian Rhinoceros (reintroduced from Assam), Swamp Deer (barasingha), Hispid Hare",
+                photographyTips: "Tall grasslands create dramatic shots. Rhino photography good near waterholes",
+                insider: "Rhinos translocated from Assam in 1980s. Billy Arjan Singh's conservation legacy",
+                climate: "Tropical. Very hot summers. Pleasant winters. Monsoon closed",
+                conservation: "Tiger and rhino conservation. Barasingha critical habitat. Billy Arjan Singh sanctuary"
+            },
+            {
+                name: "Okhla Bird Sanctuary",
+                state: "Uttar Pradesh",
+                lat: 28.5667,
+                lng: 77.3167,
+                photo: "images/bird_1.jpg",
+                type: "bird",
+                wildlife: ["bird"],
+                bestTime: "October to March",
+                description: "Urban wetland sanctuary with 300+ bird species near Delhi.",
+                area: "4 sq km",
+                icon: "🦅",
+                color: "#3498db",
+                zones: "Wetland areas, walking trails",
+                accommodation: "Noida/Delhi NCR hotels",
+                safariTypes: "Walking only (boats suspended)",
+                entryFee: "₹25 entry",
+                nearestAirport: "Delhi IGI Airport (20 km)",
+                nearestRailway: "Okhla Railway Station (3 km)",
+                permits: "Entry ticket at gate",
+                keySpecies: "300+ bird species including Sarus Crane, Bar-headed Goose, Greater Flamingo (occasional), migratory waterfowl",
+                photographyTips: "Winter best for migratory birds. Walk trail offers good vantage points",
+                insider: "Created by Okhla Barrage. Threatened by pollution and encroachment. Still productive birding",
+                climate: "Subtropical. Extreme summers and winters. Best October-March",
+                conservation: "Urban wetland under threat. Important stopover for migratory birds"
+            },
+            {
+                name: "Bhitarkanika National Park",
+                state: "Odisha",
+                lat: 20.7500,
+                lng: 87.0833,
+                photo: "images/bird_1.jpg",
+                type: "bird",
+                wildlife: ["bird"],
+                bestTime: "October to March",
+                description: "Mangrove ecosystem with saltwater crocodiles and nesting sea turtles.",
+                area: "672 sq km",
+                icon: "🐊",
+                color: "#27ae60",
+                zones: "Mangrove creeks, river channels",
+                accommodation: "Forest rest houses, Dangmal, Rajnagar town",
+                safariTypes: "Boat safari through mangrove creeks",
+                entryFee: "₹500 - ₹2,000 per boat",
+                nearestAirport: "Bhubaneswar Airport (150 km)",
+                nearestRailway: "Cuttack (120 km)",
+                permits: "Book through registered tour operators",
+                keySpecies: "Saltwater Crocodile (massive population), Water Monitor Lizard, King Cobra, Olive Ridley Turtle, 215+ bird species",
+                photographyTips: "Boat safari excellent for crocodiles basking. Bird photography good in winter",
+                insider: "Second largest mangrove in India after Sundarbans. Massive crocodiles (23 feet recorded)",
+                climate: "Tropical coastal. Monsoon heavy. Best November-February",
+                conservation: "Ramsar site. Critical saltwater crocodile habitat. Turtle nesting beaches"
+            },
+            {
+                name: "Simlipal National Park",
+                state: "Odisha",
+                lat: 21.8667,
+                lng: 86.5167,
+                photo: "images/tiger_2.jpg",
+                type: "tiger",
+                wildlife: ["tiger", "elephant", "leopard", "bird"],
+                bestTime: "November to June",
+                description: "Biosphere reserve with melanistic tigers and waterfalls.",
+                area: "2750 sq km",
+                icon: "🐅",
+                color: "#d35400",
+                zones: "Core and buffer zones, waterfalls area",
+                accommodation: "Forest rest houses at Chahala, Barehipani, Joranda",
+                safariTypes: "Jeep Safari (limited)",
+                entryFee: "₹500 - ₹2,000 per vehicle",
+                nearestAirport: "Bhubaneswar Airport (250 km)",
+                nearestRailway: "Balasore (60 km)",
+                permits: "Entry permit at Pithabata. Limited vehicles allowed",
+                keySpecies: "Bengal Tiger (pseudo-melanistic/black tigers reported), Asian Elephant, Leopard, Gaur, Giant Squirrel",
+                photographyTips: "Barehipani and Joranda waterfalls scenic. Dense forest makes tiger photography challenging",
+                insider: "Famous for melanistic (pseudo-black) tigers. Tribal villages inside reserve. Sal forests dominant",
+                climate: "Tropical. Monsoon heavy. Waterfalls spectacular in monsoon but park closed",
+                conservation: "Biosphere Reserve. Tiger Reserve. Unique melanistic tiger genetics"
+            },
+            {
+                name: "Jawai Leopard Conservation Reserve",
+                state: "Rajasthan",
+                lat: 25.0833,
+                lng: 73.0500,
+                photo: "images/leopard_1.jpg",
+                type: "leopard",
+                wildlife: ["leopard", "bird"],
+                bestTime: "October to March",
+                description: "Unique leopard sanctuary where leopards live in harmony with humans and livestock.",
+                area: "150 sq km",
+                icon: "🐆",
+                color: "#f39c12",
+                zones: "Granite hill zones, Jawai dam area",
+                accommodation: "Luxury leopard camps, heritage properties, homestays",
+                safariTypes: "Jeep Safari focused on leopard tracking",
+                entryFee: "₹2,000 - ₹5,000 per jeep (private reserve pricing)",
+                nearestAirport: "Udaipur Airport (140 km), Jodhpur (150 km)",
+                nearestRailway: "Falna Railway Station (30 km)",
+                permits: "Book through camps and tour operators. Some areas open access",
+                keySpecies: "Leopard (high density - 50+ in small area), Crocodiles, Hyena, Indian Wolf, Migratory birds",
+                photographyTips: "Leopards visible in daylight on granite rocks. Incredible sighting probability. Golden hour spectacular",
+                insider: "Rabari shepherds coexist with leopards. Leopards den in granite caves. Highest leopard density per sq km",
+                climate: "Semi-arid. Very hot summers. Pleasant winters best for safaris",
+                conservation: "Model human-leopard coexistence. Community-based conservation success"
+            },
+            {
+                name: "Jhalana Leopard Safari Park",
+                state: "Rajasthan",
+                lat: 26.8667,
+                lng: 75.8500,
+                photo: "images/leopard_1.jpg",
+                type: "leopard",
+                wildlife: ["leopard", "bird"],
+                bestTime: "October to March",
+                description: "Urban leopard reserve within Jaipur city limits, excellent sightings.",
+                area: "24 sq km",
+                icon: "🐆",
+                color: "#f39c12",
+                zones: "Rocky terrain zones within city",
+                accommodation: "Jaipur city hotels (all categories)",
+                safariTypes: "Jeep Safari (6 seater gypsy)",
+                entryFee: "₹1,000 - ₹2,500 per jeep",
+                nearestAirport: "Jaipur International Airport (15 km)",
+                nearestRailway: "Jaipur Railway Station (10 km)",
+                permits: "Online booking through Rajasthan Forest Department. Walk-in also available",
+                keySpecies: "Leopard (30+ individuals), Striped Hyena, Desert Fox, Jackal, Blue Bull, abundant birdlife",
+                photographyTips: "Excellent leopard sighting probability (80%+). Rocky terrain offers great backdrops. Evening safaris productive",
+                insider: "India's first urban leopard park. 20-minute drive from city center. World-class leopard viewing",
+                climate: "Semi-arid. Very hot summers. October-March ideal",
+                conservation: "Urban wildlife success story. Leopards adapted to city proximity. Model for urban conservation"
+            },
+            {
+                name: "Sanjay Dubri National Park (Sanjay Gandhi National Park)",
+                state: "Madhya Pradesh",
+                lat: 24.3667,
+                lng: 81.6167,
+                photo: "images/tiger_3.jpg",
+                type: "tiger",
+                wildlife: ["tiger", "leopard", "bird"],
+                bestTime: "November to June",
+                description: "Part of Sanjay-Dubri Tiger Reserve complex with scenic Singhpur landscape.",
+                area: "1674 sq km",
+                icon: "🐅",
+                color: "#d35400",
+                zones: "Multiple zones across vast landscape",
+                accommodation: "Limited forest rest houses, Sidhi town hotels",
+                safariTypes: "Jeep Safari (limited zones)",
+                entryFee: "₹1,500 - ₹3,500 per jeep",
+                nearestAirport: "Jabalpur Airport (250 km), Rewa (200 km)",
+                nearestRailway: "Singrauli (90 km)",
+                permits: "Online booking. Less developed for tourism",
+                keySpecies: "Bengal Tiger, Leopard, Sloth Bear, Chinkara, Four-horned Antelope, Wild Dog",
+                photographyTips: "Less crowded than famous MP parks. Mixed forests and grasslands scenic",
+                insider: "Contiguous with Bandhavgarh. Part of larger tiger landscape. Under-visited, good for solitude",
+                climate: "Tropical. Very hot summers. Pleasant winters",
+                conservation: "Tiger Reserve. Important corridor connecting multiple protected areas"
+            },
+            {
+                name: "Navegaon National Park",
+                state: "Maharashtra",
+                lat: 20.7333,
+                lng: 79.7167,
+                photo: "images/bird_1.jpg",
+                type: "bird",
+                wildlife: ["bird"],
+                bestTime: "November to March",
+                description: "Bird paradise with lake attracting 200+ species, near Tadoba.",
+                area: "134 sq km",
+                icon: "🦅",
+                color: "#3498db",
+                zones: "Lake area, surrounding forests",
+                accommodation: "Maharashtra Tourism resort, Navegaon town lodges",
+                safariTypes: "Boat safari on lake, walking trails, nature interpretation center",
+                entryFee: "₹100 - ₹500",
+                nearestAirport: "Nagpur Airport (130 km)",
+                nearestRailway: "Gondia (35 km)",
+                permits: "Entry ticket at gate",
+                keySpecies: "200+ bird species including Bar-headed Goose, Brahminy Duck, migratory waterfowl, Leopard, Sloth Bear",
+                photographyTips: "Lake excellent for water bird photography. Winter migratory season peak. Early morning boat rides best",
+                insider: "Often combined with Tadoba visit. Peaceful alternative to tiger parks. Excellent for serious birders",
+                climate: "Tropical. Hot summers. Pleasant winters ideal for birding",
+                conservation: "Important bird area. Wetland conservation. Educational eco-tourism focus"
+            },
+            {
+                name: "Melghat Tiger Reserve",
+                state: "Maharashtra",
+                lat: 21.3833,
+                lng: 77.3833,
+                photo: "images/tiger_3.jpg",
+                type: "tiger",
+                wildlife: ["tiger", "leopard", "bird"],
+                bestTime: "October to June",
+                description: "Rugged Satpura ranges with tigers and tribal culture.",
+                area: "1677 sq km",
+                icon: "🐅",
+                color: "#d35400",
+                zones: "Sipna, Khandu, Dolar ranges",
+                accommodation: "Semadoh forest lodge, Chikhaldara hill station hotels",
+                safariTypes: "Jeep Safari",
+                entryFee: "₹1,500 - ₹3,500 per jeep",
+                nearestAirport: "Nagpur Airport (230 km)",
+                nearestRailway: "Badnera (120 km)",
+                permits: "Online booking. Less crowded than Tadoba",
+                keySpecies: "Bengal Tiger, Leopard, Sloth Bear, Indian Giant Squirrel, Wild Dog, Gaur",
+                photographyTips: "Rugged terrain dramatic. Chikhaldara viewpoints scenic. Summer best for tiger sightings",
+                insider: "Part of Satpura-Maikal landscape. Korku tribal heartland. Less tourist pressure than other parks",
+                climate: "Tropical uplands. Hot summers. Pleasant hill climate at Chikhaldara",
+                conservation: "Project Tiger reserve. High malnutrition zone affecting tribal population and conservation"
+            },
+            {
+                name: "Bhagwan Mahavir Wildlife Sanctuary (Mollem)",
+                state: "Goa",
+                lat: 15.2500,
+                lng: 74.3167,
+                photo: "images/bird_1.jpg",
+                type: "bird",
+                wildlife: ["bird", "leopard", "elephant"],
+                bestTime: "October to March",
+                description: "Goa's largest wildlife sanctuary with Dudhsagar Falls and dense Western Ghats forests.",
+                area: "240 sq km",
+                icon: "🌳",
+                color: "#27ae60",
+                zones: "Mollem, Dudhsagar area",
+                accommodation: "Mollem lodges, Panjim hotels (50 km)",
+                safariTypes: "Jeep to Dudhsagar, nature trails, bird watching",
+                entryFee: "₹200 - ₹1,000 depending on activity",
+                nearestAirport: "Goa International Airport (60 km)",
+                nearestRailway: "Kulem/Castle Rock (on park boundary)",
+                permits: "Entry ticket at Mollem gate",
+                keySpecies: "Leopard, Gaur, Malabar Giant Squirrel, King Cobra, over 200 bird species including Emerald Dove",
+                photographyTips: "Dudhsagar Falls spectacular in monsoon/post-monsoon. Dense Western Ghats vegetation. Bird photography excellent",
+                insider: "Train passes through sanctuary. Dudhsagar Falls one of tallest in India. Devil's Canyon viewpoint stunning",
+                climate: "Heavy Western Ghats monsoon. Best October-March. Waterfall best post-monsoon",
+                conservation: "Part of Western Ghats UNESCO site. Under pressure from infrastructure projects"
+            },
+            {
+                name: "Radhanagari Wildlife Sanctuary",
+                state: "Maharashtra",
+                lat: 16.1667,
+                lng: 74.1500,
+                photo: "images/bird_1.jpg",
+                type: "bird",
+                wildlife: ["bird", "leopard"],
+                bestTime: "October to March",
+                description: "Western Ghats sanctuary with endemic species and bison.",
+                area: "351 sq km",
+                icon: "🐃",
+                color: "#16a085",
+                zones: "Forest zones around Dajipur",
+                accommodation: "MTDC resort, Radhanagari lodges",
+                safariTypes: "Jeep Safari at Dajipur bison sanctuary",
+                entryFee: "₹500 - ₹1,500 per vehicle",
+                nearestAirport: "Kolhapur Airport (55 km)",
+                nearestRailway: "Kolhapur (50 km)",
+                permits: "Entry at sanctuary gate",
+                keySpecies: "Indian Gaur (bison - large herds), Leopard, Malabar Giant Squirrel, numerous endemic birds",
+                photographyTips: "Dajipur area excellent for gaur herds. Western Ghats landscape scenic. Monsoon lush but park may close",
+                insider: "Dajipur bison sanctuary within reserve famous for gaur viewing. Less touristy Maharashtra destination",
+                climate: "Heavy Western Ghats rainfall. Best in dry season October-March",
+                conservation: "Western Ghats biodiversity. Important gaur habitat"
+            },
+            {
+                name: "Bor Wildlife Sanctuary",
+                state: "Maharashtra",
+                lat: 19.8667,
+                lng: 77.7167,
+                photo: "images/tiger_1.jpg",
+                type: "tiger",
+                wildlife: ["tiger", "leopard", "bird"],
+                bestTime: "October to May",
+                description: "Buffer zone to Tadoba, emerging tiger habitat.",
+                area: "138 sq km",
+                icon: "🐅",
+                color: "#d35400",
+                zones: "Part of Tadoba-Andhari buffer",
+                accommodation: "Resorts near Tadoba gates, Hingani area",
+                safariTypes: "Jeep Safari",
+                entryFee: "₹2,000 - ₹4,000 per jeep",
+                nearestAirport: "Nagpur Airport (150 km)",
+                nearestRailway: "Chandrapur (70 km)",
+                permits: "Online booking through Tadoba system",
+                keySpecies: "Bengal Tiger, Leopard, Sloth Bear, Wild Dog, Sambar",
+                photographyTips: "Growing tiger population. Less crowded than core Tadoba. Good for photography",
+                insider: "Tigers dispersing from Tadoba establishing territories here. Becoming hotspot for sightings",
+                climate: "Tropical dry. Very hot summers. Cool winters",
+                conservation: "Buffer zone management. Tiger corridor importance growing"
+            },
+            {
+                name: "Guru Ghasidas National Park (Sanjay National Park)",
+                state: "Chhattisgarh",
+                lat: 23.7833,
+                lng: 81.9667,
+                photo: "images/tiger_2.jpg",
+                type: "tiger",
+                wildlife: ["tiger", "leopard", "bird"],
+                bestTime: "November to June",
+                description: "Contiguous with Sanjay-Dubri, part of large tiger landscape.",
+                area: "1441 sq km",
+                icon: "🐅",
+                color: "#d35400",
+                zones: "Multiple forest zones",
+                accommodation: "Limited forest rest houses, Ambikapur town (50 km)",
+                safariTypes: "Jeep Safari (limited tourism infrastructure)",
+                entryFee: "₹1,000 - ₹2,500 per vehicle",
+                nearestAirport: "Raipur Airport (300 km)",
+                nearestRailway: "Ambikapur (50 km)",
+                permits: "Forest department permission required. Limited tourism",
+                keySpecies: "Bengal Tiger, Leopard, Sloth Bear, Chinkara, Wild Dog, Four-horned Antelope",
+                photographyTips: "Pristine and less disturbed. Wildlife photography challenging due to limited access",
+                insider: "Contiguous with MP's Sanjay-Dubri. Important tiger corridor. Very underdeveloped for tourism",
+                climate: "Tropical. Hot summers. Monsoon heavy",
+                conservation: "Tiger Reserve. Critical landscape connectivity. Needs tourism infrastructure development"
+            },
+            {
+                name: "Achanakmar Tiger Reserve",
+                state: "Chhattisgarh",
+                lat: 22.3833,
+                lng: 81.6167,
+                photo: "images/tiger_3.jpg",
+                type: "tiger",
+                wildlife: ["tiger", "leopard", "bird"],
+                bestTime: "November to June",
+                description: "Part of Kanha-Achanakmar corridor with sal forests.",
+                area: "914 sq km",
+                icon: "🐅",
+                color: "#d35400",
+                zones: "Core and buffer zones, sal forests",
+                accommodation: "Forest rest houses, Bilaspur hotels (40 km)",
+                safariTypes: "Jeep Safari",
+                entryFee: "₹1,500 - ₹3,000 per jeep",
+                nearestAirport: "Raipur Airport (200 km)",
+                nearestRailway: "Bilaspur (40 km)",
+                permits: "Online booking available but limited slots",
+                keySpecies: "Bengal Tiger, Leopard, Gaur, Wild Dog, Sloth Bear, Flying Squirrel",
+                photographyTips: "Dense sal forests. Tiger sightings challenging but increasing. Good for birds",
+                insider: "Connects Kanha to central India tiger populations. Less crowded. Authentic wilderness experience",
+                climate: "Tropical. Very hot summers. Pleasant winters",
+                conservation: "Tiger Reserve. Critical corridor for genetic diversity. Project Tiger"
+            },
+            {
+                name: "Indravati National Park",
+                state: "Chhattisgarh",
+                lat: 19.3667,
+                lng: 81.3500,
+                photo: "images/tiger_1.jpg",
+                type: "tiger",
+                wildlife: ["tiger", "leopard", "bird"],
+                bestTime: "November to May",
+                description: "Wild tiger reserve with wild buffalo, affected by insurgency.",
+                area: "2799 sq km",
+                icon: "🐅",
+                color: "#d35400",
+                zones: "Multiple zones (access restricted in some areas)",
+                accommodation: "Very limited facilities, Jagdalpur town",
+                safariTypes: "Limited safari due to security concerns",
+                entryFee: "₹500 - ₹1,500 (when accessible)",
+                nearestAirport: "Raipur Airport (300 km), Jagdalpur (250 km)",
+                nearestRailway: "Jagdalpur (250 km)",
+                permits: "Special permissions required. Security clearances needed",
+                keySpecies: "Bengal Tiger (population uncertain), Wild Buffalo, Leopard, Gaur, Barasingha, Wild Dog",
+                photographyTips: "Access very limited due to Naxal insurgency. Wildlife photography minimal",
+                insider: "Once famous for Project Tiger. Now severely affected by Maoist insurgency. Wild buffalo population important",
+                climate: "Tropical. Hot and dry. Monsoon brings floods",
+                conservation: "Tiger Reserve. Severely impacted by insurgency. Conservation challenged by security issues"
+            },
+            {
+                name: "Udanti-Sitanadi Tiger Reserve",
+                state: "Chhattisgarh",
+                lat: 21.5833,
+                lng: 82.3667,
+                photo: "images/tiger_2.jpg",
+                type: "tiger",
+                wildlife: ["tiger", "leopard", "bird"],
+                bestTime: "November to June",
+                description: "Twin sanctuary complex with wild buffalo and tigers.",
+                area: "1842 sq km",
+                icon: "🐅",
+                color: "#d35400",
+                zones: "Udanti and Sitanadi ranges",
+                accommodation: "Forest lodges, Raipur hotels (200 km)",
+                safariTypes: "Jeep Safari (limited infrastructure)",
+                entryFee: "₹1,000 - ₹2,500 per vehicle",
+                nearestAirport: "Raipur Airport (200 km)",
+                nearestRailway: "Dhamtari (50 km from Udanti)",
+                permits: "Forest department permissions. Limited tourism",
+                keySpecies: "Bengal Tiger, Wild Buffalo, Leopard, Gaur, Four-horned Antelope, Hill Myna",
+                photographyTips: "Pristine forests. Infrastructure limited. Focus on landscape and birds",
+                insider: "Wild buffalo stronghold. Combined as tiger reserve. Relatively unexplored for tourism",
+                climate: "Tropical. Hot dry summers. Heavy monsoon",
+                conservation: "Tiger Reserve. Important wild buffalo habitat. Needs tourism development"
+            },
+            {
+                name: "Barnawapara Wildlife Sanctuary",
+                state: "Chhattisgarh",
+                lat: 21.2833,
+                lng: 82.2500,
+                photo: "images/bird_1.jpg",
+                type: "bird",
+                wildlife: ["bird", "leopard"],
+                bestTime: "November to May",
+                description: "Dry deciduous forest with bar-headed geese and wildlife.",
+                area: "245 sq km",
+                icon: "🦅",
+                color: "#3498db",
+                zones: "Forest and water body zones",
+                accommodation: "Forest rest houses, Raipur hotels (90 km)",
+                safariTypes: "Jeep Safari, nature trails",
+                entryFee: "₹500 - ₹1,000 per vehicle",
+                nearestAirport: "Raipur Airport (100 km)",
+                nearestRailway: "Mahasamund (45 km)",
+                permits: "Entry at sanctuary gate",
+                keySpecies: "Leopard, Sloth Bear, Wild Dog, Chital, Bar-headed Geese (winter), numerous water birds",
+                photographyTips: "Water bodies attract wildlife in summer. Good for bird photography in winter",
+                insider: "Easily accessible from Raipur. Less crowded. Good weekend destination",
+                climate: "Tropical. Very hot summers. Pleasant winters",
+                conservation: "Eco-tourism focus. Educational programs for locals"
+            },
+            {
+                name: "Gorumara National Park",
+                state: "West Bengal",
+                lat: 26.7167,
+                lng: 88.8000,
+                photo: "images/elephant.jpeg",
+                type: "elephant",
+                wildlife: ["elephant", "rhino", "leopard", "bird"],
+                bestTime: "November to April",
+                description: "Terai forest with Indian rhinos and large elephant herds.",
+                area: "80 sq km",
+                icon: "🐘",
+                color: "#16a085",
+                zones: "Multiple safari routes through grasslands and forests",
+                accommodation: "Forest lodges, Lataguri resorts, WBFDC properties",
+                safariTypes: "Jeep Safari, Elephant Safari",
+                entryFee: "₹1,000 - ₹2,500 per jeep",
+                nearestAirport: "Bagdogra Airport (70 km)",
+                nearestRailway: "New Mal Junction (10 km)",
+                permits: "Book at entry gate or online through West Bengal Forest",
+                keySpecies: "Indian Rhinoceros, Asian Elephant (large herds), Gaur, Leopard, Wild Boar, 300+ bird species",
+                photographyTips: "Open grasslands excellent for photography. Elephant safari offers unique vantage point. Rhinoceros sightings common",
+                insider: "Rhinos translocated from Assam. Part of Dooars region. Excellent infrastructure for tourism",
+                climate: "Sub-Himalayan terai. Pleasant winters. Hot humid summers. Monsoon heavy",
+                conservation: "Rhino conservation success. Elephant corridor critical. Well-managed eco-tourism"
+            },
+            {
+                name: "Jaldapara National Park",
+                state: "West Bengal",
+                lat: 26.7333,
+                lng: 89.2667,
+                photo: "images/rhino_2.jpg",
+                type: "rhino",
+                wildlife: ["rhino", "elephant", "bird"],
+                bestTime: "November to April",
+                description: "Grassland park with Indian rhinos in Dooars region.",
+                area: "216 sq km",
+                icon: "🦏",
+                color: "#7f8c8d",
+                zones: "Grassland and riverine zones",
+                accommodation: "Hollong forest lodge, Madarihat resorts",
+                safariTypes: "Jeep Safari, Elephant Safari",
+                entryFee: "₹1,000 - ₹2,500 per jeep",
+                nearestAirport: "Bagdogra Airport (125 km)",
+                nearestRailway: "Madarihat (7 km)",
+                permits: "Book through West Bengal Forest website or at entry",
+                keySpecies: "Indian Rhinoceros (200+), Asian Elephant, Bengal Florican, Hispid Hare, Leopard",
+                photographyTips: "Grasslands offer excellent visibility. Rhino photography from elephant back unique. Winter best light",
+                insider: "Torsa River flows through park. Bengal Florican critically endangered found here. Sister park to Gorumara",
+                climate: "Sub-Himalayan. Pleasant cool winters. Monsoon June-September",
+                conservation: "Important rhino population. Bengal Florican conservation critical. Flood management challenging"
+            },
+            {
+                name: "Buxa Tiger Reserve",
+                state: "West Bengal",
+                lat: 26.7167,
+                lng: 89.5500,
+                photo: "images/tiger_1.jpg",
+                type: "tiger",
+                wildlife: ["tiger", "elephant", "leopard", "bird"],
+                bestTime: "November to May",
+                description: "International park on Bhutan border with diverse wildlife.",
+                area: "760 sq km",
+                icon: "🐅",
+                color: "#d35400",
+                zones: "Core forest zones, Buxa Fort area",
+                accommodation: "Forest lodges, Alipurduar town",
+                safariTypes: "Jeep Safari, trekking to Buxa Fort",
+                entryFee: "₹1,000 - ₹2,000 per vehicle",
+                nearestAirport: "Bagdogra Airport (160 km)",
+                nearestRailway: "Alipurduar Junction (30 km)",
+                permits: "Forest department permission. Some zones require special permits",
+                keySpecies: "Bengal Tiger, Asian Elephant, Leopard, Clouded Leopard, Gaur, 284 bird species",
+                photographyTips: "Historic Buxa Fort trek offers landscapes. Dense forests make wildlife photography challenging",
+                insider: "Trans-boundary with Bhutan. Historic Buxa Fort (detention camp during independence movement). Trade route to Bhutan",
+                climate: "Sub-Himalayan. Heavy monsoon. Pleasant winters",
+                conservation: "Tiger Reserve. Trans-boundary conservation with Bhutan. Elephant corridor"
+            },
+            {
+                name: "Neora Valley National Park",
+                state: "West Bengal",
+                lat: 27.0167,
+                lng: 88.7833,
+                photo: "images/bird_1.jpg",
+                type: "bird",
+                wildlife: ["bird", "leopard"],
+                bestTime: "October to May",
+                description: "Pristine Eastern Himalayan forest with red panda.",
+                area: "159 sq km",
+                icon: "🐼",
+                color: "#c0392b",
+                zones: "Altitude gradient zones",
+                accommodation: "Lava, Kolakham homestays and resorts",
+                safariTypes: "Trekking only (no vehicle safari)",
+                entryFee: "₹100 - ₹300 entry",
+                nearestAirport: "Bagdogra Airport (90 km)",
+                nearestRailway: "New Jalpaiguri (85 km)",
+                permits: "Entry permit from Lava forest office",
+                keySpecies: "Red Panda, Clouded Leopard, Himalayan Black Bear, numerous pheasants, 265 bird species",
+                photographyTips: "Red panda tracking requires patience. Bird photography excellent. Altitude offers cool climate shots",
+                insider: "Virgin forest, completely unexplored until 1984. Red panda habitat. Challenging treks rewarding",
+                climate: "Eastern Himalayan. Heavy monsoon. Cold winters. Spring best for rhododendrons",
+                conservation: "Strict protection. Research focused. Minimal tourism impact maintained"
+            },
+            {
+                name: "Singalila National Park",
+                state: "West Bengal",
+                lat: 27.1167,
+                lng: 88.1333,
+                photo: "images/bird_1.jpg",
+                type: "bird",
+                wildlife: ["bird", "leopard"],
+                bestTime: "April to May, October to December",
+                description: "High altitude park with red panda and Kanchenjunga views.",
+                area: "78 sq km",
+                icon: "🐼",
+                color: "#c0392b",
+                zones: "Alpine and sub-alpine zones along ridge",
+                accommodation: "Trekking huts, Sandakphu lodges, Phalut shelter",
+                safariTypes: "Multi-day trekking (Sandakphu-Phalut trek)",
+                entryFee: "₹100 - ₹500 entry + trekking fees",
+                nearestAirport: "Bagdogra Airport (80 km to Manebhanjan)",
+                nearestRailway: "New Jalpaiguri (70 km to Manebhanjan)",
+                permits: "Trekking permit from Manebhanjan",
+                keySpecies: "Red Panda, Himalayan Black Bear, Clouded Leopard, Blood Pheasant, numerous high altitude birds",
+                photographyTips: "Kanchenjunga sunrise from Sandakphu world-famous. Rhododendron forests in spring. High altitude landscape",
+                insider: "India-Nepal border trek. Four 8000m peaks visible. Red panda best chance dawn/dusk. Spring rhododendron bloom magical",
+                climate: "High altitude. Very cold winters. Snowfall common. Spring and autumn best. Monsoon trails difficult",
+                conservation: "Red panda conservation. Himalayan ecosystem preservation. Trekking regulated"
+            },
+            {
+                name: "Balphakram National Park",
+                state: "Meghalaya",
+                lat: 25.2667,
+                lng: 90.9333,
+                photo: "images/elephant.jpeg",
+                type: "elephant",
+                wildlife: ["elephant", "tiger", "leopard", "bird"],
+                bestTime: "November to March",
+                description: "Deep gorge plateau park, 'Land of Spirits' in Garo mythology.",
+                area: "220 sq km",
+                icon: "🐘",
+                color: "#16a085",
+                zones: "Plateau and gorge zones",
+                accommodation: "Very basic forest rest house, Baghmara town (40 km)",
+                safariTypes: "Trekking only, very limited access",
+                entryFee: "₹200 - ₹500 entry",
+                nearestAirport: "Guwahati Airport (250 km)",
+                nearestRailway: "Guwahati (250 km)",
+                permits: "Entry permit from Baghmara forest office. Challenging access",
+                keySpecies: "Asian Elephant, Tiger (presence uncertain), Leopard, Red Panda, Capped Langur, Hoolock Gibbon",
+                photographyTips: "Dramatic landscape photography. Deep canyon scenic. Wildlife photography very challenging",
+                insider: "Considered abode of departed souls by Garo tribe. Remote and pristine. Canyon similar to Grand Canyon. Very few visitors",
+                climate: "Heavy monsoon state. Best November-March. Leeches common in wet season",
+                conservation: "Minimal tourism. Pristine ecosystem. Needs infrastructure and protection resources"
+            },
+            {
+                name: "Nokrek National Park",
+                state: "Meghalaya",
+                lat: 25.5000,
+                lng: 90.3000,
+                photo: "images/elephant.jpeg",
+                type: "elephant",
+                wildlife: ["elephant", "leopard", "bird"],
+                bestTime: "November to March",
+                description: "UNESCO Biosphere Reserve with rare citrus species and elephants.",
+                area: "47 sq km",
+                icon: "🐘",
+                color: "#16a085",
+                zones: "Hill forest zones",
+                accommodation: "Basic facilities, Tura town (45 km)",
+                safariTypes: "Trekking with guides",
+                entryFee: "₹100 - ₹300 entry",
+                nearestAirport: "Guwahati Airport (220 km)",
+                nearestRailway: "Guwahati (220 km)",
+                permits: "Entry permit from Tura forest office",
+                keySpecies: "Asian Elephant, Clouded Leopard, Red Panda, Capped Langur, rare Citrus indica (wild orange)",
+                photographyTips: "Gene pool reserve for citrus. Landscape photography good. Wildlife sightings uncommon",
+                insider: "UNESCO Biosphere Reserve. Wild ancestor of orange (Citrus indica) found here. Garo Hills biodiversity",
+                climate: "Heavy Meghalaya monsoon. Best in dry season. Cloud cover common",
+                conservation: "Biosphere Reserve. Gene pool conservation for citrus. Research importance high"
+            },
+            {
+                name: "Pobitora Wildlife Sanctuary",
+                state: "Assam",
+                lat: 26.2500,
+                lng: 92.0000,
+                photo: "images/rhino_3.jpg",
+                type: "rhino",
+                wildlife: ["rhino", "bird"],
+                bestTime: "November to April",
+                description: "Highest density of rhinos in the world, compact grassland sanctuary.",
+                area: "38.8 sq km",
+                icon: "🦏",
+                color: "#7f8c8d",
+                zones: "Compact grassland area",
+                accommodation: "Basic lodges, Guwahati hotels (50 km)",
+                safariTypes: "Jeep Safari, Elephant Safari",
+                entryFee: "₹500 - ₹1,500 per vehicle",
+                nearestAirport: "Guwahati Airport (30 km)",
+                nearestRailway: "Guwahati (50 km)",
+                permits: "Entry at sanctuary gate. Book elephant safari in advance",
+                keySpecies: "One-horned Rhino (highest density - 100+ rhinos in 39 sq km), Wild Buffalo, Leopard, Wild Boar",
+                photographyTips: "Excellent rhino sighting probability. Elephant safari gets very close. Small size means concentrated wildlife",
+                insider: "World's highest rhino density. Better sighting chances than Kaziranga. Easy day trip from Guwahati",
+                climate: "Tropical monsoon. Floods common. November-April best",
+                conservation: "Critical rhino habitat. Flooding and encroachment challenges. Translocation source population"
+            },
+            {
+                name: "Orang National Park",
+                state: "Assam",
+                lat: 26.6500,
+                lng: 92.3333,
+                photo: "images/rhino_1.jpg",
+                type: "rhino",
+                wildlife: ["rhino", "tiger", "elephant", "bird"],
+                bestTime: "November to April",
+                description: "Mini Kaziranga on north bank of Brahmaputra with rhinos and tigers.",
+                area: "79 sq km",
+                icon: "🦏",
+                color: "#7f8c8d",
+                zones: "Grassland and riverine zones",
+                accommodation: "Forest lodges, Tezpur hotels (50 km)",
+                safariTypes: "Jeep Safari, Elephant Safari",
+                entryFee: "₹1,000 - ₹2,500 per vehicle",
+                nearestAirport: "Tezpur Airport (50 km), Guwahati (140 km)",
+                nearestRailway: "Tezpur (50 km)",
+                permits: "Book at range office or online",
+                keySpecies: "One-horned Rhino (100+), Bengal Tiger, Asian Elephant, Pygmy Hog, Gangetic Dolphin",
+                photographyTips: "Similar habitat to Kaziranga. Less crowded. Good photography opportunities. Tigers occasionally visible",
+                insider: "Called 'Mini Kaziranga'. On north bank of Brahmaputra. Less tourist traffic. Excellent alternative",
+                climate: "Tropical monsoon. Floods annually. Closed monsoon season",
+                conservation: "Important rhino population. Tiger presence significant. Flood management critical"
+            },
+            {
+                name: "Barnadi Wildlife Sanctuary",
+                state: "Assam",
+                lat: 26.7333,
+                lng: 91.5333,
+                photo: "images/bird_1.jpg",
+                type: "bird",
+                wildlife: ["bird", "elephant"],
+                bestTime: "November to April",
+                description: "Pygmy hog sanctuary with grassland birds.",
+                area: "26 sq km",
+                icon: "🦅",
+                color: "#3498db",
+                zones: "Grassland zones",
+                accommodation: "Basic lodges, Mangaldoi town (20 km)",
+                safariTypes: "Limited safari, mainly research focused",
+                entryFee: "₹200 - ₹500",
+                nearestAirport: "Guwahati Airport (135 km)",
+                nearestRailway: "Mangaldoi (20 km)",
+                permits: "Permission from forest office",
+                keySpecies: "Pygmy Hog (reintroduction site), Bengal Florican, Hispid Hare, grassland birds",
+                photographyTips: "Important for grassland bird photography. Access limited. Research priority area",
+                insider: "Critical site for pygmy hog conservation breeding. Released captive-bred pygmy hogs here",
+                climate: "Tropical. Monsoon floods. Best November-March",
+                conservation: "Pygmy hog reintroduction program. Bengal florican habitat. Small but critical"
+            },
+            {
+                name: "Anamalai Tiger Reserve (Indira Gandhi Wildlife Sanctuary)",
+                state: "Tamil Nadu",
+                lat: 10.4500,
+                lng: 76.9667,
+                photo: "images/tiger_2.jpg",
+                type: "tiger",
+                wildlife: ["tiger", "elephant", "leopard", "bird"],
+                bestTime: "December to March",
+                description: "Western Ghats reserve with large elephant population and Parambikulam landscape.",
+                area: "958 sq km",
+                icon: "🐅",
+                color: "#d35400",
+                zones: "Topslip, Sethumadai areas",
+                accommodation: "Topslip forest lodges, Pollachi hotels (40 km)",
+                safariTypes: "Jeep Safari, trekking",
+                entryFee: "₹1,000 - ₹2,500 per vehicle",
+                nearestAirport: "Coimbatore Airport (90 km)",
+                nearestRailway: "Pollachi (40 km)",
+                permits: "Book at Topslip or through Tamil Nadu Forest online",
+                keySpecies: "Bengal Tiger, Asian Elephant (large population), Lion-tailed Macaque, Leopard, Gaur, Nilgiri Tahr",
+                photographyTips: "Topslip area good for elephants. Dense Western Ghats forests. Landscape photography excellent",
+                insider: "Contiguous with Kerala's Parambikulam. Part of Anamalai landscape. Teak plantations within reserve",
+                climate: "Western Ghats. Heavy monsoon. Pleasant hill climate most of year",
+                conservation: "Project Tiger. Critical elephant corridor. Part of UNESCO World Heritage Western Ghats"
+            },
+            {
+                name: "Kalakkad Mundanthurai Tiger Reserve",
+                state: "Tamil Nadu",
+                lat: 8.5333,
+                lng: 77.3500,
+                photo: "images/tiger_1.jpg",
+                type: "tiger",
+                wildlife: ["tiger", "elephant", "leopard", "bird"],
+                bestTime: "October to March",
+                description: "Southern Western Ghats with agastyamalai biosphere contiguity.",
+                area: "895 sq km",
+                icon: "🐅",
+                color: "#d35400",
+                zones: "Multiple zones, difficult terrain",
+                accommodation: "Limited forest rest houses, Tirunelveli (70 km)",
+                safariTypes: "Limited safari, mainly trekking",
+                entryFee: "₹500 - ₹1,500",
+                nearestAirport: "Tuticorin Airport (75 km)",
+                nearestRailway: "Tirunelveli (70 km)",
+                permits: "Forest department permission required",
+                keySpecies: "Bengal Tiger, Asian Elephant, Lion-tailed Macaque, Nilgiri Tahr, Grizzled Giant Squirrel",
+                photographyTips: "Challenging terrain. Focus on landscape. Agastyakoodam peak sacred. Wildlife photography difficult",
+                insider: "Contiguous with Kerala's Neyyar and Peppara. Agastyamalai biosphere. Very rugged terrain",
+                climate: "Heavy Western Ghats rainfall. Two monsoons. October-March best",
+                conservation: "Project Tiger. UNESCO World Heritage part. Sacred groves and tribal traditions"
+            },
+            {
+                name: "Sathyamangalam Tiger Reserve",
+                state: "Tamil Nadu",
+                lat: 11.7500,
+                lng: 77.0000,
+                photo: "images/tiger_3.jpg",
+                type: "tiger",
+                wildlife: ["tiger", "elephant", "leopard", "bird"],
+                bestTime: "October to May",
+                description: "Eastern Ghats connecting Mudumalai-Bandipur-BRT landscape.",
+                area: "1411 sq km",
+                icon: "🐅",
+                color: "#d35400",
+                zones: "Multiple ranges across large landscape",
+                accommodation: "Limited facilities, Sathy town, Erode (50 km)",
+                safariTypes: "Limited safari opportunities",
+                entryFee: "₹500 - ₹1,500",
+                nearestAirport: "Coimbatore Airport (100 km)",
+                nearestRailway: "Erode (50 km)",
+                permits: "Forest department permissions. Tourism infrastructure limited",
+                keySpecies: "Bengal Tiger (growing population), Asian Elephant (large corridor), Leopard, Four-horned Antelope",
+                photographyTips: "Large landscape. Access limited. Focus on eastern ghats scenery",
+                insider: "Critical elephant corridor. Connects multiple reserves. Veerappan's former stronghold. Now recovering",
+                climate: "Eastern Ghats dry. Less rain than western side. Hot summers",
+                conservation: "Tiger Reserve since 2013. Crucial landscape connectivity. Recovering from poaching era"
+            },
+            {
+                name: "Mukundra Hills Tiger Reserve (Darrah)",
+                state: "Rajasthan",
+                lat: 24.7667,
+                lng: 76.0333,
+                photo: "images/tiger_1.jpg",
+                type: "tiger",
+                wildlife: ["tiger", "leopard", "bird"],
+                bestTime: "October to March",
+                description: "Rajasthan's third tiger reserve with reintroduced tigers.",
+                area: "759 sq km",
+                icon: "🐅",
+                color: "#d35400",
+                zones: "Darrah, Jawahar Sagar, Chambal gorge areas",
+                accommodation: "Limited forest lodges, Kota hotels (50 km)",
+                safariTypes: "Jeep Safari (limited)",
+                entryFee: "₹1,000 - ₹2,500 per vehicle",
+                nearestAirport: "Kota Airport (60 km)",
+                nearestRailway: "Kota (50 km)",
+                permits: "Forest department booking",
+                keySpecies: "Bengal Tiger (reintroduced 2018), Leopard, Sloth Bear, Chinkara, Crocodile (in Chambal)",
+                photographyTips: "Tiger reintroduction ongoing. Leopard sightings more common. Chambal gorge scenic",
+                insider: "Tigers translocated from Ranthambore. Third tiger reserve after Ranthambore and Sariska. Tourism developing",
+                climate: "Semi-arid Rajasthan. Very hot summers. Pleasant winters",
+                conservation: "Tiger reintroduction project. Connecting Ranthambore landscape. Critical corridor development"
+            },
+            {
+                name: "Ramgarh Vishdhari Wildlife Sanctuary",
+                state: "Rajasthan",
+                lat: 25.3333,
+                lng: 75.8333,
+                photo: "images/tiger_2.jpg",
+                type: "tiger",
+                wildlife: ["tiger", "leopard", "bird"],
+                bestTime: "October to March",
+                description: "Tiger corridor between Ranthambore and Mukundra with resident tigers.",
+                area: "307 sq km",
+                icon: "🐅",
+                color: "#d35400",
+                zones: "Buffer zones connecting reserves",
+                accommodation: "Very limited, Bundi town (40 km)",
+                safariTypes: "Limited access (mainly corridor)",
+                entryFee: "Access limited",
+                nearestAirport: "Kota Airport (80 km)",
+                nearestRailway: "Bundi (40 km)",
+                permits: "Special permissions required",
+                keySpecies: "Bengal Tiger (dispersing individuals), Leopard, Sloth Bear, Chinkara",
+                photographyTips: "Not tourism focused. Corridor function primary. Tiger presence increasing",
+                insider: "Designated to provide corridor between Ranthambore and Mukundra. Critical for genetic exchange",
+                climate: "Semi-arid. Hot dry summers. Winter best",
+                conservation: "Critical tiger corridor. Landscape connectivity. Buffer management important"
+            },
+            {
+                name: "Mount Abu Wildlife Sanctuary",
+                state: "Rajasthan",
+                lat: 24.6000,
+                lng: 72.7500,
+                photo: "images/leopard_1.jpg",
+                type: "leopard",
+                wildlife: ["leopard", "bird"],
+                bestTime: "October to March",
+                description: "Hill station sanctuary with leopards and unique hill fauna.",
+                area: "289 sq km",
+                icon: "🐆",
+                color: "#f39c12",
+                zones: "Hill forest zones around Mount Abu town",
+                accommodation: "Mount Abu hotels and resorts (abundant)",
+                safariTypes: "Jeep Safari, trekking trails",
+                entryFee: "₹500 - ₹1,500 per vehicle",
+                nearestAirport: "Udaipur Airport (185 km)",
+                nearestRailway: "Abu Road (28 km)",
+                permits: "Entry at sanctuary gates",
+                keySpecies: "Leopard, Sloth Bear, Wild Boar, Indian Fox, Wolf, numerous hill birds",
+                photographyTips: "Hill landscape scenic. Leopard sightings occasional. Best for birds and landscape",
+                insider: "Rajasthan's only hill station. Ancient Dilwara Jain temples nearby. Cool climate year-round",
+                climate: "Hill station. Pleasant year-round. Much cooler than plains",
+                conservation: "Important hill ecosystem in arid state. Tourism pressure from hill station"
+            },
+            {
+                name: "Desert National Park",
+                state: "Rajasthan",
+                lat: 26.9167,
+                lng: 71.0000,
+                photo: "images/bird_1.jpg",
+                type: "bird",
+                wildlife: ["bird"],
+                bestTime: "November to January",
+                description: "Thar Desert ecosystem with Great Indian Bustard and desert fauna.",
+                area: "3162 sq km",
+                icon: "🦅",
+                color: "#f4d03f",
+                zones: "Sand dunes, rocky zones, fossil park",
+                accommodation: "Jaisalmer hotels (45 km), desert camps",
+                safariTypes: "Jeep Safari on desert tracks",
+                entryFee: "₹500 - ₹2,000 per vehicle",
+                nearestAirport: "Jaisalmer Airport (45 km), Jodhpur (285 km)",
+                nearestRailway: "Jaisalmer (45 km)",
+                permits: "Entry permit at Sudashri or Sam forest check post",
+                keySpecies: "Great Indian Bustard (critically endangered - few individuals), Desert Fox, Chinkara, Blackbuck, Sand grouse",
+                photographyTips: "Desert landscape unique. Great Indian Bustard extremely rare. Focus on desert birds and scenery",
+                insider: "One of largest national parks in India. 180-million-year-old fossils. Great Indian Bustard on brink of extinction",
+                climate: "Extreme desert. Very hot summers (50°C). Cold winters. Best November-February",
+                conservation: "Critical for Great Indian Bustard (less than 150 left). Desert ecosystem preservation. Power line mortality crisis"
+            },
+            {
+                name: "Tal Chhapar Wildlife Sanctuary",
+                state: "Rajasthan",
+                lat: 27.8333,
+                lng: 74.4333,
+                photo: "images/bird_1.jpg",
+                type: "bird",
+                wildlife: ["bird"],
+                bestTime: "September to March",
+                description: "Grassland sanctuary famous for blackbuck and harriers.",
+                area: "7 sq km",
+                icon: "🦌",
+                color: "#8e44ad",
+                zones: "Open grasslands",
+                accommodation: "Forest rest house, Sujangarh town (15 km), Bikaner (85 km)",
+                safariTypes: "Jeep Safari, walking permitted",
+                entryFee: "₹100 - ₹300 per vehicle",
+                nearestAirport: "Bikaner Airport (85 km), Jaipur (210 km)",
+                nearestRailway: "Sujangarh (15 km)",
+                permits: "Entry at sanctuary gate",
+                keySpecies: "Blackbuck (large herds - 2000+), Harriers (multiple species in winter), Desert Fox, Desert Cat, Caracal (rare)",
+                photographyTips: "Open grassland excellent for photography. Blackbuck herds spectacular. Harriers at dawn/dusk",
+                insider: "One of best places in India for harriers. Blackbuck density very high. Small but productive sanctuary",
+                climate: "Semi-arid. Very hot summers. Cold winters. Monsoon transforms grasslands",
+                conservation: "Blackbuck protection. Important harrier wintering ground. Grassland ecosystem preservation"
+            },
+            {
+                name: "Kumbhalgarh Wildlife Sanctuary",
+                state: "Rajasthan",
+                lat: 25.1500,
+                lng: 73.5833,
+                photo: "images/leopard_1.jpg",
+                type: "leopard",
+                wildlife: ["leopard", "bird"],
+                bestTime: "October to March",
+                description: "Aravalli hills sanctuary surrounding Kumbhalgarh Fort with wolves and leopards.",
+                area: "578 sq km",
+                icon: "🐆",
+                color: "#f39c12",
+                zones: "Hill forest zones around historic fort",
+                accommodation: "Hotels near Kumbhalgarh Fort, Udaipur (85 km)",
+                safariTypes: "Jeep Safari, horse safari",
+                entryFee: "₹500 - ₹1,500 per vehicle",
+                nearestAirport: "Udaipur Airport (85 km)",
+                nearestRailway: "Falna (60 km)",
+                permits: "Entry at sanctuary gates",
+                keySpecies: "Indian Wolf, Leopard, Sloth Bear, Four-horned Antelope, Chinkara, Jungle Cat",
+                photographyTips: "Kumbhalgarh Fort backdrop dramatic. Wildlife sightings moderate. Combine with fort visit",
+                insider: "Surrounds UNESCO World Heritage Kumbhalgarh Fort. Second longest wall after Great Wall of China. Wolf sightings possible",
+                climate: "Aravalli hills. Pleasant winters. Hot summers. Monsoon brings greenery",
+                conservation: "Important Aravalli biodiversity. Wolf conservation significant. Heritage and wildlife tourism blend"
+            },
+            {
+                name: "Sitanadi Wildlife Sanctuary",
+                state: "Chhattisgarh",
+                lat: 21.7833,
+                lng: 82.2500,
+                photo: "images/tiger_1.jpg",
+                type: "tiger",
+                wildlife: ["tiger", "leopard", "bird"],
+                bestTime: "November to June",
+                description: "Part of Udanti-Sitanadi Tiger Reserve with wild buffalo.",
+                area: "553 sq km",
+                icon: "🐅",
+                color: "#d35400",
+                zones: "Dense sal forest zones",
+                accommodation: "Limited forest lodges, Dhamtari town",
+                safariTypes: "Limited jeep safari",
+                entryFee: "₹500 - ₹1,500",
+                nearestAirport: "Raipur Airport (150 km)",
+                nearestRailway: "Dhamtari (60 km)",
+                permits: "Forest department permissions",
+                keySpecies: "Bengal Tiger, Wild Buffalo, Leopard, Gaur, Four-horned Antelope",
+                photographyTips: "Pristine forests. Limited access. Focus on landscape",
+                insider: "Combined with Udanti as tiger reserve. Wild buffalo habitat important. Under-developed for tourism",
+                climate: "Tropical. Hot summers. Heavy monsoon",
+                conservation: "Tiger Reserve component. Wild buffalo conservation. Landscape connectivity"
+            },
+            {
+                name: "Bhimbandh Wildlife Sanctuary",
+                state: "Bihar",
+                lat: 24.8833,
+                lng: 85.5667,
+                photo: "images/bird_1.jpg",
+                type: "bird",
+                wildlife: ["bird", "leopard"],
+                bestTime: "November to March",
+                description: "Hill sanctuary with hot springs and Maa Bhimeshwari temple.",
+                area: "682 sq km",
+                icon: "🦅",
+                color: "#3498db",
+                zones: "Hill and valley zones",
+                accommodation: "Very basic facilities, Munger town (50 km)",
+                safariTypes: "Trekking, limited vehicle access",
+                entryFee: "₹100 - ₹300",
+                nearestAirport: "Patna Airport (180 km)",
+                nearestRailway: "Munger (50 km)",
+                permits: "Entry permit from forest office",
+                keySpecies: "Leopard, Sloth Bear, Chital, Sambar, Wild Boar, various hill birds",
+                photographyTips: "Hot springs area scenic. Wildlife photography challenging. Focus on landscape and pilgrimage site",
+                insider: "Religious site with hot springs. Bhimband waterfall. Limited wildlife tourism. Needs infrastructure",
+                climate: "Hill climate. Pleasant winters. Hot summers. Monsoon heavy",
+                conservation: "Biodiversity of North Indian hills. Limited protection resources. Tourism potential untapped"
+            }
+        ];
+    
+        
+        // Initialize map with CartoDB tile layer (free, no limits for reasonable use)
+        const map = L.map('map', { closePopupOnClick: false, tap: false
+        }).setView([22.5, 78.9], 4);
+        
+        // Using CartoDB Positron - free tile layer with no strict limits
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+            subdomains: 'abcd',
+            maxZoom: 19
+        }).addTo(map);
+
+        function loadPopupImage(container) {
+          const imageDiv = container.querySelector('.popup-image-placeholder');
+          if (imageDiv && imageDiv.dataset.photo && !imageDiv.classList.contains('loaded')) {
+            const url = imageDiv.dataset.photo;
+
+            const img = new Image();
+            img.onload = () => {
+              imageDiv.style.backgroundImage = `url('${url}')`;
+              imageDiv.classList.add('loaded'); // trigger fade-in
+              const fallback = imageDiv.querySelector('.popup-image-fallback');
+              if (fallback) fallback.style.display = 'none';
+            };
+            img.src = url;
+          }
+        }
+
+
+        map.on('popupopen', function(e) {
+          loadPopupImage(e.popup.getElement());
+        });
+        
+        // Initialize marker cluster group
+        const markers = L.markerClusterGroup({
+            maxClusterRadius: 80,
+            spiderfyOnMaxZoom: true,
+            showCoverageOnHover: false,
+            zoomToBoundsOnClick: true
+        });
+        
+        let allMarkers = [];
+        let currentFilter = 'all';
+        
+        // Create custom icon
+        function createCustomIcon(safari) {
+            return L.divIcon({
+                className: 'custom-marker',
+                html: `<div class="marker-pin" style="--marker-color: ${safari.color}">${safari.icon}</div>`,
+                iconSize: [35, 35],
+                iconAnchor: [17, 17]
+            });
+        }
+        
+        // Create detailed popup content
+        function createPopupContent(safari, isMobile = false) {
+            const wildlifeTags = safari.wildlife.map(w => 
+                `<span class="wildlife-tag">${w.charAt(0).toUpperCase() + w.slice(1)}</span>`
+            ).join('');
+
+            const closeBtn = isMobile 
+                ? `<button class="close-btn" onclick="closeMobilePopup()">×</button>`
+                : '';
+
+            return `
+                <div class="popup-content">
+                    ${closeBtn}
+                    <div class="popup-header">
+                        <h3>${safari.name}</h3>
+                        <div class="popup-state">${safari.icon} ${safari.state}</div>
+                    </div>
+                    
+                    <div class="popup-image-placeholder" 
+                         data-photo="${safari.photo}">
+                        <span class="popup-image-fallback">🏞️ ${safari.name}</span>
+                    </div>
+
+                    <div class="popup-section">
+                        <div class="popup-info">${safari.description}</div>
+                        <div class="wildlife-tags">${wildlifeTags}</div>
+                    </div>
+                    
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <div class="info-card-label">📍 Total Area</div>
+                            <div class="info-card-value">${safari.area}</div>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-card-label">🗓️ Best Time</div>
+                            <div class="info-card-value">${safari.bestTime}</div>
+                        </div>
+                    </div>
+
+                    <button class="popup-cta" onclick="toggleDetails(this)">📖 View Complete Details</button>
+                    
+                    <div class="popup-details">
+                        <!-- full details unchanged -->
+                        <div class="popup-section">
+                            <div class="popup-section-title">🎯 Safari Zones & Routes</div>
+                            <div class="popup-info">${safari.zones}</div>
+                        </div>
+                                
+                                <div class="popup-section">
+                                    <div class="popup-section-title">🚙 Safari Options</div>
+                                    <div class="popup-info"><strong>Types:</strong> ${safari.safariTypes}</div>
+                                    <div class="popup-info"><strong>Entry Fee:</strong> ${safari.entryFee}</div>
+                                </div>
+                                
+                                <div class="popup-section">
+                                    <div class="popup-section-title">✈️ How to Reach</div>
+                                    <div class="popup-info"><strong>Airport:</strong> ${safari.nearestAirport}</div>
+                                    <div class="popup-info"><strong>Railway:</strong> ${safari.nearestRailway}</div>
+                                </div>
+                                
+                                <div class="popup-section">
+                                    <div class="popup-section-title">🐾 Key Wildlife</div>
+                                    <div class="popup-info">${safari.keySpecies}</div>
+                                </div>
+                                
+                                <div class="popup-section">
+                                    <div class="popup-section-title">📸 Photography Tips</div>
+                                    <div class="popup-info">${safari.photographyTips}</div>
+                                </div>
+                                
+                                <div class="popup-section">
+                                    <div class="popup-section-title">💡 Expert Insider Tips</div>
+                                    <div class="popup-info">${safari.insider}</div>
+                                </div>
+                                
+                                <div class="popup-section">
+                                    <div class="popup-section-title">🏨 Accommodation</div>
+                                    <div class="popup-info">${safari.accommodation}</div>
+                                </div>
+                                
+                                <div class="popup-section">
+                                    <div class="popup-section-title">🌡️ Climate & Season</div>
+                                    <div class="popup-info">${safari.climate}</div>
+                                </div>
+                                
+                                <div class="popup-section">
+                                    <div class="popup-section-title">📋 Permits & Booking</div>
+                                    <div class="popup-info">${safari.permits}</div>
+                                </div>
+                                
+                                <div class="popup-section">
+                                    <div class="popup-section-title">🌳 Conservation Story</div>
+                                    <div class="popup-info">${safari.conservation}</div>
+                                </div>
+                                
+                                <div class="popup-section">
+                                    <div class="popup-section-title">✅ What to Pack & Remember</div>
+                                    <ul class="tips-list">
+                                        <li>Binoculars (8x42 or 10x42 recommended for wildlife viewing)</li>
+                                        <li>Camera with telephoto lens (300mm+ for wildlife photography)</li>
+                                        <li>Neutral colored clothing (khaki, olive, beige - avoid bright colors)</li>
+                                        <li>Sun protection: hat, sunscreen, sunglasses</li>
+                                        <li>Insect repellent (especially for evening safaris)</li>
+                                        <li>Water bottle and light snacks</li>
+                                        <li>Field guide book for species identification</li>
+                                        <li>Power bank for devices</li>
+                                        <li>Light jacket for early morning safaris (can be cold)</li>
+                                        <li>Respect silence - wildlife scared by loud noises</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+        }
+        
+        // Toggle details function (global scope for onclick)
+        window.toggleDetails = function(button) {
+
+              const details = button.nextElementSibling;
+              const isOpen = details.style.display === 'block';
+
+              if (isOpen) {
+                details.style.display = 'none';
+                button.textContent = '📖 View Complete Details';
+              } else {
+                details.style.display = 'block';
+                button.textContent = '🔽 Hide Details';
+
+                // 👉 If inside mobile popup, scroll it into view
+                if (button.closest('#mobilePopup')) {
+                  setTimeout(() => {
+                    details.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }, 100);
+                }
+              }
+        };
+
+        // Utility to detect mobile
+        function isMobile() {
+          return window.innerWidth <= 768;
+        }
+
+        function openMobilePopup(safari) {
+          const mobilePopup = document.getElementById('mobilePopup');
+
+          // Reuse createPopupContent() for consistent HTML
+          const content = createPopupContent(safari);
+
+          // Show mobile popup (slide-up)
+          $('#mobilePopup').html(content).fadeIn();
+
+          // Lazy-load the image inside the popup
+          loadPopupImage(mobilePopup);
+
+          // Ensure close button works
+          const closeBtn = document.createElement('button');
+          closeBtn.textContent = '✕';
+          closeBtn.className = 'close-btn';
+          closeBtn.onclick = closeMobilePopup;
+
+          // Append close button at the top right
+          mobilePopup.prepend(closeBtn);
+        }
+
+        // Close popup in mobile container
+        window.closeMobilePopup = function() {
+          $('#mobilePopup').fadeOut();
+        };
+
+        
+        // Add markers to cluster group
+        function addMarkers(filter = 'all') {
+            // Clear existing markers
+            markers.clearLayers();
+            allMarkers = [];
+
+            safariData.forEach(safari => {
+                if (filter !== 'all' && !safari.wildlife.includes(filter)) {
+                    return;
+                }
+
+                const marker = L.marker([safari.lat, safari.lng], {
+                    icon: createCustomIcon(safari)
+                });
+
+                if (isMobile()) {
+                    marker.on('click', () => openMobilePopup(safari));
+                } else {
+                    marker.bindPopup(createPopupContent(safari), {
+                        maxWidth: 400,
+                        minWidth: 320,
+                        maxHeight: 600,
+                        className: 'custom-popup',
+                        autoPan: false,   // prevent unwanted sliding
+                        closeOnClick: false,
+                        autoClose: false
+                    });
+                }
+
+                markers.addLayer(marker);
+                allMarkers.push({ marker, safari });
+            });
+            
+            map.addLayer(markers);
+        }
+        
+        // Initial markers
+        addMarkers();
+        
+        // Filter functionality
+        $('.filter-btn').on('click', function() {
+            $('.filter-btn').removeClass('active');
+            $(this).addClass('active');
+            
+            const filter = $(this).data('filter');
+            currentFilter = filter;
+            addMarkers(filter);
+        });
+        
+        // Search functionality
+        $('#searchInput').on('input', function() {
+            const searchTerm = $(this).val().toLowerCase();
+            
+            markers.clearLayers();
+            
+            allMarkers.forEach(({ marker, safari }) => {
+                const matchesFilter = currentFilter === 'all' || safari.wildlife.includes(currentFilter);
+                const matchesSearch = safari.name.toLowerCase().includes(searchTerm) ||
+                                     safari.state.toLowerCase().includes(searchTerm) ||
+                                     safari.description.toLowerCase().includes(searchTerm) ||
+                                     safari.keySpecies.toLowerCase().includes(searchTerm);
+                
+                if (matchesFilter && matchesSearch) {
+                    markers.addLayer(marker);
+                }
+            });
+        });
+        
+        // Add scale control
+        L.control.scale({
+            imperial: false,
+            metric: true
+        }).addTo(map);
+    </script>
+</body>
+</html>
