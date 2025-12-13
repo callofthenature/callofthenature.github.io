@@ -1670,6 +1670,26 @@
             </div>
 
             <div class="stay-carousel-item">
+              <div class="stay-card">
+                <div class="stay-image" style="background-image: url('images/fagu_1.jpg')">
+                    <div class="stay-badge">Heritage Bungalow</div>
+                </div>
+                <div class="stay-content">
+                    <h3 class="stay-title">Gorubathan Tea Estate Bungalow</h3>
+                    <p class="stay-location">📍 Gorubathan, West Bengal</p>
+                    <p class="stay-description">Experience the magical beauty of the Gorubathan tea estate from this colonial era heritage bungalow.</p>
+                    <div class="stay-features">
+                        <span class="feature-tag">Tea Estate</span>
+                        <span class="feature-tag">Colonial Heritage</span>
+                        <span class="feature-tag">Heritage Bungalow</span>
+                    </div>
+                    <br>
+                    <button class="explore-btn">Explore Retreat</button>
+                </div>
+            </div>
+            </div>
+
+            <div class="stay-carousel-item">
                <div class="stay-card">
                 <div class="stay-image" style="background-image: url('images/chilapata_coming_soon.jpg')">
                     <div class="stay-badge">Jungle Lodge</div>
@@ -2057,6 +2077,8 @@ Thank you CALL OF THE NATURE for a wonderful memory.. 🤟❤️"
                     window.location.href = "kaziranga.html";
                 } else if (safariTitle.includes('Belpahari Jungle')) {
                     window.location.href = "belpahari.html";
+                } else if (safariTitle.includes('Gorubathan Tea Estate')) {
+                    window.location.href = "gorubathan.html";
                 } else {
                     console.log('Exploring stay:', this.closest('.stay-card').querySelector('.stay-title').textContent);
                 }
