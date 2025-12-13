@@ -1275,7 +1275,7 @@
 
             // Initialize map
             const mapOptions = {
-                center: [26.657212, 93.556565],
+                center: [26.954713, 88.711067],
                 zoom: 13
             };
 
@@ -1286,7 +1286,7 @@
             map.scrollWheelZoom.disable();
             map.dragging.disable();
 
-            const marker = new L.marker([26.657212, 93.556565], {
+            const marker = new L.marker([26.954713, 88.711067], {
                 draggable: false,
             });
 
@@ -1297,7 +1297,7 @@
             function onMarkerClick(e) {
                 popup
                     .setLatLng(e.latlng)
-                    .setContent("<p style='font-size:15px;'><b>Suhaana Ghar</b> <br>Village Goshti, Shangarh, HP 175023</p>")
+                    .setContent("<p style='font-size:15px;'><b>Gorubathan Tea Estate Bungalow</b> <br>Gorubathan, West Bengal</p>")
                     .openOn(map);
             }
 
