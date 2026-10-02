@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Tirthan, Shangarh, Sethan & Shugu - Call of the Nature</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&family=Crimson+Text:wght@400;600;700&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="icon" href="images/favicon.ico" type="image/x-icon"><style>
+:root{--primary-dark:#0f172a;--text-dark:#0f172a;--accent-gold:#2563eb;--warm-gold:#2E7D32;--light-gray:#f5f5f5;--medium-gray:#374151;--border-gray:#e5e5e5;--shadow-light:rgba(0,0,0,.08);--shadow-medium:rgba(0,0,0,.12);--heading-font:'Crimson Text',serif;--body-font:'Montserrat',sans-serif;--primary-green:#2d5016;--light-green:#7fb069;--warm-beige:#f5f1e8;--text-light:#666;--gold-accent:#d4af37;--wa:#25D366;--wa-dark:#128C7E}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--body-font);line-height:1.6;color:var(--text-dark);overflow-x:hidden;min-height:100vh;display:flex;flex-direction:column}
+.navbar{position:fixed;top:0;width:100%;padding:1rem 2rem;background:#fff;border-bottom:1px solid var(--border-gray);z-index:1000;transition:all .3s}
+.navbar.scrolled{box-shadow:0 2px 20px var(--shadow-light)}
+.nav-container{display:flex;justify-content:space-between;align-items:center;max-width:1400px;margin:0 auto}
+.logo{display:flex;align-items:center;gap:.5rem;font-family:var(--heading-font);font-size:1.8rem;font-weight:600;color:var(--primary-dark);text-decoration:none}
+.logo-img{height:40px;width:auto;border-radius:50%}
+.nav-menu{display:flex;list-style:none;gap:2.5rem}
+.nav-link{color:var(--primary-dark);text-decoration:none;font-weight:400;transition:.3s;position:relative}
+.nav-link:hover{color:var(--accent-gold)}
+.nav-link::after{content:'';position:absolute;width:0;height:2px;bottom:-5px;left:0;background:var(--accent-gold);transition:width .3s}
+.nav-link:hover::after{width:100%}
+.mobile-menu-btn{display:none;background:none;border:none;color:var(--primary-dark);font-size:1.5rem;cursor:pointer}
+.nav-dropdown{position:relative}
+.dropdown-trigger{display:flex;align-items:center;gap:.5rem}
+.dropdown-arrow{font-size:.8rem;transition:transform .3s}
+.nav-dropdown:hover .dropdown-arrow{transform:rotate(180deg)}
+.dropdown-menu{position:absolute;top:calc(100% + 10px);left:0;background:#fff;border-radius:12px;box-shadow:0 10px 30px var(--shadow-medium);border:1px solid var(--border-gray);min-width:240px;opacity:0;visibility:hidden;transform:translateY(-10px);transition:.3s;z-index:1001;list-style:none;padding:.5rem 0}
+.nav-dropdown:hover .dropdown-menu{opacity:1;visibility:visible;transform:none}
+.dropdown-link{display:block;padding:.7rem 1.2rem;color:var(--primary-dark);text-decoration:none;font-size:.9rem;transition:.2s;border-radius:6px;margin:0 .5rem}
+.dropdown-link:hover{background:var(--light-gray);color:var(--accent-gold);transform:translateX(4px)}
+.contact-buttons{position:fixed;right:2rem;bottom:2rem;z-index:999;display:flex;flex-direction:column;gap:1rem}
+.contact-btn{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px var(--shadow-medium);transition:.3s;text-decoration:none}
+.contact-btn:hover{transform:scale(1.1)}
+.whatsapp-btn{background:#25D366}.call-btn{background:var(--accent-gold)}
+.main-content{flex:1;padding-top:80px}
+.hero{height:70vh;background:linear-gradient(rgba(45,80,22,.55),rgba(20,40,10,.75)),linear-gradient(135deg,#2d5016,#4a7c59 55%,#1d4ed8);display:flex;align-items:center;justify-content:center;text-align:center;padding:0 1.5rem}
+.hero-content{max-width:800px;color:#fff}
+.hero h1{font-family:var(--heading-font);font-size:3.5rem;font-weight:700;margin-bottom:1rem;text-shadow:2px 2px 4px rgba(0,0,0,.3)}
+.hero .location{font-size:1.2rem;color:var(--gold-accent);margin-bottom:1rem}
+.hero p{font-size:1.2rem;opacity:.95}
+.content{padding:4rem 2rem;max-width:1200px;margin:0 auto}
+.section-title{font-family:var(--heading-font);font-size:1.75rem;color:var(--primary-green);margin-bottom:2rem;text-align:center}
+.overview-grid{display:grid;grid-template-columns:2fr 1fr;gap:3rem}
+.overview-text{font-size:.9rem;line-height:1.8;color:var(--text-light)}
+.overview-text h3{font-family:var(--heading-font);font-size:1.5rem;color:var(--primary-green);margin:1rem 0}
+.quick-info{background:var(--warm-beige);padding:2rem;border-radius:15px;height:fit-content}
+.quick-info h3{font-family:var(--heading-font);color:var(--primary-green);margin-bottom:1.5rem;font-size:1.3rem}
+.info-item{display:flex;justify-content:space-between;gap:1rem;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid rgba(45,80,22,.1)}
+.info-label{font-weight:600}.info-value{color:var(--text-light);text-align:right}
+.book-btn{width:100%;padding:1rem;background:linear-gradient(135deg,var(--wa),var(--wa-dark));color:#fff;border-radius:10px;font-weight:600;font-size:1.1rem;transition:.3s;margin-top:1rem;display:flex;align-items:center;justify-content:center;gap:.5rem;text-decoration:none}
+.book-btn:hover{transform:translateY(-2px);box-shadow:0 5px 15px rgba(37,211,102,.4)}
+.itinerary{background:var(--warm-beige);padding:4rem 1rem}
+.itinerary-container{max-width:1200px;margin:0 auto}
+.day-card{background:#fff;padding:2rem;border-radius:15px;margin-bottom:2rem;box-shadow:0 5px 15px rgba(0,0,0,.1);transition:transform .3s}
+.day-card:hover{transform:translateY(-5px)}
+.day-header{display:flex;align-items:center;margin-bottom:1rem}
+.day-number{background:var(--primary-green);color:#fff;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;margin-right:1rem;flex-shrink:0}
+.day-title{font-family:var(--heading-font);font-size:1.2rem;color:var(--primary-green)}
+.day-activities{color:var(--text-light);line-height:1.7;font-size:.9rem}
+.day-activities ul{margin:.4rem 0 .6rem 1.2rem}
+.highlights,.expectations{padding:4rem 2rem;max-width:1200px;margin:0 auto}
+.highlights-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem}
+.highlight-card{background:#fff;padding:2rem;border-radius:15px;text-align:center;box-shadow:0 5px 15px rgba(0,0,0,.1);transition:transform .3s}
+.highlight-card:hover{transform:translateY(-5px)}
+.highlight-icon{font-size:3rem;margin-bottom:1rem}
+.highlight-card h3{font-family:var(--heading-font);color:var(--primary-green);margin-bottom:1rem}
+.highlight-card p{color:var(--text-light)}
+.expectations-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem}
+.expectation-item{display:flex;align-items:flex-start;gap:1rem}
+.expectation-icon{background:var(--light-green);color:#fff;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.2rem}
+.expectation-content h4{color:var(--primary-green);margin-bottom:.5rem}
+.expectation-content p{color:var(--text-light);font-size:.95rem}
+.footer{background:var(--light-gray);padding:3rem 2rem 1.5rem;border-top:1px solid var(--border-gray);margin-top:auto}
+.footer-content{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem}
+.footer-section h3{font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:1.5rem;color:#000}
+.footer-section p,.footer-section a{color:#000;text-decoration:none;line-height:1.8;margin-bottom:.5rem}
+.footer-section a:hover{color:var(--accent-gold)}
+.footer-bottom{text-align:center;margin-top:2rem;padding-top:2rem;border-top:1px solid var(--border-gray);color:var(--medium-gray)}
+@media(max-width:768px){body.no-scroll{overflow:hidden;position:fixed;width:100%}
+.mobile-menu-btn{display:block}
+.nav-menu{position:fixed;top:70px;left:-100%;width:100%;height:calc(100vh - 70px);background:#fff;flex-direction:column;align-items:center;padding-top:2rem;transition:left .3s;border-top:1px solid var(--border-gray)}
+.nav-menu.active{left:0}
+.dropdown-menu{position:static;opacity:0;visibility:hidden;max-height:0;overflow:hidden;transform:none;box-shadow:none;border:none;transition:.3s}
+.dropdown-menu.mobile-active{opacity:1;visibility:visible;max-height:400px;margin-top:.5rem}
+.dropdown-link{margin:0;padding:.5rem 0}
+.contact-buttons{right:1rem;bottom:1rem}.contact-btn{width:50px;height:50px}
+.hero h1{font-size:2.5rem}.overview-grid{grid-template-columns:1fr}.navbar{padding:1rem}.logo{font-size:1.4rem}}
+.fade-in{opacity:0;transform:translateY(30px);transition:all .6s}.fade-in.visible{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.fade-in{opacity:1;transform:none;transition:none}}
+</style></head><body>
+<nav class="navbar" id="navbar"><div class="nav-container"><a href="index.html" class="logo"><img src="images/cotn_logo.jpg" alt="Call of the Nature Logo" class="logo-img"><span>Call of the Nature</span></a><ul class="nav-menu" id="nav-menu"><li><a href="index.html#home" class="nav-link">Home</a></li><li class="nav-dropdown"><a href="index.html#stays" class="nav-link dropdown-trigger">Offbeat Stays <span class="dropdown-arrow">▼</span></a><ul class="dropdown-menu"><li><a href="shangarh.html" class="dropdown-link">Shangarh Mountain Retreat</a></li><li><a href="jhargram.html" class="dropdown-link">Jhargram River View Stay</a></li><li><a href="belpahari.html" class="dropdown-link">Belpahari Jungle Lodge</a></li><li><a href="gorubathan.html" class="dropdown-link">Gorubathan Tea Estate Bungalow</a></li></ul></li><li class="nav-dropdown"><a href="index.html#tours" class="nav-link dropdown-trigger">Offbeat Trips <span class="dropdown-arrow">▼</span></a><ul class="dropdown-menu"><li><a href="ranchi.html" class="dropdown-link">Ranchi</a></li><li><a href="himachal.html" class="dropdown-link">Tirthan, Shangarh, Sethan & Shugu</a></li><li><a href="panchachuli.html" class="dropdown-link">Pithoragarh, Munsiyari & Almora</a></li><li><a href="shimla.html" class="dropdown-link">Shimla, Sarahan, Chitkul & Kalpa</a></li></ul></li><li class="nav-dropdown">
+                    <a href="index.html#safaris" class="nav-link dropdown-trigger">
+                        Wildlife Safaris <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="sundarbans.html" class="dropdown-link">Sundarbans Tiger Safari</a></li>
+                        <li><a href="jhalana_jawai.html" class="dropdown-link">Jhalana & Jawai Safari</a></li>
+                        <li><a href="jawai.html" class="dropdown-link">Jawai Leopard Safari</a></li>
+                        <li><a href="kanha.html" class="dropdown-link">Kanha Tiger Safari</a></li>
+                        <li><a href="sanjay_dubri.html" class="dropdown-link">Sanjay Dubri Wildlife Safari</a></li>
+                    </ul>
+                </li><li><a href="gallery.html" class="nav-link">Gallery</a></li><li><a href="index.html#contact" class="nav-link">Contact</a></li></ul><button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Menu">☰</button></div></nav>
+<div class="main-content"><section class="hero"><div class="hero-content"><h1>Tirthan, Shangarh, Sethan & Shugu</h1><p class="location">📍 Himachal Pradesh, India</p><p>An offbeat Himalayan escape from the Tirthan River to the high villages of Lahaul.</p></div></section>
+<section class="content"><div class="overview-grid"><div class="overview-text fade-in"><h2 class="section-title" style="text-align:left;margin-bottom:1rem">Slow Himalayan Villages</h2><p>This route links four quiet Himachal villages: riverside Tirthan Valley, the meadows of Shangarh, Sethan above Manali, and Shugu in Lahaul.</p><h3>How the Trip Works</h3><p>Stays are in homestays and cottages, with campfire evenings and local Himachali meals. Drive times depend on road and weather conditions.</p></div>
+<div class="quick-info fade-in"><h3>Quick Information</h3><div class="info-item"><span class="info-label">Duration</span><span class="info-value">5 Nights / 6 Days</span></div><div class="info-item"><span class="info-label">Route</span><span class="info-value">Aut → Tirthan → Shangarh → Sethan → Shugu → Manali</span></div><div class="info-item"><span class="info-label">Pickup</span><span class="info-value">Aut Bus Stand</span></div><div class="info-item"><span class="info-label">Drop</span><span class="info-value">Manali</span></div>
+<a href="https://wa.me/918240443268?text=Hi! I'm interested in booking the Tirthan,%20Shangarh,%20Sethan%20and%20Shugu trip." class="book-btn" target="_blank" rel="noopener"><svg width="24" height="24" fill="white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg> Chat on WhatsApp</a></div></div></section>
+<section class="itinerary"><div class="itinerary-container"><h2 class="section-title">Detailed Itinerary</h2><div class="day-card fade-in"><div class="day-header"><div class="day-number">1</div><div class="day-title">Aut to Tirthan Valley</div></div><div class="day-activities"><ul><li>Scenic drive alongside the Tirthan River.</li><li>Check into a riverside homestay or cottage and relax by the river.</li><li>Evening village walk and sunset, then bonfire and dinner at the property.</li></ul>Keep the first evening slow: river, mountains, fresh air and Himachali food.</div></div><div class="day-card fade-in"><div class="day-header"><div class="day-number">2</div><div class="day-title">Explore Tirthan Valley</div></div><div class="day-activities"><ul><li>Breakfast overlooking the valley.</li><li>Drive towards Jalori Pass through cedar and pine forest.</li><li>Optional short hike towards Serolsar Lake or Raghupur Fort.</li></ul></div></div><div class="day-card fade-in"><div class="day-header"><div class="day-number">3</div><div class="day-title">Tirthan to Shangarh</div></div><div class="day-activities"><ul><li>Breakfast, check-out and drive towards Sainj Valley (approx. 3–4 hours).</li><li>Reach Shangarh around lunchtime and check into a traditional Himachali homestay.</li><li>Explore Shangarh Meadows, Shangchul Mahadev Temple, village lanes and Himalayan viewpoints.</li></ul></div></div><div class="day-card fade-in"><div class="day-header"><div class="day-number">4</div><div class="day-title">Shangarh to Sethan</div></div><div class="day-activities"><ul><li>Early breakfast and a last walk around Shangarh Meadows.</li><li>Drive towards Kullu and Manali, with possible stops at Kullu Valley viewpoints, Naggar, Manali and a mountain café.</li><li>Continue to Sethan, the peaceful high-altitude village above Manali, and check into a mountain homestay.</li><li>Explore on foot and watch the sunset over the Dhauladhar range.</li></ul></div></div><div class="day-card fade-in"><div class="day-header"><div class="day-number">5</div><div class="day-title">Sethan to Shugu, Lahaul</div></div><div class="day-activities"><ul><li>Early breakfast, descend to Manali and cross the Atal Tunnel into Lahaul.</li><li>Possible stops, depending on road and weather: Sissu, Chandra Valley viewpoints, Tandi, Keylong, Gondhla and local monasteries.</li><li>Reach Shugu for sunset, a bonfire, a local Lahauli dinner and a clear night sky.</li></ul></div></div><div class="day-card fade-in"><div class="day-header"><div class="day-number">6</div><div class="day-title">Shugu to Manali</div></div><div class="day-activities"><ul><li>Wake early for sunrise photography over the Lahaul landscape.</li><li>After breakfast: Shugu → Gondhla → Keylong → Sissu → Atal Tunnel → Manali.</li><li>Possible stops: Gondhla Fort, Keylong, Sissu, Chandra River viewpoints and the Atal Tunnel.</li><li>Drop at Manali.</li></ul></div></div></div></section>
+<section class="highlights"><h2 class="section-title">Trip Highlights</h2><div class="highlights-grid"><div class="highlight-card fade-in"><div class="highlight-icon">🌊</div><h3>Tirthan Valley</h3><p>Riverside stays, forest roads towards Jalori Pass and optional hikes.</p></div><div class="highlight-card fade-in"><div class="highlight-icon">🌄</div><h3>Shangarh Meadows</h3><p>A traditional homestay near meadows and Shangchul Mahadev Temple.</p></div><div class="highlight-card fade-in"><div class="highlight-icon">🏔️</div><h3>Sethan Village</h3><p>Dhauladhar sunsets from a peaceful village above Manali.</p></div><div class="highlight-card fade-in"><div class="highlight-icon">🌌</div><h3>Shugu, Lahaul</h3><p>Massive mountains, bonfire evenings and an open night sky.</p></div></div></section>
+<section class="expectations"><h2 class="section-title">Good to Know</h2><div class="expectations-grid"><div class="expectation-item fade-in"><div class="expectation-icon">✓</div><div class="expectation-content"><h4>Homestays</h4><p>Riverside cottages and traditional mountain homestays throughout.</p></div></div><div class="expectation-item fade-in"><div class="expectation-icon">✓</div><div class="expectation-content"><h4>Road Conditions</h4><p>Routes cross high passes and Lahaul, so stops may change with weather and road conditions.</p></div></div></div></section></div>
+<footer class="footer" id="contact"><div class="footer-content"><div class="footer-section"><h3>Call of the Nature</h3><p>We specialize in curating extraordinary experiences that combine unique offbeat accommodations with unforgettable wildlife encounters across India.</p><p style="margin-top:1rem;font-style:italic">"Where Every Journey Leads to Wonder"</p></div><div class="footer-section"><h3>Our Experiences</h3><p><a href="index.html#stays">Offbeat Stays</a></p><p><a href="index.html#safaris">Wildlife Safaris</a></p><p><a href="gallery.html">Photo Gallery</a></p><p><a href="index.html#contact">Custom Packages</a></p></div><div class="footer-section"><h3>Get in Touch</h3><p>📧 <a href="mailto:callofthenatureinfo@gmail.com">callofthenatureinfo@gmail.com</a></p><p>📞 <a href="tel:+918240443268">+91 82404 43268</a> / <a href="tel:+919073757780">+91 90737 57780</a></p><p>📍 Kolkata, West Bengal, India</p></div><div class="footer-section"><h3>Follow Our Journey</h3><p><a href="https://www.instagram.com/call_of_thenature/profilecard/?igsh=MXZ4d2dxMDd6bjJxbg==" target="_blank">📷 Instagram</a></p><p><a href="https://www.facebook.com/share/1AuiDmBZ2L/" target="_blank">📘 Facebook</a></p><p><a href="https://youtube.com/@callofdnature" target="_blank">📺 YouTube</a></p></div></div><div class="footer-bottom"><p>&copy; 2025 Call of the Nature. All rights reserved. | Crafted for Nature Enthusiasts &amp; Adventure Seekers</p></div></footer>
+<div class="contact-buttons"><a href="https://api.whatsapp.com/send?phone=918240443268" target="_blank" rel="noopener" class="contact-btn whatsapp-btn" aria-label="WhatsApp"><svg width="24" height="24" fill="white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg></a><a href="tel:+918240443268" class="contact-btn call-btn" aria-label="Call"><svg width="24" height="24" fill="white" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></a></div>
+<script>document.addEventListener('DOMContentLoaded',function(){
+const nb=document.getElementById('navbar'),m=document.getElementById('nav-menu'),b=document.getElementById('mobile-menu-btn');
+const closeD=()=>{document.querySelectorAll('.dropdown-menu').forEach(d=>d.classList.remove('mobile-active'));document.querySelectorAll('.dropdown-arrow').forEach(a=>a.style.transform='')};
+window.addEventListener('scroll',()=>nb.classList.toggle('scrolled',scrollY>50));
+b.addEventListener('click',e=>{e.stopPropagation();m.classList.toggle('active');const o=m.classList.contains('active');b.innerHTML=o?'✕':'☰';document.body.classList.toggle('no-scroll',o);if(!o)closeD()});
+document.addEventListener('click',e=>{if(!m.contains(e.target)&&!b.contains(e.target)){m.classList.remove('active');b.innerHTML='☰';document.body.classList.remove('no-scroll');closeD()}});
+document.querySelectorAll('.dropdown-trigger').forEach(t=>t.addEventListener('click',function(e){if(innerWidth<=768){e.preventDefault();const d=this.parentNode.querySelector('.dropdown-menu'),was=d.classList.contains('mobile-active');closeD();if(!was){d.classList.add('mobile-active');this.querySelector('.dropdown-arrow').style.transform='rotate(180deg)'}}}));
+const o=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:.1});
+document.querySelectorAll('.fade-in').forEach(e=>o.observe(e));});</script></body></html>
