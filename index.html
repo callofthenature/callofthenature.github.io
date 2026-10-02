@@ -1386,6 +1386,13 @@
         }
 
 
+    
+        /* Offbeat Trips */
+        .trip-carousel-item{flex:0 0 33.33%;box-sizing:border-box;padding:15px}
+        @media (max-width:768px){.trip-carousel-item{flex:0 0 100%}}
+        .dropdown-menu{min-width:300px}
+        .book-trip-btn{width:100%;padding:.8rem;background:linear-gradient(135deg,var(--accent-gold),var(--warm-gold));color:#fff;border:none;border-radius:12px;font-weight:600;cursor:pointer;transition:all .3s ease}
+        .book-trip-btn:hover{transform:translateY(-2px);box-shadow:0 5px 20px rgba(212,175,55,.3)}
     </style>
 </head>
 <body>
@@ -1424,6 +1431,18 @@
                     </ul>
                 </li>
                 
+                <li class="nav-dropdown">
+                    <a href="#trips" class="nav-link dropdown-trigger">
+                        Offbeat Trips <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="ranchi.html" class="dropdown-link">Ranchi, Netarhat &amp; Betla</a></li>
+                        <li><a href="himachal.html" class="dropdown-link">Tirthan, Shangarh, Sethan &amp; Shugu</a></li>
+                        <li><a href="panchachuli.html" class="dropdown-link">Pithoragarh, Munsiyari &amp; Almora</a></li>
+                        <li><a href="shimla.html" class="dropdown-link">Shimla, Sarahan, Chitkul &amp; Kalpa</a></li>
+                    </ul>
+                </li>
+
                 <li class="nav-dropdown">
                     <a href="#safaris" class="nav-link dropdown-trigger">
                         Wildlife Safaris <span class="dropdown-arrow">▼</span>
@@ -1466,6 +1485,7 @@
             <div class="hero-buttons">
                 <a href="#stays" class="cta-button">Offbeat Stays</a>
                 <a href="#safaris" class="cta-button secondary">Wildlife Safaris</a>
+                <a href="#trips" class="cta-button secondary">Offbeat Trips</a>
             </div>
         </div>
     </section>
@@ -1839,6 +1859,89 @@
         </div>
     </section>
 
+        <!-- Offbeat Trips Section -->
+    <section class="section course-slider offbeat-stays" id="trips">
+        <div class="carousel-container" id="trip-carousel-container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">Offbeat Trips</h2>
+                <p class="section-subtitle">Multi-day journeys through quiet villages, hill stations and mountain valleys, planned from start to finish</p>
+            </div>
+            <div class="carousel-track fade-in" id="trip-carousel-track">
+
+                <div class="trip-carousel-item">
+                <div class="safari-card">
+                    <div class="safari-image" style="background-image: url('images/ranchi.png')">
+                        <div class="safari-duration">3 Nights / 4 Days</div>
+                        <div class="safari-badge">Hills &amp; Waterfalls</div>
+                    </div>
+                    <div class="safari-content">
+                        <h3 class="safari-title">Ranchi, Netarhat &amp; Betla</h3>
+                        <p class="safari-location">📍 Jharkhand</p>
+                        <p class="safari-description">Chase waterfalls around Ranchi, watch sunrise and sunset in Netarhat, then roam towards Betla and Palamau Fort.</p>
+                        <div class="safari-highlights"><span class="highlight-tag">Waterfalls</span><span class="highlight-tag">Netarhat Sunrise</span><span class="highlight-tag">Pine Forest</span><span class="highlight-tag">Palamau Fort</span></div>
+                        <br>
+                        <button class="book-trip-btn" onclick="window.location.href='ranchi.html'">View Trip</button>
+                    </div>
+                </div>
+            </div>
+
+                <div class="trip-carousel-item">
+                <div class="safari-card">
+                    <div class="safari-image" style="background-image: url('images/himachal.png')">
+                        <div class="safari-duration">5 Nights / 6 Days</div>
+                        <div class="safari-badge">Himalayan Villages</div>
+                    </div>
+                    <div class="safari-content">
+                        <h3 class="safari-title">Tirthan, Shangarh, Sethan &amp; Shugu</h3>
+                        <p class="safari-location">📍 Himachal Pradesh</p>
+                        <p class="safari-description">Slow down in four quiet villages, from the Tirthan River and Shangarh Meadows to Sethan and Shugu in Lahaul.</p>
+                        <div class="safari-highlights"><span class="highlight-tag">Tirthan Valley</span><span class="highlight-tag">Shangarh Meadows</span><span class="highlight-tag">Lahaul</span><span class="highlight-tag">Homestays</span></div>
+                        <br>
+                        <button class="book-trip-btn" onclick="window.location.href='himachal.html'">View Trip</button>
+                    </div>
+                </div>
+            </div>
+
+                <div class="trip-carousel-item">
+                <div class="safari-card">
+                    <div class="safari-image" style="background-image: url('images/panchachuli.png')">
+                        <div class="safari-duration">4 Nights / 5 Days</div>
+                        <div class="safari-badge">Kumaon Himalaya</div>
+                    </div>
+                    <div class="safari-content">
+                        <h3 class="safari-title">Pithoragarh, Munsiyari &amp; Almora</h3>
+                        <p class="safari-location">📍 Uttarakhand</p>
+                        <p class="safari-description">Wake up facing the Panchachuli range in Munsiyari, with forts, temples and Kumaoni sweets along the way.</p>
+                        <div class="safari-highlights"><span class="highlight-tag">Panchachuli Views</span><span class="highlight-tag">Khaliya Top</span><span class="highlight-tag">Nanda Devi Temple</span><span class="highlight-tag">Almora</span></div>
+                        <br>
+                        <button class="book-trip-btn" onclick="window.location.href='panchachuli.html'">View Trip</button>
+                    </div>
+                </div>
+            </div>
+
+                <div class="trip-carousel-item">
+                <div class="safari-card">
+                    <div class="safari-image" style="background-image: url('images/shimla.png')">
+                        <div class="safari-duration">5 Nights / 6 Days</div>
+                        <div class="safari-badge">Kinnaur Valley</div>
+                    </div>
+                    <div class="safari-content">
+                        <h3 class="safari-title">Shimla, Sarahan, Chitkul &amp; Kalpa</h3>
+                        <p class="safari-location">📍 Himachal Pradesh</p>
+                        <p class="safari-description">Follow the Sutlej and Baspa valleys through Sarahan, Chitkul and Kalpa, with Kinner Kailash at sunset.</p>
+                        <div class="safari-highlights"><span class="highlight-tag">Bhimakali Temple</span><span class="highlight-tag">Chitkul</span><span class="highlight-tag">Kinner Kailash</span><span class="highlight-tag">Apple Orchards</span></div>
+                        <br>
+                        <button class="book-trip-btn" onclick="window.location.href='shimla.html'">View Trip</button>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+            <button class="carousel-button prev" id="trip-prev">&#10094;</button>
+            <button class="carousel-button next" id="trip-next">&#10095;</button>
+        </div>
+    </section>
+
     <!-- Guest Testimonials Section -->
     <section class="testimonials" id="testimonials">
         <div class="container">
@@ -1929,6 +2032,7 @@ Thank you CALL OF THE NATURE for a wonderful memory.. 🤟❤️"
                     <h3>Our Experiences</h3>
                     <p><a href="#stays">Offbeat Stays</a></p>
                     <p><a href="#safaris">Wildlife Safaris</a></p>
+                    <p><a href="#trips">Offbeat Trips</a></p>
                     <p><a href="/gallery.html">Photo Gallery</a></p>
                     <p><a href="#contact">Custom Packages</a></p>
                 </div>
@@ -2661,5 +2765,25 @@ Thank you CALL OF THE NATURE for a wonderful memory.. 🤟❤️"
 
 
     </script>
+<script>
+    // Offbeat Trips carousel (desktop buttons + mobile swipe)
+    (function(){
+        const c=document.getElementById('trip-carousel-container'),t=document.getElementById('trip-carousel-track');
+        if(!c||!t)return;
+        const items=t.querySelectorAll('.trip-carousel-item');
+        let i=0,sx=0,sy=0,cx=0,drag=false;
+        const w=()=>items[0].offsetWidth,vis=()=>Math.max(1,Math.floor(c.offsetWidth/w()));
+        const upd=()=>{t.style.transform=`translateX(-${i*w()}px)`};
+        const next=()=>{i=i<items.length-vis()?i+1:0;upd()};
+        const prev=()=>{i=i>0?i-1:Math.max(0,items.length-vis());upd()};
+        document.getElementById('trip-next').addEventListener('click',next);
+        document.getElementById('trip-prev').addEventListener('click',prev);
+        c.addEventListener('touchstart',e=>{sx=cx=e.touches[0].clientX;sy=e.touches[0].clientY;drag=true;t.style.transition='none'});
+        c.addEventListener('touchmove',e=>{if(!drag)return;cx=e.touches[0].clientX;if(Math.abs(e.touches[0].clientY-sy)>Math.abs(cx-sx)){drag=false;return}t.style.transform=`translateX(calc(-${i*w()}px + ${cx-sx}px))`});
+        c.addEventListener('touchend',()=>{if(!drag)return;drag=false;t.style.transition='transform 0.5s ease';const d=cx-sx;if(d>w()/16&&i>0)i--;else if(d<-w()/16&&i<items.length-1)i++;upd()});
+        window.addEventListener('resize',upd);
+        upd();
+    })();
+</script>
 </body>
 </html>
